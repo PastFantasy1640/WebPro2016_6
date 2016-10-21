@@ -11,7 +11,7 @@
 <head>
 <meta charset="UTF-8" />
 <%
-    out.print("<title>" + test + "コミュニティー</title>");
+    out.print("<title>" + community_name + "のコミュニティーページ</title>");
 %>
 
 </head>
