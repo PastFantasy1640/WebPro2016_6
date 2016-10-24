@@ -13,4 +13,6 @@
     <servlet-name>HelloWorld</servlet-name>
     <url-pattern>/servlet/SvlSmpl1</url-pattern>
 </servlet-mapping>
+
+
 </web-app>

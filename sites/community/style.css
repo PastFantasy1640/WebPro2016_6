@@ -1,0 +1,80 @@
+body{
+	background-color : gray; /* BACKGROUND COLOR*/
+	margin : 0;
+}
+
+/*** BASE GROUND ***/
+#base_ground{
+	background-color : white;
+	max-width : 1150px;
+	margin : 0 auto;
+}
+
+/*****************************************
+ *                HEADER                 *
+ *****************************************/
+
+/*** HEADER ***/
+header{
+	text-align : center;
+	padding-bottom:2em;
+}
+
+/*** HEADER IMAGE ***/
+#header_image{
+	height : 300px;
+	background-image:url("/webpro/WebPro2016_6/assets/clubs/001/top_image.png");
+	background-size : cover;
+}
+
+#header_description{
+	width : 80%;
+	margin : 0 auto;	/* centering */
+	font-size : small;
+}
+
+
+
+/*****************************************
+ *             MAIN CONTENTS             *
+ *****************************************/
+
+/*** FRAMING ***/
+#contents_table{
+	display : table;
+	width : 100%;
+}
+
+#contents_base{
+	display : table-cell;
+	background-color : red;
+	max-width : 890px;
+}
+
+#sidebar_base{
+	display : table-cell;
+	background-color : blue;
+	width : 260px;
+}
+
+
+/*** A TALK ELEMENT ***/
+div.talk{
+	border : 2px solid black;
+	margin : 5px;
+	padding : 1em;
+}
+
+/*** MESSAGE ***/
+div.talk p{
+}
+
+/*** DATE ***/
+div.talk small{
+}
+
+/*** NAME ***/
+div.talk h2{
+
+}
+
