@@ -27,13 +27,18 @@
 %>
 <h1>全コミュニティ</h1>
 
+<a href="http://www.google.co.jp/" class="makeCommunity">コミュニティを作る</a>
+
 <h3>おすすめのコミュニティ<h3>
+
+
 
 <%
 	// nextメソッドでポインタを順次移動
 	while(rs.next()) {
 %>
 
+<a href="http://www.google.co.jp/">
 <div class="card_community">
   <img src="./images/<%= rs.getString("image_url") %>" width=240px height=160px>
   <div class="name">
@@ -43,6 +48,7 @@
     <%= rs.getString("description") %>
   </div>
 </div>
+</a>
 <%
 	}
 	// ResultSet, Statement, データベースを順にクローズ
