@@ -6,6 +6,7 @@
 <META HTTP-EQUIV="Expires" CONTENT="-1">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
 <title>コミュニティ一覧</title>
+<link rel="stylesheet" type="text/css" href="css/DbJspCommunitylist.css">
 </head>
 <body>
 
@@ -26,17 +27,22 @@
 %>
 <h1>全コミュニティ</h1>
 
-<table border="1">
-<tr><td>番号</td><td>サークル名</td><td>description</td></tr>
+<h3>おすすめのコミュニティ<h3>
+
 <%
 	// nextメソッドでポインタを順次移動
 	while(rs.next()) {
 %>
-<tr>
-<td><%= rs.getInt("id") %></td>
-<td><%= rs.getString("name") %></td>
-<td><%= rs.getString("description") %></td>
-</tr>
+
+<div class="card_community">
+  <img src="./images/<%= rs.getString("image_url") %>" width=240px height=160px>
+  <div class="name">
+    <%= rs.getString("name") %>
+  </div>
+  <div class="description">
+    <%= rs.getString("description") %>
+  </div>
+</div>
 <%
 	}
 	// ResultSet, Statement, データベースを順にクローズ
@@ -44,6 +50,5 @@
 	st.close();
 	db.close();
 %>
-</table>
 </body>
 </html>
