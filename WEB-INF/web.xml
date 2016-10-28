@@ -5,12 +5,12 @@
          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
 <servlet>
-  <servlet-name>HelloWorld</servlet-name>
-  <servlet-class>SvlSmpl1</servlet-class>
+  <servlet-name>RegistUser</servlet-name>
+  <servlet-class>RegistUser</servlet-class>
 </servlet>
 
 <servlet-mapping>
-    <servlet-name>HelloWorld</servlet-name>
-    <url-pattern>/servlet/SvlSmpl1</url-pattern>
+    <servlet-name>RegistUser</servlet-name>
+    <url-pattern>/servlet/RegistUser</url-pattern>
 </servlet-mapping>
 </web-app>
