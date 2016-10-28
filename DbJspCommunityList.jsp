@@ -37,7 +37,7 @@
 	// nextメソッドでポインタを順次移動
 	while(rs.next()) {
 %>
- 
+  
 <a href="http://www.google.co.jp/">
 <div class="card_community">
   <img src="./images/<%= rs.getString("image_url") %>" width=240px height=160px>
