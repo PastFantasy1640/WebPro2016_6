@@ -8,6 +8,7 @@ body{
 	background-color : white;
 	max-width : 1150px;
 	margin : 0 auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
 /*****************************************
@@ -23,8 +24,8 @@ header{
 /*** HEADER IMAGE ***/
 #header_image{
 	height : 300px;
-	background-image:url("/MyApp/webpro/WebPro2016_6/assets/communities/001/top_image.jpg");
 	background-size : cover;
+	background-position : center center;
 }
 
 #header_description{
@@ -52,33 +53,80 @@ header{
 
 #sidebar_base{
 	display : table-cell;
-	
 	width : 260px;
 }
+
+/*** TALK AREA ***/
+#talkarea{
+	background-color: #CCCCCC;
+	padding: 1px 0;
+}
+
+#talkarea_margin{
+	margin: 10px;
+}
+
+#talkarea input,
+#talkarea textarea{
+    font-size:14px;
+    font-family: 'ÉqÉâÉMÉmäpÉS Pro W3', 'Hiragino Kaku Gothic Pro', 'Hiragino Kaku Gothic ProN', 'ÉÅÉCÉäÉI', Meiryo;
+    border: 1px solid #B9C9CE;
+    border-radius:5px;
+    padding: 12px 0.8em;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+}
+ 
+#talkarea input{
+    width: 120px;
+}
+#talkarea textarea{
+    width: 100%;
+    margin: 0 0 8px;
+}
+#talkarea input[type=text]:focus,
+#talkarea textarea:focus {
+  border-color:#83B6C2;
+    outline:none;
+    box-shadow:2px 2px 4px rgba(143,183,222,0.6),-2px -2px 4px rgba(143,183,222,0.6),inset 0 1px 2px rgba(0,0,0,0.2);
+}
+::-webkit-input-placeholder {
+    color:#AFAFAF;
+}
+:-moz-placeholder {
+    color:#AFAFAF;
+}
+
+#talkarea_table {
+	margin: 0;
+}
+
 
 
 /*** A TALK ELEMENT ***/
 div.talk{
 	border : 2px solid black;
-	margin : 5px;
-	width : 100%;
+	margin : 10px 5px;
+	width : 98%;
 	display: table;
+    box-shadow: 3px 3px 4px rgba(0,0,0,0.5);
+    border-radius:5px;
 }
 
 div.talk div.image{
 	display: table-cell;
-	width: 80px;
-	height: 80px;
-	vertical-align: top;
+	width: 64px;
+	height: 64px;
+	vertical-align: middle;
 }
 
 div.talk div.image img{
 	margin: 0;
 	width: auto;
 	height: auto;
-	max-width: 80px;
-	max-height: 80px;
-	vertical-align: middle;
+	max-width: 64px;
+	max-height: 64px;
+	vertical-align: top;
+    border-radius:32px;
 }
 
 div.talk div.contents{
