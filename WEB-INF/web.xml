@@ -13,4 +13,15 @@
     <servlet-name>HelloWorld</servlet-name>
     <url-pattern>/servlet/SvlSmpl1</url-pattern>
 </servlet-mapping>
+
+<servlet>
+    <servlet-name>CommunityTop</servlet-name>
+    <jsp-file>/sites/community/community_top.jsp</jsp-file>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>CommunityTop</servlet-name>
+    <url-pattern>/servlet/comtop</url-pattern>
+</servlet-mapping>
+
 </web-app>
