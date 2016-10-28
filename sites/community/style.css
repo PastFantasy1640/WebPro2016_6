@@ -23,7 +23,7 @@ header{
 /*** HEADER IMAGE ***/
 #header_image{
 	height : 300px;
-	background-image:url("/webpro/WebPro2016_6/assets/clubs/001/top_image.png");
+	background-image:url("/MyApp/webpro/WebPro2016_6/assets/communities/001/top_image.jpg");
 	background-size : cover;
 }
 
@@ -47,13 +47,12 @@ header{
 
 #contents_base{
 	display : table-cell;
-	background-color : red;
 	max-width : 890px;
 }
 
 #sidebar_base{
 	display : table-cell;
-	background-color : blue;
+	
 	width : 260px;
 }
 
@@ -62,19 +61,45 @@ header{
 div.talk{
 	border : 2px solid black;
 	margin : 5px;
-	padding : 1em;
+	width : 100%;
+	display: table;
+}
+
+div.talk div.image{
+	display: table-cell;
+	width: 80px;
+	height: 80px;
+	vertical-align: top;
+}
+
+div.talk div.image img{
+	margin: 0;
+	width: auto;
+	height: auto;
+	max-width: 80px;
+	max-height: 80px;
+	vertical-align: middle;
+}
+
+div.talk div.contents{
+	display: table-cell;
+	vertical-align: top;
+	width: 100%;
 }
 
 /*** MESSAGE ***/
 div.talk p{
+	margin: 0 0 0 2.5em;
 }
 
 /*** DATE ***/
 div.talk small{
+	margin: 0 0 0 0.7em;
 }
 
 /*** NAME ***/
 div.talk h2{
-
+	margin: 0 0 0 0.5em;
+	font-size: small;
 }
 

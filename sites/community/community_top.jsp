@@ -1,17 +1,17 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ page import="java.util.ArrayList" %>
-<%-- @ page import="community.ComComment" --%>
+<%@ page import="community.ComComment" %>
 
 <%
 
     String community_name = "サイバー対策コンテストコミュニティー";
     String community_description = "このコミュニティーは、サイバー対策コンテストの対策として建てられたコミュニティーです。以下ダミーです。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。";
 
-	ArrayList comments = new ArrayList();
-	//java.util.ArrayList<community.ComComment> comments = new java.util.ArrayList<>();
-	community.ComCommunity("","","","");
-	//comments.add(new community.ComComment("これがコメントです","ほげゆーざ","2016/05/18 20:12",""));
-	comments.add("hoge");
+    ArrayList<ComComment> comments = new ArrayList<ComComment>();
+
+    comments.add(new ComComment("これがコメントです","ほげゆーざ","2016/05/18 20:12",""));
+    comments.add(new ComComment("コメント２です","はげちゅーざ","hizuke2",""));
+    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk",""));
 %>
 
 <html lang="ja">
@@ -34,11 +34,27 @@
 		
 		<div id="contents_table">
 			<div id="contents_base">
+
+<%
+    for(ComComment p : comments){
+	out.println("<div class=\"talk\">");
+	out.println("<h2>" + p.getName() + "</h2>");
+	out.println("<p>" + p.getComment() + "</p>");
+	out.println("<small>" + p.getDateStr() + "</small>");
+	out.println("</div>");
+    }
+%>
+
 				<!-- 参加者のコメント -->
 				<div class="talk">
-					<h2>東大　サイバー研</h2>
-					<p>これが発言の表示サンプルです。</p>
-					<small>2016/10/24  11:28:03</small>
+					<div class="image">
+						<img src="../../assets/communities/001/top_image.jpg" />
+					</div>
+					<div class="contents">
+						<h2>東大　サイバー研</h2>
+						<small>2016/10/24  11:28:03</small>
+						<p>これが発言の表示サンプルです</p>
+					</div>
 				</div>
 			</div>
 			
