@@ -1,0 +1,35 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>コミュニティリスト</title>
+</head>
+<body>
+<h1>全学生の表示</h1>
+<form action=servlet/DbSvlSmpl1>
+<input type="submit" value="全学生の表示">
+</form>
+
+<h1>学生の追加</h1>
+<form action=servlet/DbSvlSmpl2>
+学生番号 <input type="text" name=StudentIDData size=20>
+名字 <input type="text" name=LastNameData size=20>
+名前 <input type="text" name=FirstNameData size=20>
+<input type="submit" value="送信">
+</form>
+
+<h1>成績追加</h1>
+<form action=servlet/DbSvlSmpl3>
+学生番号 <input type="text" name=StudentIDData size=20>
+科目名 <input type="text" name=SubjectData size=20>
+成績 <input type="text" name=MarkData size=20>
+<input type="submit" value="送信">
+</form>
+
+<h1>学生成績の参照</h1>
+<form action=servlet/DbSvlSmpl4>
+番号 <input type="text" name=StudentIDData size=20>
+<input type="submit" value="成績の参照">
+</form>
+
+</body>
+</html>
