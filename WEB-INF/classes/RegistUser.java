@@ -51,18 +51,16 @@ public class RegistUser extends HttpServlet {
 				 + "<tr><td align=\"right\">アイコン(URL):</td>"+"<td>"+iconUrl+"</td></tr>"
 				 + "</table>");
 			//登録情報記憶
+			HttpSession session = hreq.getSession(true);
 
-			out.println("<form action=SignupPage>"+
-				  "<input type=\"hidden\" name=\"UserId\" value=\""+userId+"\">"
-				 + "<input type=\"hidden\" name=\"UniversityId\" value=\""+universityId+"\">"
-				 + "<input type=\"hidden\" name=\"sex\" value=\""+sex+"\">"
-				 + "<input type=\"hidden\" name=\"password\" value=\""+pass+"\">"
-				 + "<input type=\"hidden\" name=\"mail\" value=\""+mail+"\">"
-				 + "<input type=\"hidden\" name=\"twitter\" value=\""+twitter+"\">"
-				 + "<input type=\"hidden\" name=\"facebook\" value=\""+facebook+"\">"
-				 + "<input type=\"hidden\" name=\"icon_url\" value=\""+iconUrl+"\">"
-				 + "<input type=\"submit\" value=\"登録\">"
-				 + "</form>");
+			session.setAttribute("IdData",userId);
+			session.setAttribute("UniversityId",universityId);
+			session.setAttribute("sex",sex);
+			session.setAttribute("password",pass);
+			session.setAttribute("mail",mail);
+			session.setAttribute("twitter",twitter);
+			session.setAttribute("facebook",facebook);
+			session.setAttribute("icon_url",iconUrl);
 		}
 		out.println("</body></html>");
 	}

@@ -20,14 +20,15 @@ public class SignupPage extends HttpServlet {
 		PrintWriter out = hres.getWriter();
 
 		// パラメータの入力とチェック
-		String userId = hreq.getParameter("UserId");
-		String universityId = hreq.getParameter("UniversityId");
-		String sex = hreq.getParameter("sex");	//1->男 2->女
-		String pass = hreq.getParameter("password");
-		String mail = hreq.getParameter("mail");
-		String twitter = hreq.getParameter("twitter");
-		String facebook = hreq.getParameter("facebook");
-		String iconUrl = hreq.getParameter("icon_url");
+		HttpSession session = hreq.getSession(true);
+		String userId = (String)session.getAttribute("IdData");
+		String universityId = (String)session.getAttribute("UniversityId");
+		String sex = (String)session.getAttribute("sex");	//1->男 2->女
+		String pass = (String)session.getAttribute("password");
+		String mail = (String)session.getAttribute("mail");
+		String twitter = (String)session.getAttribute("twitter");
+		String facebook = (String)session.getAttribute("facebook");
+		String iconUrl = (String)session.getAttribute("icon_url");
 
 		// HTMLテキストの出力
 		out.println("<html><head><meta http-equiv=\"Pragma\" content=\"no-cache\">");
@@ -48,7 +49,6 @@ public class SignupPage extends HttpServlet {
 			// SQL 文を実行し挿入した数が返る
 			int num = st.executeUpdate(query);
 			if(num > 0) {
-				HttpSession session = hreq.getSession(true);
 				session.setAttribute("Login",1);
 				session.setAttribute("IdData",userId);
 				out.println("データが登録されました．");
