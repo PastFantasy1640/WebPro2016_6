@@ -49,6 +49,7 @@ public class SignupPage extends HttpServlet {
 			int num = st.executeUpdate(query);
 			if(num > 0) {
 				out.println("データが登録されました．");
+				out.println("<p>メンバートップページは<a href = \"MemberTop\">こちら</a></p>");
 			}
 			else {
 				out.println("データが登録されませんでした．");

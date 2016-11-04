@@ -22,7 +22,9 @@ public class LoginPage extends HttpServlet {
 		try {
 			Class.forName("org.gjt.mm.mysql.Driver");
 			db = DriverManager.getConnection("jdbc:mysql://localhost/circle_triangle?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
-			// id,passの取得
+			HttpSession session = request.getSession(true);
+			session.setAttribute("Login",0);
+
 			String idData = hreq.getParameter("IdData");
 			String pass = hreq.getParameter("PasswordData");
 			//DBから参照
@@ -41,6 +43,8 @@ public class LoginPage extends HttpServlet {
 				out.println("<body>"
 				 + "IdData は " + idData + " で "
 				 + "Password は " + pass + " です");
+				session.setAttribute("Login",1);
+				session.setAttribute("IdData",idData);
 			}else{
 				//ログイン失敗
 				out.println("<title>ログイン失敗</title></head>");
