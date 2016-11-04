@@ -13,4 +13,35 @@
     <servlet-name>RegistUser</servlet-name>
     <url-pattern>/servlet/RegistUser</url-pattern>
 </servlet-mapping>
+
+<servlet>
+  <servlet-name>SignupPage</servlet-name>
+  <servlet-class>SignupPage</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>SignupPage</servlet-name>
+    <url-pattern>/servlet/SignupPage</url-pattern>
+</servlet-mapping>
+
+<servlet>
+  <servlet-name>MemberTop</servlet-name>
+  <servlet-class>MemberTop</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>MemberTop</servlet-name>
+    <url-pattern>/servlet/MemberTop</url-pattern>
+</servlet-mapping>
+
+<servlet>
+  <servlet-name>LoginPage</servlet-name>
+  <servlet-class>LoginPage</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>LoginPage</servlet-name>
+    <url-pattern>/servlet/LoginPage</url-pattern>
+</servlet-mapping>
+
 </web-app>
