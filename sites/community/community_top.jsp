@@ -1,5 +1,8 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.io.File" %>
+<%@ page import="java.io.FileReader" %>
+<%@ page import="java.io.BufferedReader" %>
 <%@ page import="community.ComComment" %>
 
 <%
@@ -7,12 +10,28 @@
     String community_name = "サイバー対策コンテストコミュニティー";
     String community_description = "このコミュニティーは、サイバー対策コンテストの対策として建てられたコミュニティーです。以下ダミーです。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。";
 	String document_root = "/webpro";
+	String document_root_servlet = application.getRealPath("");
 	String community_img_url = document_root + "/assets/communities/001/top_image.jpg";
+
+
+	boolean user_allow_talk = true;
 
     ArrayList<ComComment> comments = new ArrayList<ComComment>();
 
     comments.add(new ComComment("これがコメントです","ほげゆーざ","2016/05/18 20:12","/assets/communities/001/top_image.jpg"));
     comments.add(new ComComment("コメント２です","はげちゅーざ","hizuke2","/assets/communities/001/top_image.jpg"));
+    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
+    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
+    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
+    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
+    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
+    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
+    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
+    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
+    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
+    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
+    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
+    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
     comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
 %>
 
@@ -46,9 +65,19 @@
 			<p id="header_description"><%= community_description %></p>
 		</header>
 		
+		<div id="header_contents_margin"></div>
+		
 		<div id="contents_table">
 			<div id="contents_base">
+			
+			<%-- ########################## Talk Area Jsp ############################ --%>
 
+			<%
+			
+			if(user_allow_talk){
+			
+			%>
+			
 			<div id="talkarea">
 				<div id="talkarea_margin">
 					<form action="community_top.jsp" method="post" name="talk">
@@ -70,7 +99,13 @@
 				</div>
 			</div>
 			
+			<%
 			
+			}
+			
+			%>
+
+			<%-- ####################### end of Talk Area############################ --%>
 
 <%
     for(ComComment p : comments){
@@ -102,6 +137,20 @@
 			
 			<div id="sidebar_base">
 				<!-- 参加するボタン、広告、ほかのコミュニティー -->
+				
+				<div class="joincom">
+					<p>このコミュニティーに参加して意見を交換しましょう！</p>
+					<form action="community_join.jsp" method="post" name="talk">
+						<button id="join_button" type="join">参加</button>
+					</form>
+					<small>※コミュニティーには、サークルの代表者のみが参加できます。コミュニティーについて、詳しくは<a href="#">こちら</a>をご覧ください。</small>
+				</div>
+				
+				<p class="sidemenu">参加団体一覧</p>
+				
+				<p>このコミュニティーに参加している団体は以下のとおりです。</p>
+				
+				
 			</div>
 		</div>
 	</div>
