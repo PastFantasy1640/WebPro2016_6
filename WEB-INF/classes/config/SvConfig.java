@@ -19,8 +19,8 @@ public class SvConfig{
      * @throws 
      */
     public SvConfig() throws IOException{
-        InputStream inputStream = new FileInputStream(new File("configs.properties"));
-	config.load(inputStream);
+        //InputStream inputStream = new FileInputStream(new File("configs.properties"));
+	//config.load(inputStream);
     }
 
     /** データベース名を取得します。
