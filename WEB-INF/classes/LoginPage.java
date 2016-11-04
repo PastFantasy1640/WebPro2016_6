@@ -43,6 +43,7 @@ public class LoginPage extends HttpServlet {
 				out.println("<body>"
 				 + "IdData は " + idData + " で "
 				 + "Password は " + pass + " です");
+				out.println("<p>メンバートップページは<a href = \"MemberTop\">こちら</a><p>");
 				session.setAttribute("Login",1);
 				session.setAttribute("IdData",idData);
 			}else{
