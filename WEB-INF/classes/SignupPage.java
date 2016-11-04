@@ -48,6 +48,9 @@ public class SignupPage extends HttpServlet {
 			// SQL 文を実行し挿入した数が返る
 			int num = st.executeUpdate(query);
 			if(num > 0) {
+				HttpSession session = hreq.getSession(true);
+				session.setAttribute("Login",1);
+				session.setAttribute("IdData",userId);
 				out.println("データが登録されました．");
 				out.println("<p>メンバートップページは<a href = \"MemberTop\">こちら</a></p>");
 			}
