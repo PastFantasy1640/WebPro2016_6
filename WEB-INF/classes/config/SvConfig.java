@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import javax.servlet.*;
+import javax.servlet.http.*;
 
 import config.NoValueProperty;
 
@@ -15,16 +17,18 @@ public class SvConfig{
     //Keys
     final private String DB_KEY = "db_name";
 
-    /** コンストラクタ。コンストラクタ内で設定ファイルを読み込みます。失敗すると例外を投げます。 
+    /** Constructor. If there is no configuration file, this function throws IOException. 
      * @throws 
      */
     public SvConfig() throws IOException{
+    	//String path = new File(".").getAbsoluteFile().getParent();
+   	    //String realPath = this.getServletContext().getRealPath("/WEB-INF/configs.properties");
         InputStream inputStream = new FileInputStream(new File("configs.properties"));
-	config.load(inputStream);
+		config.load(inputStream);
     }
 
-    /** データベース名を取得します。
-     * @return データベース名
+    /** Get the database name.
+     * @return the database name.
      */
     public String getDBName() throws NoValueProperty{
         String res = config.getProperty(this.DB_KEY);
