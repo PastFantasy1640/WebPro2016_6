@@ -1,5 +1,5 @@
 // 
-// MemberTop.java
+// Logout.java
 // 
 
 // 必要なパッケージの指定
@@ -8,7 +8,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 // 
-public class MemberTop extends HttpServlet {
+public class Logout extends HttpServlet {
 // SvlSmpl1::doGet()
 	public void doGet(HttpServletRequest hreq,	// リクエスト
 			  HttpServletResponse hres)	// レスポンス
@@ -26,24 +26,8 @@ public class MemberTop extends HttpServlet {
 			hres.sendRedirect("../webpro/WebPro2016_6/LoginPage.html");
 			session.setAttribute("Login",0);
 		}else{
-			if((int)session.getAttribute("Login")==1){
-				String idData = (String)session.getAttribute("IdData");
-				// HTMLテキストの出力
-				out.println("<html><head><meta http-equiv=\"Pragma\" content=\"no-cache\">");
-				out.println("<meta http-equiv=\"Expires\" content=\"-1\">");
-				out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
-				// ここまでは以降もそのまま使う
-				out.println("<title>MemberTop</title></head>");
-				out.println("<body>"
-				 + " id " + idData + " さんようこそ。"
-				 + "<form action=Logout>"
-				 + "<input type=\"submit\" value=\"logout\">"
-				 + "</form>"
-				 + "</body>"
-				 + "</html>");
-			}else{
-				hres.sendRedirect("../webpro/WebPro2016_6/LoginPage.html");
-			}	
+			session.setAttribute("Login",0);
+			hres.sendRedirect("../webpro/WebPro2016_6/LoginPage.html");
 		}
 	}
 }

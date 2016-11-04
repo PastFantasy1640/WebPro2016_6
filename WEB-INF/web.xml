@@ -44,4 +44,14 @@
     <url-pattern>/servlet/LoginPage</url-pattern>
 </servlet-mapping>
 
+<servlet>
+  <servlet-name>Logout</servlet-name>
+  <servlet-class>Logout</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/servlet/Logout</url-pattern>
+</servlet-mapping>
+
 </web-app>
