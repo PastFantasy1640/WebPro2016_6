@@ -22,7 +22,7 @@ public class LoginPage extends HttpServlet {
 		try {
 			Class.forName("org.gjt.mm.mysql.Driver");
 			db = DriverManager.getConnection("jdbc:mysql://localhost/circle_triangle?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
-			HttpSession session = request.getSession(true);
+			HttpSession session = hreq.getSession(true);
 			session.setAttribute("Login",0);
 
 			String idData = hreq.getParameter("IdData");
