@@ -20,14 +20,14 @@ public class LoginPage extends HttpServlet {
 		//データベースとの結合
 		Connection db = null;
 		try {
-			Class.forName("org.gjt.mm.myssql.Driver");
+			Class.forName("org.gjt.mm.mysql.Driver");
 			db = DriverManager.getConnection("jdbc:mysql://localhost/circle_triangle?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
 			// id,passの取得
 			String idData = hreq.getParameter("IdData");
 			String pass = hreq.getParameter("PasswordData");
 			//DBから参照
 			Statement st=db.createStatement();
-			String query = "select id, password from users where id="+idData+"and pass="+pass;
+			String query = "select id, password from users where id='"+idData+"' and password='"+pass+"'";
 			ResultSet rs=st.executeQuery(query);
 
 			// HTMLテキストの出力
@@ -35,7 +35,7 @@ public class LoginPage extends HttpServlet {
 			out.println("<meta http-equiv=\"Expires\" content=\"-1\">");
 			out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
 			//id,passの判定
-			if(idData.equals(rs.getString("id"))&&pass.equals(rs.getString("password"))){
+			if(rs.next()){
 				//ログイン成功
 				out.println("<title>ログイン成功</title></head>");
 				out.println("<body>"
@@ -54,6 +54,7 @@ public class LoginPage extends HttpServlet {
 			out.println("接続失敗<br>" + e.toString());
 		} catch(Exception e) {
 	 		e.printStackTrace();
+			out.println("stacktrace<br>" + e.toString());
 		} finally {
 			try {
 				db.close();
