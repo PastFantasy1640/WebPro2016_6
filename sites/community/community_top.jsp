@@ -7,32 +7,43 @@
 
 <%
 
+    int community_id = 0;
+    int user_id = 10;
+
+    int comment_status = 0;	//0:no comment 1:success 2:failed
+
+    //新規投稿か？
+    String n_comment = request.getParameter("talk_message");
+    if(n_comment != null){
+        comment_status = 1;
+        //Error check
+        if(n_comment.length() > 0 && n_comment.length() < 512){
+            //length is ok.
+            //insert comment
+            if(ComComment.addComment(community_id, user_id, n_comment)){
+                comment_status = 2;
+                //responce.sendRedirect("/community_top.jsp");
+            }
+        }
+    }
+
+
     String community_name = "サイバー対策コンテストコミュニティー";
     String community_description = "このコミュニティーは、サイバー対策コンテストの対策として建てられたコミュニティーです。以下ダミーです。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。";
-	String document_root = "/webpro";
-	String document_root_servlet = application.getRealPath("");
-	String community_img_url = document_root + "/assets/communities/001/top_image.jpg";
+    //String document_root = "/webpro";
+    String document_root = "/MyApp/webpro/WebPro2016_6";
+    String document_root_servlet = application.getRealPath("");
+    String community_img_url = document_root + "/assets/communities/001/top_image.jpg";
 
 
-	boolean user_allow_talk = true;
+    boolean user_allow_talk = true;
 
-    ArrayList<ComComment> comments = new ArrayList<ComComment>();
 
-    comments.add(new ComComment("これがコメントです","ほげゆーざ","2016/05/18 20:12","/assets/communities/001/top_image.jpg"));
-    comments.add(new ComComment("コメント２です","はげちゅーざ","hizuke2","/assets/communities/001/top_image.jpg"));
-    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
-    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
-    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
-    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
-    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
-    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
-    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
-    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
-    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
-    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
-    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
-    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
-    comments.add(new ComComment("コメント３です","hjdiska","hjfdshk","/assets/communities/001/top_image.jpg"));
+
+    ArrayList<ComComment> comments = ComComment.getCommentsFromCommunity(community_id);
+
+
+
 %>
 
 <html lang="ja">
@@ -80,10 +91,10 @@
 			
 			<div id="talkarea">
 				<div id="talkarea_margin">
-					<form action="community_top.jsp" method="post" name="talk">
+					<form action="community_top.jsp" method="post">
 						<textarea rows="5" cols="20" name="talk_message" id="tkf1" placeholder="発言メッセージ" maxlength="512" ></textarea>
-						<table id="talkarea_table"><tr><td width="100%">残り文字数は<span id="countdown">512</span>文字です</td>
-						<td><input type="button" value="発言" name="talk_on" id="tkf2" disabled></td></tr></table>
+						<table id="talkarea_table"><tr><td width="100%">残り文字数は<span id="countdown">512</span>文字です。<br /></td>
+						<td><input type="submit" value="発言" name="talk_on" id="tkf2" disabled></td></tr></table>
 					</form>
 					
 					<!-- Countdown jQuery-->
