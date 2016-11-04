@@ -12,7 +12,7 @@ import config.NoValueProperty;
 
 public class SvConfig{
 
-    final private Properties config = new Properties();
+    private Properties config = new Properties();
 
     //Keys
     final private String DB_KEY = "db_name";
@@ -21,9 +21,8 @@ public class SvConfig{
      * @throws 
      */
     public SvConfig() throws IOException{
-    	//String path = new File(".").getAbsoluteFile().getParent();
-   	    //String realPath = this.getServletContext().getRealPath("/WEB-INF/configs.properties");
-        InputStream inputStream = new FileInputStream(new File("configs.properties"));
+    	String path = new File(".").getAbsoluteFile().getParent();
+   	    InputStream inputStream = new FileInputStream(new File(path + "/configs.properties"));
 		config.load(inputStream);
     }
 
@@ -35,4 +34,9 @@ public class SvConfig{
         if(res == null) throw new NoValueProperty(this.DB_KEY);
         return res;
     }
+    
+    public String getCurrentlyPath(){
+    	return new File(".").getAbsoluteFile().getParent();
+    }
+    
 }
