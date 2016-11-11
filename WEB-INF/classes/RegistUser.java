@@ -70,7 +70,7 @@ public class RegistUser extends HttpServlet {
 			session.setAttribute("facebook",facebook);
 			session.setAttribute("icon_url",iconUrl);
 
-			out.println("<form action = SignupUser>"
+			out.println("<form action = SignupPage>"
 			+ "<input type=\"submit\" value=\"登録\">"
 			+ "</form>");
 		}
