@@ -61,6 +61,10 @@ public class RegistUser extends HttpServlet {
 			session.setAttribute("twitter",twitter);
 			session.setAttribute("facebook",facebook);
 			session.setAttribute("icon_url",iconUrl);
+
+			out.println("<form action = SignupUser>"
+			+ "<input type=\"submit\" value=\"登録\">"
+			+ "</form>");
 		}
 		out.println("</body></html>");
 	}
