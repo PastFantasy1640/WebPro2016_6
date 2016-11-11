@@ -4,28 +4,30 @@
 <%@ page import="java.io.FileReader" %>
 <%@ page import="java.io.BufferedReader" %>
 <%@ page import="community.ComComment" %>
+<%@ page import="java.security.SecureRandom" %>
 
 <%
+
+	response.setContentType("text/html;charset=UTF-8");
+ 	request.setCharacterEncoding("UTF-8");
 
     int community_id = 0;
     int user_id = 10;
 
-    int comment_status = 0;	//0:no comment 1:success 2:failed
 
-    //新規投稿か？
-    String n_comment = request.getParameter("talk_message");
-    if(n_comment != null){
-        comment_status = 1;
-        //Error check
-        if(n_comment.length() > 0 && n_comment.length() < 512){
-            //length is ok.
-            //insert comment
-            if(ComComment.addComment(community_id, user_id, n_comment)){
-                comment_status = 2;
-                //responce.sendRedirect("/community_top.jsp");
-            }
-        }
-    }
+	/*** session check ***/
+	String ticket = (String)session.getAttribute("ticket");
+	String ncomment = request.getParameter("talk_message");
+	if(ncomment != null && ticket != null){
+		if(ncomment.length() > 0 && ncomment.length() < 511 && request.getParameter("ticket").equals(ticket)){
+			//submit comment
+			ComComment.addComment(community_id, user_id, ncomment);
+		}
+	}
+	SecureRandom sr = new SecureRandom();
+	session.setAttribute("ticket", String.valueOf(sr.nextInt()));
+
+    int comment_status = 0;	//0:no comment 1:success 2:failed
 
 
     String community_name = "サイバー対策コンテストコミュニティー";
@@ -41,6 +43,7 @@
 
 
     ArrayList<ComComment> comments = ComComment.getCommentsFromCommunity(community_id);
+    java.util.Collections.reverse(comments);
 
 
 
@@ -77,7 +80,6 @@
 		</header>
 		
 		<div id="header_contents_margin"></div>
-		
 		<div id="contents_table">
 			<div id="contents_base">
 			
@@ -91,7 +93,8 @@
 			
 			<div id="talkarea">
 				<div id="talkarea_margin">
-					<form action="community_top.jsp" method="post">
+					<form action="community_top.jsp" method="post" accept-charset="utf-8">
+						<input type="hidden" name="ticket" value="<%= session.getAttribute("ticket") %>">
 						<textarea rows="5" cols="20" name="talk_message" id="tkf1" placeholder="発言メッセージ" maxlength="512" ></textarea>
 						<table id="talkarea_table"><tr><td width="100%">残り文字数は<span id="countdown">512</span>文字です。<br /></td>
 						<td><input type="submit" value="発言" name="talk_on" id="tkf2" disabled></td></tr></table>
