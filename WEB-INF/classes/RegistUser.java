@@ -28,6 +28,14 @@ public class RegistUser extends HttpServlet {
 		String facebook = hreq.getParameter("facebook");
 		String iconUrl = hreq.getParameter("icon_url");
 
+		// 性別の文字列化
+		String sex2;
+		if(sex.equals("1")) {
+			sex2 = "男";
+		} else {
+			sex2 = "女";
+		}
+
 		// HTMLテキストの出力
 		out.println("<html><head><meta http-equiv=\"Pragma\" content=\"no-cache\">");
 		out.println("<meta http-equiv=\"Expires\" content=\"-1\">");
@@ -43,7 +51,7 @@ public class RegistUser extends HttpServlet {
 				 + "<table border=\"0\">"
 				 + "<tr><td align=\"right\">ユーザーID:</td>"+"<td>"+userId+"</td></tr>"
 				 + "<tr><td align=\"right\">大学ID:</td>"+"<td>"+universityId+"</td></tr>"
-				 + "<tr><td align=\"right\">性別:</td>"+"<td>"+sex+"</td></tr>"
+				 + "<tr><td align=\"right\">性別:</td>"+"<td>"+sex2+"</td></tr>"
 				 + "<tr><td align=\"right\">パスワード:</td><td>表示なし</td></tr>"
 				 + "<tr><td align=\"right\">メール:</td>"+"<td>"+mail+"</td></tr>"
 				 + "<tr><td align=\"right\">twitter:</td>"+"<td>"+twitter+"</td></tr>"
