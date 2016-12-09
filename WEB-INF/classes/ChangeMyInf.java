@@ -1,5 +1,5 @@
 // 
-// MemberTop.java
+// ChangeMyInf.java
 // 
 
 // 必要なパッケージの指定
@@ -8,7 +8,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 
 // 
-public class MemberTop extends HttpServlet {
+public class ChangeMyInf extends HttpServlet {
 // SvlSmpl1::doGet()
 	public void doGet(HttpServletRequest hreq,	// リクエスト
 			  HttpServletResponse hres)	// レスポンス
@@ -27,25 +27,42 @@ public class MemberTop extends HttpServlet {
 			session.setAttribute("Login",0);
 		}else{
 			if((int)session.getAttribute("Login")==1){
-				String idData = (String)session.getAttribute("IdData");
+				String target = hreq.getParameter("Target");
 				// HTMLテキストの出力
 				out.println("<html><head><meta http-equiv=\"Pragma\" content=\"no-cache\">");
 				out.println("<meta http-equiv=\"Expires\" content=\"-1\">");
 				out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
 				// ここまでは以降もそのまま使う
-				out.println("<title>MemberTop</title></head>");
-				out.println("<body>"
-				 + " id " + idData + " さんようこそ。"
-				 + "<a href = \"ChangeMyInf?Target=pass\">パスワード変更</a>
-				 + "<a href = \"ChangeMyInf?Target=twitter\">ツイッターアカウント変更</a>
-				 + "<a href = \"ChangeMyInf?Target=facebook\">フェイスブックアカウント変更</a>
-				 + "<a href = \"ChangeMyInf?Target=mail\">メールアドレス変更</a>
-				 + "<form action=Logout>"
-				 + "<input type=\"submit\" value=\"logout\">"
-				 + "</form>"
-				 + "<p>退会は<a href = \"../webpro/WebPro2016_6/DeleteUser.html\">こちら</a></p>"
-				 + "</body>"
-				 + "</html>");
+				out.println("<title>ChangeMyInf</title></head>");
+				if(target.equals("pass")){
+					out.println("<body>"
+					 + "<h2>パスワード変更</h2>"
+					 + "<form action=\"ChangedMyInf\">"
+					 + "<table border=\"0\">"
+					 + "<tr><td align=\"right\">新しいパスワード:</td>
+					 + "<td><input type=\"password\" name=\"pass\" size=32 maxlength=32></td></tr>"
+					 + "<tr><td align=\"right\">新しいパスワード（確認）:</td>
+					 + "<td><input type=\"password\" name=\"pass2\" size=32 maxlength=32></td></tr>"
+					 + "<tr><td align=\"right\">変更前のパスワード:</td>
+					 + "<td><input type=\"password\" name=\"oldpass\" size=32 maxlength=32></td></tr>"
+					 + "</table>"
+					 + "<input type=\"submit\" value=\"変更\">"
+					 + "</form>"
+					 + "</body>"
+					 + "</html>");
+				}else if(target.equals("twitter")){
+					out.println("<body>"
+					+"</body>"
+					+"</html>");
+				}else if(taget.equals("facebook")){
+					out.println("<body>"
+					+"</body>"
+					+"</html>");
+				}else if(target.equals("mail")){
+					out.println("<body>"
+					+"</body>"
+					+"</html>");
+				}
 			}else{
 				hres.sendRedirect("../webpro/WebPro2016_6/LoginPage.html");
 			}	
