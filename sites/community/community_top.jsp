@@ -35,7 +35,7 @@
     //String document_root = "/webpro";
     String document_root = "/MyApp/webpro/WebPro2016_6";
     String document_root_servlet = application.getRealPath("");
-    String community_img_url = document_root + "/assets/communities/001/top_image.jpg";
+    String community_img_url = document_root + "/uploads/communities/001/top_image.jpg";
 
 
     boolean user_allow_talk = true;
