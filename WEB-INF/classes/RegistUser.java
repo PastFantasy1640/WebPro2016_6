@@ -26,7 +26,7 @@ public class RegistUser extends HttpServlet {
 		String mail = hreq.getParameter("mail");
 		String twitter = hreq.getParameter("twitter");
 		String facebook = hreq.getParameter("facebook");
-		String iconUrl = hreq.getParameter("icon_url");
+		Part iconUrl = hreq.getPart("icon_url");
 
 		// 性別の文字列化
 		String sex2;
@@ -56,7 +56,7 @@ public class RegistUser extends HttpServlet {
 				 + "<tr><td align=\"right\">メール:</td>"+"<td>"+mail+"</td></tr>"
 				 + "<tr><td align=\"right\">twitter:</td>"+"<td>"+twitter+"</td></tr>"
 				 + "<tr><td align=\"right\">facebook:</td>"+"<td>"+facebook+"</td></tr>"
-				 + "<tr><td align=\"right\">アイコン(URL):</td>"+"<td>"+iconUrl+"</td></tr>"
+				 //+ "<tr><td align=\"right\">アイコン(URL):</td>"+"<td>"+iconUrl+"</td></tr>"
 				 + "</table>");
 			//登録情報記憶
 			HttpSession session = hreq.getSession(true);
