@@ -34,9 +34,10 @@ public class RegistUser extends HttpServlet {
 		String sex2;
 		if(sex.equals("1")) {
 			sex2 = "男";
-		} else {
+		} else if(sex.equals("2")){
 			sex2 = "女";
-		}
+		} else
+			sex2 = "";
 
 		// HTMLテキストの出力
 		out.println("<html><head><meta http-equiv=\"Pragma\" content=\"no-cache\">");
@@ -45,7 +46,7 @@ public class RegistUser extends HttpServlet {
 		// ここまでは以降もそのまま使う
 		out.println("<title>ユーザー登録確認画面</title></head>");
 		out.println("<body>");
-		if(userId.equals("") || universityId.equals("") || pass.equals("")){
+		if(userId.equals("") || universityId.equals("") || pass.equals("") || sex2.equals("")){
 			out.println("未記入項目があります。入力しなおしてください。");
 		}else{
 			String fileName = this.getFileName(iconUrl);

@@ -23,10 +23,12 @@ public class Logout extends HttpServlet {
 		HttpSession session = hreq.getSession(false);
 		if(session == null){
 			session = hreq.getSession(true);
-			hres.sendRedirect("../webpro/WebPro2016_6/LoginPage.html");
 			session.setAttribute("Login",0);
+			session.invalidate();
+			hres.sendRedirect("../webpro/WebPro2016_6/LoginPage.html");
 		}else{
 			session.setAttribute("Login",0);
+			session.invalidate();
 			hres.sendRedirect("../webpro/WebPro2016_6/LoginPage.html");
 		}
 	}
