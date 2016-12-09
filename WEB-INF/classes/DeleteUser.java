@@ -55,7 +55,7 @@ public class DeleteUser extends HttpServlet {
 				if(num > 0) {
 					session.setAttribute("Login",0);
 					out.println("データが削除されました．");
-					out.println("<p>再登録は<a href = \"webpro/WebPro2016_6/RegistUser.html\">こちら</a></p>");
+					out.println("<p>再登録は<a href = \"../webpro/WebPro2016_6/RegistUser.html\">こちら</a></p>");
 				}
 				else {
 					out.println("データが削除されませんでした．");

@@ -49,7 +49,7 @@ public class SignupPage extends HttpServlet {
 			ResultSet rs = st.executeQuery(query);
 			if(rs.next()) {
 				out.println("そのユーザーIDは既に使用されています．");
-				out.println("<p>再登録は<a href = \"../../RegistUser.html\">こちら</a></p>");
+				out.println("<p>再登録は<a href = \"../webpro/WebPro2016_6/RegistUser.html\">こちら</a></p>");
 				out.println("</body></html>");
 			} else {
 				// SQL 文を query に格納
