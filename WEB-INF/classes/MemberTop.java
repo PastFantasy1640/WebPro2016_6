@@ -39,6 +39,7 @@ public class MemberTop extends HttpServlet {
 				 + "<form action=Logout>"
 				 + "<input type=\"submit\" value=\"logout\">"
 				 + "</form>"
+				 + "<p>退会は<a href = \"../webpro/WebPro2016_6/DeleteUser.html\">こちら</a></p>"
 				 + "</body>"
 				 + "</html>");
 			}else{

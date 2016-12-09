@@ -6,10 +6,12 @@
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
+import javax.servlet.annotation.MultipartConfig;
 
-// 
+ 
+@MultipartConfig(location="", maxFileSize=1048576)
 public class RegistUser extends HttpServlet {
-	public void doGet(HttpServletRequest hreq,	// リクエスト
+	public void doPost(HttpServletRequest hreq,	// リクエスト
 			  HttpServletResponse hres)	// レスポンス
 		throws ServletException, IOException {
 		// リクエストパラメータの文字エンコーディング指定
@@ -46,6 +48,8 @@ public class RegistUser extends HttpServlet {
 		if(userId.equals("") || universityId.equals("") || pass.equals("")){
 			out.println("未記入項目があります。入力しなおしてください。");
 		}else{
+			String fileName = this.getFileName(iconUrl);
+			iconUrl.write(getServletContext().getRealPath("/WEB-INF/uploaded") + "/" + fileName);
 			out.println("<body>"
 				 + "以下の情報で登録します。"
 				 + "<table border=\"0\">"
@@ -56,8 +60,11 @@ public class RegistUser extends HttpServlet {
 				 + "<tr><td align=\"right\">メール:</td>"+"<td>"+mail+"</td></tr>"
 				 + "<tr><td align=\"right\">twitter:</td>"+"<td>"+twitter+"</td></tr>"
 				 + "<tr><td align=\"right\">facebook:</td>"+"<td>"+facebook+"</td></tr>"
-				 //+ "<tr><td align=\"right\">アイコン(URL):</td>"+"<td>"+iconUrl+"</td></tr>"
+				 + "<tr><td align=\"right\">ファイル名:</td>"+"<td>"+fileName+"</td></tr>"
 				 + "</table>");
+
+			
+
 			//登録情報記憶
 			HttpSession session = hreq.getSession(true);
 
@@ -68,12 +75,25 @@ public class RegistUser extends HttpServlet {
 			session.setAttribute("mail",mail);
 			session.setAttribute("twitter",twitter);
 			session.setAttribute("facebook",facebook);
-			session.setAttribute("icon_url",iconUrl);
+			session.setAttribute("fileName",fileName);
 
-			out.println("<form action = SignupPage>"
+			out.println("<form method=\"POST\" enctype=\"multipart/form-data\" action = SignupPage>"
 			+ "<input type=\"submit\" value=\"登録\">"
 			+ "</form>");
 		}
 		out.println("</body></html>");
 	}
+
+	private String getFileName(Part part) {
+		String name = null;
+		for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
+			if (dispotion.trim().startsWith("filename")) {
+				name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
+				name = name.substring(name.lastIndexOf("\\") + 1);
+				break;
+			}
+		}
+		return name;
+	}
+
 }
