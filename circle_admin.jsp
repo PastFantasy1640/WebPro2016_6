@@ -4,7 +4,7 @@
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 <META HTTP-EQUIV="Expires" CONTENT="-1">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
-<title>サークル登録</title>
+<title>サークル管理</title>
 </head>
 <body>
 <%
@@ -29,6 +29,21 @@
   String university = request.getParameter("university");
   if(university==null)
     university="";
+  String comment = request.getParameter("comment");
+  if(comment==null)
+    comment="";
+  String mail = request.getParameter("mail");
+  if(mail==null)
+    mail="";
+  String phone = request.getParameter("phone");
+  if(phone==null)
+    phone="";
+  String twitter = request.getParameter("twitter");
+  if(twitter==null)
+    twitter="";
+  String facebook = request.getParameter("facebook");
+  if(facebook==null)
+    facebook="";
   String button = request.getParameter("button");
   if(button==null)
     button="";
@@ -36,6 +51,13 @@
   // データベースとの結合
   Connection db = DriverManager.getConnection("jdbc:mysql://localhost/webpro_db?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
 
+  //ここにサークル情報を取得するSQL文を書く
+  //
+  //
+  //
+  //
+  //
+  //
   // Statement オブジェクトの生成
   Statement st = db.createStatement();
   Statement st1 = db.createStatement();
@@ -48,17 +70,20 @@
   // SQL 文を実行し挿入した数が返る
   ResultSet rs1 = st1.executeQuery(query1);
 
-  out.println("<form method=\"post\" enctype=\" multipart/form-data\" action=circle_regist.jsp>");
-  if(button.equals("送信")){
-    application.getRequestDispatcher("/webpro/WebPro2016_6/circle_reg.jsp").forward(request, response);
-  }
 %>
-<h1>サークル名<br>
+<form action=Servlet/UploadServlet enctype=multipart/form-data method=post>
+<h1>サークル画像<br></h1>
+<input type=file name=image size=30>
+<input type="submit" name=button value="送信">
+</form>
+
+<form action=circle_admin.jsp method=post>
+<h1>サークル名<br></h1>
 <%
 out.println("<input type=\"text\" value=\"" + circlename + "\"name=circlename size=30></h1>");
 %>
 
-<h1>カテゴリ<br>
+<h1>カテゴリ<br></h1>
 <%
 if(category.equals("0")){
   out.println("<select name=category><option value=\"0\" selected>体育系</option><option value=\"1\">文化系</option></select>");
@@ -123,6 +148,32 @@ out.println("<select name=prefecture>");
 %>
 </select>
 </h1>
+<h1>サークル紹介<br>
+<%
+out.println("<textarea name=comment rows=4 cols=30>" + comment + "</textarea>");
+%>
+</textarea><br>
+</h1>
+
+<h1>メールアドレス<br></h1>
+<%
+out.println("<input type=\"text\" value=\"" + mail + "\"name=circlename size=30></h1>");
+%>
+
+<h1>電話番号<br></h1>
+<%
+out.println("<input type=\"text\" value=\"" + phone + "\"name=circlename size=30></h1>");
+%>
+
+<h1>Twitter<br></h1>
+<%
+out.println("<input type=\"text\" value=\"" + twitter + "\"name=circlename size=30></h1>");
+%>
+
+<h1>facebook<br></h1>
+<%
+out.println("<input type=\"text\" value=\"" + facebook + "\"name=circlename size=30></h1>");
+%>
 
 <input type="submit" name=button value="送信">
 <%
