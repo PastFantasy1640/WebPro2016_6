@@ -25,6 +25,7 @@ public class RegistUser extends HttpServlet {
 		String universityId = hreq.getParameter("UniversityId");
 		String sex = hreq.getParameter("sex");	//1->男 2->女
 		String pass = hreq.getParameter("password");
+		String pass2 = hreq.getParameter("password2");
 		String mail = hreq.getParameter("mail");
 		String twitter = hreq.getParameter("twitter");
 		String facebook = hreq.getParameter("facebook");
@@ -48,9 +49,12 @@ public class RegistUser extends HttpServlet {
 		out.println("<body>");
 		if(userId.equals("") || universityId.equals("") || pass.equals("") || sex2.equals("")){
 			out.println("未記入項目があります。入力しなおしてください。");
+		}else if(!pass.equals(pass2)){
+			out.println("パスワードが一致しません。入力しなおしてください。");
 		}else{
 			String fileName = this.getFileName(iconUrl);
-			iconUrl.write(getServletContext().getRealPath("/WEB-INF/uploaded") + "/" + fileName);
+			if(!fileName.equals(""))
+				iconUrl.write(getServletContext().getRealPath("/webpro/WebPro2016_6/uploads/users") + "/" + fileName);
 			out.println("<body>"
 				 + "以下の情報で登録します。"
 				 + "<table border=\"0\">"
