@@ -33,12 +33,12 @@ public class RegistUser extends HttpServlet {
 
 		// 性別の文字列化
 		String sex2;
-		if(sex.equals("1")) {
-			sex2 = "男";
-		} else if(sex.equals("2")){
-			sex2 = "女";
-		} else
+		if(sex == null) {
 			sex2 = "";
+		} else if(sex.equals("1")){
+			sex2 = "男";
+		} else
+			sex2 = "女";
 
 		// HTMLテキストの出力
 		out.println("<html><head><meta http-equiv=\"Pragma\" content=\"no-cache\">");
