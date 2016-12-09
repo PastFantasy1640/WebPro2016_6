@@ -49,8 +49,10 @@ public class RegistUser extends HttpServlet {
 		out.println("<body>");
 		if(userId.equals("") || universityId.equals("") || pass.equals("") || sex2.equals("")){
 			out.println("未記入項目があります。入力しなおしてください。");
+			out.println("<p>再入力は<a href = \"../webpro/WebPro2016_6/RegistUser.html\">こちら</a></p>");
 		}else if(!pass.equals(pass2)){
 			out.println("パスワードが一致しません。入力しなおしてください。");
+			out.println("<p>再入力は<a href = \"../webpro/WebPro2016_6/RegistUser.html\">こちら</a></p>");
 		}else{
 			String fileName = this.getFileName(iconUrl);
 			if(!fileName.equals(""))
