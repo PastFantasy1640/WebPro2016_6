@@ -25,15 +25,16 @@
 	// SQL 文を実行し結果を ResultSet に格納
 	ResultSet rs = st.executeQuery(query);
 %>
-<h1>全コミュニティ</h1>
+<h1>コミュニティ</h1>
 
 <a href="http://www.google.co.jp/" class="makeCommunity">コミュニティを作る</a>
 
-<h3>おすすめのコミュニティ<h3>
+<h3>おすすめのコミュニティ</h3>
 
 
 
 <%
+
 	// nextメソッドでポインタを順次移動
 	while(rs.next()) {
 %>
@@ -48,10 +49,39 @@
     <%= rs.getString("description") %>
   </div>
 </div>
+
 </a>
 <%
 	}
+%>
+<h3>新着のコミュニティ</h3>
+
+<%
+	// SQL 文を実行し結果を ResultSet に格納
+	ResultSet rs_new = st.executeQuery(query);
+	// nextメソッドでポインタを順次移動
+	while(rs_new.next()) {
+%>
+  
+<a href="http://www.google.co.jp/">
+<div class="card_community">
+  <img src="./images/<%= rs_new.getString("image_url") %>" width=240px height=160px>
+  <div class="name">
+    <%= rs_new.getString("name") %>
+  </div>
+  <div class="description">
+    <%= rs_new.getString("description") %>
+  </div>
+</div>
+
+</a>
+<%
+	}
+%>
+
+<%
 	// ResultSet, Statement, データベースを順にクローズ
+	rs_new.close();
 	rs.close();
 	st.close();
 	db.close();
