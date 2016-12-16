@@ -9,6 +9,8 @@ package utility;
 
 import java.sql.*;
 import java.util.logging.Logger;
+import java.security.SecureRandom;
+
 
 /** ImageManager class manages images uploaded from users.
  */
@@ -16,57 +18,104 @@ public class ImageManager{
 
 	private final int id;
 	private final String url;
-	private final String alt;
 	
 	private final String QUERY_GET_IMAGE = "select * from images where images.id=?;";
-	private final String QUERY_ADD_IMAGE = "insert into images (url, alt) values (?, ?);"; 
+	private final String QUERY_ADD_IMAGE = "insert into images (url) values (?);"; 
+	private final String QUERY_UNIQUE_FILENAME = "select count(*) from images where images.url=?";
+	private final String QUERY_LAST_ID = "select last_insert_id() as LAST;";
 
 	public int getId(){ return this.id; }
 	public String getUrl(){ return this.url; }
-	public String getAlt(){ return this.alt; }
-	
-	private ImageManager(final int id, final String url, final String alt){
+
+	private String generateRandomName(final int id){
+		SecureRandom random = new SecureRandom();
+		byte bytes[] = new byte[20];
+		random.nextBytes(bytes);
+
+		String ret = "img";
+		for(byte b: bytes){
+			char c = (char)('a' + ((int)b % 26));
+			ret += c;
+		}
+
+		ret += Integer.toString(id);
+
+		return ret;
+	}
+
+
+	private ImageManager(final int id, final String url){
 		this.id = id;
 		this.url = url;
-		this.alt = alt;
 	}
 	
-	public ImageManager(final int id, final String alt = ""){
+/*	public ImageManager(final int id){
+		this.ImageManager(id,"");
+	}
+*/
+
+	public ImageManager(final int id){
     			
-    	this.prepareDB();
-    	
 		Logger logger = Logger.getLogger("ImageManager");
+
+    		boolean res = false;
+		try{
+    			Class.forName("org.gjt.mm.mysql.Driver");
+    			res = true;
+    		}catch(ClassNotFoundException e){
+    			logger.warning("DB Driver not found exception has occured. EXCEPTION:" + e.toString());
+    		}
+    	
 		
 		int tid = 0;
 		String turl = "";
-		String talt = "Failed to get the image data.";
 		
-    	try{
-	    	db = DriverManager.getConnection("jdbc:mysql://localhost/circle_triangle_db?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
+		Connection db = null;
+    		try{
+		    	db = DriverManager.getConnection("jdbc:mysql://localhost/circle_triangle_db?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
 	    	
-	    	if(id > 0){
-		    	//get
-		    	PreparedStatement ps = db.prepareStatement(QUERY_GET_IMAGE);
-		    	ps.setInt(1, id);
-		    	ResultSet rs = ps.executeQuery();
+		    	if(id > 0){
+			    	//get
+			    	PreparedStatement ps = db.prepareStatement(QUERY_GET_IMAGE);
+			    	ps.setInt(1, id);
+			    	ResultSet rs = ps.executeQuery();
+			    	
+			    	if(rs.next()){
+			    		tid = rs.getInt("id");
+			    		turl = rs.getString("url");
+			    	}else{
+			    		logger.warning("Illegal id has been set.");
+			    	}
 		    	
-		    	if(rs.next()){
-		    		tid = rs.getInt("id");
-		    		turl = rs.getString("url");
-		    		talt = rs.getString("alt");
+		    	
 		    	}else{
-		    		logger.warning("Illegal id has been set.");
+		    		//new addition
+		    		//create url
+		    		int count = 0;
+		    		do{
+			    		turl = this.generateRandomName(id);
+			    		PreparedStatement ps = db.prepareStatement(QUERY_UNIQUE_FILENAME);
+			    		ps.setString(1,turl);
+			    		ResultSet rs = ps.executeQuery();
+
+			    		count = rs.getInt("count(*)");
+
+	    			}while(count > 0);
+				
+				PreparedStatement ps = db.prepareStatement(QUERY_ADD_IMAGE);
+			    	ps.setString(1,turl);
+			    	ResultSet rs = ps.executeQuery();
+
+			    	ps = db.prepareStatement(QUERY_LAST_ID);
+			    	rs = ps.executeQuery();
+			    	tid = rs.getInt("LAST");
+
+
 		    	}
-		    	
-		    	
-	    	}else{
-	    		//new addition
-	    		//create url
-	    		//TO DO##############################################################
-	    		
-	    	}
 		}catch(SQLException e){
 			logger.warning("access to database has denied.");
+			tid = 0;
+			turl = "";
 		}finally{
 			try{
 				if(db != null) db.close();
@@ -75,35 +124,9 @@ public class ImageManager{
 			}
 		}
     	
+    		this.id = tid;
+    		this.url = turl;
 	}
 
-	private boolean prepareDB(){
-	
-		Logger logger = Logger.getLogger("ImageManager");
-	
-		boolean res = false;
-		try{
-    		Class.forName("org.gjt.mm.mysql.Driver");
-    		res = true;
-    	}catch(ClassNotFoundException e){
-    		logger.warning("DB Driver not found exception has occured. EXCEPTION:" + e.toString());
-    	}
-    	
-    	return res;
-	}
-
-
-	static public ImageManager getImage(final int id){
-		//return the image data and informations.
-		return new ImageManager(id);
-	}
-	
-	/** update an image.
-	 *@param want_id 0:add a new image. else:update the exising image.
-	 *@return new id and url. if id is 0, didn't update successfully.
-	 */
-	static public ImageManager updateImage(final int want_id, final String alt = ""){
-		
-	}
 
 }
