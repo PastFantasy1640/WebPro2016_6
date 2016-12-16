@@ -13,13 +13,9 @@
   // JDBC ドライバのロード
   Class.forName("org.gjt.mm.mysql.Driver");
 
-
   String circlename = request.getParameter("circlename");
   if(circlename==null)
     circlename="";
-  String category = request.getParameter("category");
-  if(category==null)
-    category="0";
   String type = request.getParameter("type");
   if(type==null)
     type="";
@@ -36,15 +32,10 @@
   // データベースとの結合
   Connection db = DriverManager.getConnection("jdbc:mysql://localhost/webpro_db?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
 
-  // Statement オブジェクトの生成
-  Statement st = db.createStatement();
+  // Statement オブジェクトの生成;
   Statement st1 = db.createStatement();
   // SQL 文を query に納入
-  String query = "select name from categorys where type=0";
-  // SQL 文を実行し挿入した数が返る
-  ResultSet rs = st.executeQuery(query);
-  // SQL 文を query に納入
-  String query1 = "select name from categorys where type=32768";
+  String query1 = "select name from categories";
   // SQL 文を実行し挿入した数が返る
   ResultSet rs1 = st1.executeQuery(query1);
 
@@ -60,29 +51,12 @@ out.println("<input type=\"text\" value=\"" + circlename + "\"name=circlename si
 
 <h1>カテゴリ<br>
 <%
-if(category.equals("0")){
-  out.println("<select name=category><option value=\"0\" selected>体育系</option><option value=\"1\">文化系</option></select>");
-}
-if(category.equals("1")){
-  out.println("<select name=category><option value=\"0\">体育系</option><option value=\"1\" selected>文化系</option></select>");
-}
-%>
-<input type="submit" name=button value=検索>
-<%
-if(category.equals("0")){
-  out.println("<select name=type>");
-  while(rs.next()){
-    out.println("<option value=\"" + rs.getString("name") + "\">" + rs.getString("name") + "</option>");
-  }
-  out.println("</select>");
-}
-if(category.equals("1")){
   out.println("<select name=type>");
   while(rs1.next()){
     out.println("<option value=\"" + rs1.getString("name") + "\">" + rs1.getString("name") + "</option>");
   }
   out.println("</select>");
-}
+
 %>
 </select>
 </h1>
@@ -127,11 +101,9 @@ out.println("<select name=prefecture>");
 <input type="submit" name=button value="送信">
 <%
   // Statement, データベースを順にクローズ
-  rs.close();
   rs1.close();
   rs2.close();
   rs3.close();
-  st.close();
   st1.close();
   st2.close();
   st3.close();

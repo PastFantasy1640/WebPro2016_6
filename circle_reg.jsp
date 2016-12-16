@@ -14,7 +14,6 @@
 	request.setCharacterEncoding("utf-8");
 	// パラメータの入力とチェック
   String circlename = request.getParameter("circlename");
-  String category = request.getParameter("category");
   String type = request.getParameter("type");
   String prefecture = request.getParameter("prefecture");
   String university = request.getParameter("university");
@@ -41,7 +40,7 @@
     Statement st2 = db.createStatement();
     Statement st3 = db.createStatement();
 
-    String query1 = "select id from categorys where name='" + type + "'";
+    String query1 = "select id from categories where name='" + type + "'";
     String query2 = "select id from universities where name='" + university + "'";
     String query3 = "select id from circles where name='" + circlename + "' and university_id = (select id from universities where name='" + university + "')";
     

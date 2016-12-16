@@ -17,7 +17,6 @@ public class ImageUploader extends HttpServlet {
     Part part = request.getPart("image");
     String name = this.getFileName(part);
     String filename = getServletContext().getRealPath("/uploads/images") + "/" + name;
-    part.write(filename);
     HttpSession session = request.getSession();
     if(getServletContext().getMimeType(filename).equals("image/png")
     || getServletContext().getMimeType(filename).equals("image/jpeg")
@@ -26,6 +25,7 @@ public class ImageUploader extends HttpServlet {
       ImageManager imagemanager = new ImageManager((int)session.getAttribute("ID"));
       name = imagemanager.getFileName();
       filename = getServletContext().getRealPath("/uploads/images") + "/" + name;
+    part.write(filename);
     }
 
     session.setAttribute("ID",imagemanager.getID());

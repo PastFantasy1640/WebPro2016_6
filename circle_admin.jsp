@@ -13,13 +13,9 @@
   // JDBC ドライバのロード
   Class.forName("org.gjt.mm.mysql.Driver");
 
-
   String circlename = request.getParameter("circlename");
   if(circlename==null)
     circlename="";
-  String category = request.getParameter("category");
-  if(category==null)
-    category="0";
   String type = request.getParameter("type");
   if(type==null)
     type="";
@@ -51,66 +47,72 @@
   // データベースとの結合
   Connection db = DriverManager.getConnection("jdbc:mysql://localhost/webpro_db?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
 
-  //ここにサークル情報を取得するSQL文を書く
-  //
-  //
-  //
-  //
-  //
-  //
+Statement st4 = db.createStatement();
+String query4 = "select name,name1 from universities";
+ResultSet rs4 = st4.executeQuery(query4);
+
+function Handler1()
+{
+    a = [];
+    b = [];
+    var val    = document.Form1.initial.value;
+    var target = document.getElementById("output1");
+    <%
+    while(rs4.next()) {
+    %>
+    a.push('<%= rs4.getString("name1") %>');
+    b.push('<%= rs4.getString("name") %>');
+    <%
+    }
+    %>
+    var mozi = '';
+     
+    mozi = "<select>";
+ 
+    for(i = 0; i < a.length; i++){
+	if(~a[i].indexOf(val)){
+	    mozi += "<option>"+b[i]+"</option>";
+	}
+    }	 
+    mozi += "</select>";
+	 
+    target.innerHTML = mozi;
+}
+
   // Statement オブジェクトの生成
-  Statement st = db.createStatement();
   Statement st1 = db.createStatement();
   // SQL 文を query に納入
-  String query = "select name from categorys where type=0";
-  // SQL 文を実行し挿入した数が返る
-  ResultSet rs = st.executeQuery(query);
-  // SQL 文を query に納入
-  String query1 = "select name from categorys where type=32768";
+  String query1 = "select name from categories";
   // SQL 文を実行し挿入した数が返る
   ResultSet rs1 = st1.executeQuery(query1);
-
 %>
-<form action=Servlet/UploadServlet enctype=multipart/form-data method=post>
-<h1>サークル画像<br></h1>
+<center>
+<h1>サークル管理</h1><br>
+<form action=Servlet/ImageUploader enctype=multipart/form-data method=post>
+<h2>・サークル画像変更</h2>
 <input type=file name=image size=30>
 <input type="submit" name=button value="送信">
-</form>
+</form><br><br>
 
+<h2>・サークル情報変更</h2>
 <form action=circle_admin.jsp method=post>
-<h1>サークル名<br></h1>
+<table>
+<tbody>
+<tr><th>サークル名</th><td>
 <%
 out.println("<input type=\"text\" value=\"" + circlename + "\"name=circlename size=30></h1>");
 %>
-
-<h1>カテゴリ<br></h1>
+</td></tr>
+<tr><th>カテゴリ</th><td>
 <%
-if(category.equals("0")){
-  out.println("<select name=category><option value=\"0\" selected>体育系</option><option value=\"1\">文化系</option></select>");
-}
-if(category.equals("1")){
-  out.println("<select name=category><option value=\"0\">体育系</option><option value=\"1\" selected>文化系</option></select>");
-}
-%>
-<input type="submit" name=button value=検索>
-<%
-if(category.equals("0")){
-  out.println("<select name=type>");
-  while(rs.next()){
-    out.println("<option value=\"" + rs.getString("name") + "\">" + rs.getString("name") + "</option>");
-  }
-  out.println("</select>");
-}
-if(category.equals("1")){
   out.println("<select name=type>");
   while(rs1.next()){
     out.println("<option value=\"" + rs1.getString("name") + "\">" + rs1.getString("name") + "</option>");
   }
   out.println("</select>");
-}
 %>
 </select>
-</h1>
+</td></tr>
 <%
   // Statement オブジェクトの生成
   Statement st2 = db.createStatement();
@@ -119,18 +121,60 @@ if(category.equals("1")){
   // SQL 文を実行し挿入した数が返る
   ResultSet rs2 = st2.executeQuery(query2);
 %>
-<h1>所在大学<br>
+<tr><th>所在大学</th><td>
 <%
-out.println("<select name=prefecture>");
-  while(rs2.next()){
-    if(prefecture.equals(rs2.getString("name"))){
-      out.println("<option value=\"" + rs2.getString("name") + "\"selected>" + rs2.getString("name") + "</option>");
-    }else{
-      out.println("<option value=\"" + rs2.getString("name") + "\">" + rs2.getString("name") + "</option>");
-    }
-  }
-  out.println("</select>");
+		    <div class="font2">大学名から探す</div>
+		    <div style="text-align: center; padding:10px">
+			<form name="Form1">
+				<select name="initial" onChange="Handler1()">
+				    <option value="">頭文字</option>
+				    <option value="あ">あ</option>
+				    <option value="い">い</option>
+				    <option value="う">う</option>
+				    <option value="え">え</option>
+				    <option value="お">お</option>
+				    <option value="か">か</option>
+				    <option value="き">き</option>
+				    <option value="く">く</option>
+				    <option value="け">け</option>
+				    <option value="こ">こ</option>
+				    <option value="さ">さ</option>
+				    <option value="し">し</option>
+				    <option value="せ">せ</option>
+				    <option value="そ">そ</option>
+				    <option value="た">た</option>
+				    <option value="ち">ち</option>
+				    <option value="つ">つ</option>
+				    <option value="て">て</option>
+				    <option value="と">と</option>
+				    <option value="な">な</option>
+				    <option value="に">に</option>
+				    <option value="ひ">ひ</option>
+				    <option value="ふ">ふ</option>
+				    <option value="ほ">ほ</option>
+				    <option value="む">む</option>
+				    <option value="め">め</option>
+				    <option value="も">も</option>
+				    <option value="よ">よ</option>
+				    <option value="り">り</option>
+				    <option value="わ">わ</option>
+				</select>
+				<select style="width:200px;height:30px" id="output1">
+				    <option value="指定">指定しろ</option>
+				</select>
+			</form>
+		    </div>
+//out.println("<select name=prefecture onChange=\">");
+//  while(rs2.next()){
+//    if(prefecture.equals(rs2.getString("name"))){
+//      out.println("<option value=\"" + rs2.getString("name") + "\"selected>" + rs2.getString("name") + "</option>");
+//    }else{
+//      out.println("<option value=\"" + rs2.getString("name") + "\">" + rs2.getString("name") + "</option>");
+//    }
+//  }
+//  out.println("</select>");
 %>
+</td></tr>
 <input type="submit" name=button value=検索>
 <%
   // Statement オブジェクトの生成
@@ -157,35 +201,35 @@ out.println("<textarea name=comment rows=4 cols=30>" + comment + "</textarea>");
 
 <h1>メールアドレス<br></h1>
 <%
-out.println("<input type=\"text\" value=\"" + mail + "\"name=circlename size=30></h1>");
+out.println("<input type=\"text\" value=\"" + mail + "\"name=mail size=30></h1>");
 %>
 
 <h1>電話番号<br></h1>
 <%
-out.println("<input type=\"text\" value=\"" + phone + "\"name=circlename size=30></h1>");
+out.println("<input type=\"text\" value=\"" + phone + "\"name=phone size=30></h1>");
 %>
 
 <h1>Twitter<br></h1>
 <%
-out.println("<input type=\"text\" value=\"" + twitter + "\"name=circlename size=30></h1>");
+out.println("<input type=\"text\" value=\"" + twitter + "\"name=twitter size=30></h1>");
 %>
 
 <h1>facebook<br></h1>
 <%
-out.println("<input type=\"text\" value=\"" + facebook + "\"name=circlename size=30></h1>");
+out.println("<input type=\"text\" value=\"" + facebook + "\"name=facebook size=30></h1>");
 %>
 
-<input type="submit" name=button value="送信">
+<br><br><input type="submit" name=button value="送信">
 <%
   // Statement, データベースを順にクローズ
-  rs.close();
   rs1.close();
   rs2.close();
   rs3.close();
-  st.close();
+  rs4.close();
   st1.close();
   st2.close();
   st3.close();
+  st4.close();
   db.close();
 %>
 </form>
