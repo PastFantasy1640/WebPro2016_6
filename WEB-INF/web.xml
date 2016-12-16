@@ -64,4 +64,14 @@
     <url-pattern>/servlet/ChangeMyInfo</url-pattern>
 </servlet-mapping>
 
+<servlet>
+  <servlet-name>ChangedMyInfo</servlet-name>
+  <servlet-class>ChangedMyInfo</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>ChangedMyInfo</servlet-name>
+    <url-pattern>/servlet/ChangedMyInfo</url-pattern>
+</servlet-mapping>
+
 </web-app>
