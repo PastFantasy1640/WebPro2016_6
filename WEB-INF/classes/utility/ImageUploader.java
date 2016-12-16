@@ -1,3 +1,5 @@
+package utility;
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -6,29 +8,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.BufferedWriter;
-import java.io.PrintWriter;
+import javax.servlet.http.*;
 import java.io.*;
 
-@WebServlet("/UploadServlet")
+@WebServlet("/ImageUploader")
 @MultipartConfig(location="/tmp", maxFileSize=1048576)
-public class UploadServlet extends HttpServlet {
+public class ImageUploader extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     Part part = request.getPart("image");
     String name = this.getFileName(part);
-    String filename = getServletContext().getRealPath("/webpro/WebPro2016_6/image") + "/" + name;
-    part.write(filename);
-    File file = new File("/usr/local/MyApp/check.txt");
-    if(checkBeforeWritefile(file)){
-      PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file)));
-      pw.println(getServletContext().getMimeType(filename));
+    String filename = getServletContext().getRealPath("/uploads/images") + "/" + name;
+    HttpSession session = request.getSession();
+    if(getServletContext().getMimeType(filename).equals("image/png")
+    || getServletContext().getMimeType(filename).equals("image/jpeg")
+    || getServletContext().getMimeType(filename).equals("image/gif"))
+    {
+      ImageManager imagemanager = new ImageManager((int)session.getAttribute("ID"));
+      name = imagemanager.getFileName();
+      filename = getServletContext().getRealPath("/uploads/images") + "/" + name;
+      part.write(filename);
+      session.setAttribute("ID",imagemanager.getId());
+    }else session.setAttribute("ID",-1);
 
-      pw.close();
-    }
-    response.sendRedirect("/MyApp/circle_admin.jsp");
+    //URL先はセッションから取得
+    response.sendRedirect((String)session.getAttribute("url"));
   }
 
   private String getFileName(Part part) {
@@ -41,14 +45,5 @@ public class UploadServlet extends HttpServlet {
       }
     }
     return name;
-  }
-  private static boolean checkBeforeWritefile(File file){
-    if (file.exists()){
-      if (file.isFile() && file.canWrite()){
-        return true;
-      }
-    }
-
-    return false;
   }
 }

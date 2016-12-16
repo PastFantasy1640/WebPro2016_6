@@ -63,7 +63,7 @@ public class ImageManager{
 		Logger logger = Logger.getLogger("ImageManager");
 
 		//temporary members
-		int tid = 0;
+		int tid = -1;
 		String turl = "";
 
 		//load the db driver
@@ -100,7 +100,7 @@ public class ImageManager{
 			    	}
 		    	
 		    	
-		    	}else{
+		    	}else if(id == 0){
 		    		//new addition
 		    		//create url
 		    		int count = 0;
@@ -134,6 +134,9 @@ public class ImageManager{
 		    		ps.close();
 		    		rs.close();
 
+		    	}else{
+		    		tid = -1;
+		    		turl = "";
 		    	}
 		}catch(SQLException e){
 			logger.warning("access to database has denied.");
