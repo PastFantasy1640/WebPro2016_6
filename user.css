@@ -1,5 +1,21 @@
 @charset "utf-8";
 
+/*見出し・段落・水平線のスタイル指定*/
+h2 {
+	font-size:100%; margin-bottom:10px; padding-left:25px;
+	font-size:95%; border-bottom:solid 1px #cccccc;
+	//background-image:url("images/icon.gif");
+	background-repeat:no-repeat; background-position:left center;
+}
+h3 {font-size:100%a;}	/* h3 { font-size:100%; margin-left:5px;} */
+p {font-size:90%; margin:10px 0px 10px 10px; text-indent:10px;} */
+
+/* リンクの色 */
+a:link { color: #0000ff; }
+a:visited { color: #000080; }
+a:hover { color: #ff0000; }
+a:active { color: #ff8000; }
+
 /*============================================
  * 全般的なスタイル
  * ============================================*/
@@ -40,53 +56,53 @@ h1 a {text-decoration:none;} 			/*リンクの下線を無くす*/
  * リンク
  * ============================================*/
 div#link {
-	width:600px; margin:0px 0px 0px 0px;	/*幅の指定と位置調整*/
-	float:center;				/*2カラム全体を右寄せにする*/
+	width:600px; margin: 0px 100px 0px 100px;	/*幅の指定と位置調整*/
 }
 
 /*============================================
- * ニュース（中央カラム）
+ * html
  * ============================================*/
 div#html {
-	width:280px; margin-right:5px; padding-top:10px; /*幅の指定と位置調整*/
+	width:250px; margin-right:10px; padding-top:10px; /*幅の指定と位置調整*/
 	float:left;					/*カラムを左寄せにする*/
-	background-image:url("images/bar_news.gif");	/*中央カラムの背景画像*/
+	//background-image:url("images/bar_news.gif");	/*中央カラムの背景画像*/
 	background-repeat:no-repeat;			/*背景画像を繰り返さない*/
 }
-
-/*見出し・段落・水平線のスタイル指定*/
-h2 {
-	font-size:100%; margin-bottom:10px; padding-left:25px;
-	font-size:95%; border-bottom:solid 1px #cccccc;
-	background-image:url("images/icon.gif");
-	background-repeat:no-repeat; background-position:left center;
+div#html ul {
+	text-align: left;
+        margin-left:10px;               /*左マージンを10px空ける*/
+        font-size:100%;                 /*フォントサイズを90%にする*/
 }
-h3 {font-size:90%; margin-left:5px;}
-p {font-size:90%; margin:10px 0px 10px 10px; text-indent:10px;}
-hr {height:1px; border:solid 1px #cccccc; margin-bottom:30px;}
+div#html li {
+        list-style-type:none;                /*リストマーカー無しにする*/
+        line-height:1.8;                /*行の高さを1.8倍にする*/
+}
 
 /*============================================
- * ピックアップ（右カラム）
+ * java
  * ============================================*/
 div#java {
-	width:280px; padding-top:10px; 		/*幅の指定と位置調整*/
+	width:250px; padding-top:10px; 		/*幅の指定と位置調整*/
 	float:right;				/*カラムを右寄せにする*/
-	background-image:url("images/bar_pickup.gif");	/*右カラムの背景画像*/
+	//background-image:url("images/bar_pickup.gif");	/*右カラムの背景画像*/
 	background-repeat:no-repeat;		 /*背景画像を繰り返さない*/
 }
-div#pickup ul {
+div#java ul {
+	text-align: left;
 	margin-left:10px; 		/*左マージンを10px空ける*/
-	font-size:90%;			/*フォントサイズを90%にする*/
+	font-size:100%;			/*フォントサイズを90%にする*/
 }
-div#pickup li {
+div#java li {
 	list-style-type:none; 		/*リストマーカー無しにする*/
 	line-height:1.8;		/*行の高さを1.8倍にする*/
 }
+
 
 /*============================================
  * フッタ
  * ============================================*/
 div#footer {
+	margin: 500px 0px 0px 0px;
 	height:30px; text-align:center;
 	clear:both;					/*回り込みを解除する*/
 	//background-image:url("images/bg_footer.jpg");	/*フッタ部分の背景画像*/
