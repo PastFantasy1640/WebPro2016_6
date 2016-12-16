@@ -14,7 +14,7 @@ body {
 	text-align:center;		/*IE6以下でセンタリングするための対策*/
 }
 div#pagebody {
-	width:796px; margin:0 auto;	/*内容全体をセンタリング*/
+	width:800px; margin:0 auto;	/*内容全体をセンタリング*/
 	text-align:center;	/*テキストの配置を左揃えにする*/
 	//background-image:url("../../sky1.jpg");	/*内容全体の背景*/
 	background-repeat:repeat-y;		/*背景画像を縦方向に繰り返す*/
@@ -25,7 +25,7 @@ div#pagebody {
  * ヘッダ
  * ============================================*/
 div#header {
-	height:77px;	/*背景画像のサイズに合わせてボックスの高さを指定*/
+	height:70px;	/*背景画像のサイズに合わせてボックスの高さを指定*/
 	//background-image:url("images/bg_header.jpg");	/*ヘッダ部分の背景画像*/
 	background-repeat:no-repeat;		/*背景画像を繰り返さない*/
 	background-color:#eeeeee;		/*ヘッダ部分の背景色*/
@@ -40,15 +40,15 @@ h1 a {text-decoration:none;} 			/*リンクの下線を無くす*/
  * リンク
  * ============================================*/
 div#link {
-	width:560px; margin:10px 20px 10px 0px;	/*幅の指定と位置調整*/
-	float:right;				/*2カラム全体を右寄せにする*/
+	width:600px; margin:0px 0px 0px 0px;	/*幅の指定と位置調整*/
+	float:center;				/*2カラム全体を右寄せにする*/
 }
 
 /*============================================
  * ニュース（中央カラム）
  * ============================================*/
 div#html {
-	width:390px; margin-right:5px; padding-top:10px; /*幅の指定と位置調整*/
+	width:280px; margin-right:5px; padding-top:10px; /*幅の指定と位置調整*/
 	float:left;					/*カラムを左寄せにする*/
 	background-image:url("images/bar_news.gif");	/*中央カラムの背景画像*/
 	background-repeat:no-repeat;			/*背景画像を繰り返さない*/
@@ -69,7 +69,7 @@ hr {height:1px; border:solid 1px #cccccc; margin-bottom:30px;}
  * ピックアップ（右カラム）
  * ============================================*/
 div#java {
-	width:150px; padding-top:10px; 		/*幅の指定と位置調整*/
+	width:280px; padding-top:10px; 		/*幅の指定と位置調整*/
 	float:right;				/*カラムを右寄せにする*/
 	background-image:url("images/bar_pickup.gif");	/*右カラムの背景画像*/
 	background-repeat:no-repeat;		 /*背景画像を繰り返さない*/
