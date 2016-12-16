@@ -74,4 +74,14 @@
     <url-pattern>/servlet/ChangedMyInfo</url-pattern>
 </servlet-mapping>
 
+<servlet>
+  <servlet-name>DeleteUser</servlet-name>
+  <servlet-class>DeleteUser</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>DeleteUser</servlet-name>
+    <url-pattern>/servlet/DeleteUser</url-pattern>
+</servlet-mapping>
+
 </web-app>

@@ -8,7 +8,7 @@ import javax.servlet.http.*;
 import java.sql.*;
 
 public class LoginPage extends HttpServlet {
-	public void doGet(HttpServletRequest hreq,	// リクエスト
+	public void doPost(HttpServletRequest hreq,	// リクエスト
 			  HttpServletResponse hres)	// レスポンス
 		throws ServletException, IOException {
 		// リクエストパラメータの文字エンコーディング指定

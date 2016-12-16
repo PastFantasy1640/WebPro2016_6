@@ -11,7 +11,7 @@ import java.sql.*;
 
 @MultipartConfig(location="", maxFileSize=1048576)
 public class ChangedMyInfo extends HttpServlet {
-	public void doGet(HttpServletRequest hreq,	// リクエスト
+	public void doPost(HttpServletRequest hreq,	// リクエスト
 			  HttpServletResponse hres)	// レスポンス
 		throws ServletException, IOException {
 		// リクエストパラメータの文字エンコーディング指定
@@ -58,14 +58,37 @@ public class ChangedMyInfo extends HttpServlet {
 						String newTwitter = hreq.getParameter("newTwitter");
 						String newFacebook = hreq.getParameter("newFacebook");
 						String newMail = hreq.getParameter("newMail");
-						if(!newPass.equals("") && newTwitter.equals("") && newFacebook.equals("") && newMail.equals("")){
+						if(newPass!=null && newTwitter==null && newFacebook==null && newMail==null){
 							if(!newPass.equals(newPass2)){
 								out.println("新しいパスワードと新しいパスワード（確認）が一致しません。");
 								out.println("もう一度入力しなおしてください。");
 								out.println("<p>メンバートップページは<a href = \"MemberTop\">こちら</a></p>");
 								out.println("</body></html>");
+							}else if(newPass.equals("")){
+								out.println("このパスワードは登録できません。もう一度入力しなおしてください。");
+								out.println("<p>メンバートップページは<a href = \"MemberTop\">こちら</a></p>");
+								out.println("</body></html>");
 							}else{
 								query = "update users set password = '"+newPass+"' where id = '"+id+"'";
+								int num = st.executeUpdate(query);
+								if(num > 0) {
+									//登録成功
+									out.println("データが登録されました．");
+									out.println("<p>メンバートップページは<a href = \"MemberTop\">こちら</a></p>");
+									out.println("</body></html>");
+								}else {
+									out.println("データの登録に失敗しました。もう一度入力しなおしてください。");
+									out.println("<p>メンバートップページは<a href = \"MemberTop\">こちら</a></p>");
+								}
+								out.println("</body></html>");
+							}
+						}else if(newPass==null && newTwitter!=null && newFacebook==null && newMail==null){
+							if(newTwitter.equals("")){
+								out.println("このツイッターアカウントは登録できません。もう一度入力しなおしてください。");
+								out.println("<p>メンバートップページは<a href = \"MemberTop\">こちら</a></p>");
+								out.println("</body></html>");
+							}else{
+								query = "update users set twitter = '"+newTwitter+"' where id = '"+id+"'";
 								int num = st.executeUpdate(query);
 								if(num > 0) {
 									//登録成功
@@ -77,42 +100,43 @@ public class ChangedMyInfo extends HttpServlet {
 								}
 								out.println("</body></html>");
 							}
-						}else if(newPass.equals("") && !newTwitter.equals("") && newFacebook.equals("") && newMail.equals("")){
-							query = "update users set twitter = '"+newTwitter+"' where id = '"+id+"'";
-							int num = st.executeUpdate(query);
-							if(num > 0) {
-								//登録成功
-								out.println("データが登録されました．");
+						}else if(newPass==null && newTwitter==null && newFacebook!=null && newMail==null){
+							if(newFacebook.equals("")){
+								out.println("このフェイスブックアカウントは登録できません。もう一度入力しなおしてください。");
 								out.println("<p>メンバートップページは<a href = \"MemberTop\">こちら</a></p>");
-							}else {
-								out.println("データの登録に失敗しました。もう一度入力しなおしてください。");
-								out.println("<p>メンバートップページは<a href = \"MemberTop\">こちら</a></p>");
+								out.println("</body></html>");
+							}else{
+								query = "update users set facebook = '"+newFacebook+"' where id = '"+id+"'";
+								int num = st.executeUpdate(query);
+								if(num > 0) {
+									//登録成功
+									out.println("データが登録されました．");
+									out.println("<p>メンバートップページは<a href = \"MemberTop\">こちら</a></p>");
+								}else {
+									out.println("データの登録に失敗しました。もう一度入力しなおしてください。");
+									out.println("<p>メンバートップページは<a href = \"MemberTop\">こちら</a></p>");
+								}
+								out.println("</body></html>");
 							}
-							out.println("</body></html>");
-						}else if(newPass.equals("") && newTwitter.equals("") && !newFacebook.equals("") && newMail.equals("")){
-							query = "update users set facebook = '"+newFacebook+"' where id = '"+id+"'";
-							int num = st.executeUpdate(query);
-							if(num > 0) {
-								//登録成功
-								out.println("データが登録されました．");
+						}else if(newPass==null && newTwitter==null && newFacebook==null && newMail!=null){
+							if(newMail.equals("")){
+								out.println("このメールアドレスは登録できません。もう一度入力しなおしてください。");
 								out.println("<p>メンバートップページは<a href = \"MemberTop\">こちら</a></p>");
-							}else {
-								out.println("データの登録に失敗しました。もう一度入力しなおしてください。");
-								out.println("<p>メンバートップページは<a href = \"MemberTop\">こちら</a></p>");
+								out.println("</body></html>");
+
+							}else{
+								query = "update users set mail = '"+newMail+"' where id = '"+id+"'";
+								int num = st.executeUpdate(query);
+								if(num > 0) {
+									//登録成功
+									out.println("データが登録されました．");
+									out.println("<p>メンバートップページは<a href = \"MemberTop\">こちら</a></p>");
+								}else {
+									out.println("データの登録に失敗しました。もう一度入力しなおしてください。");
+									out.println("<p>メンバートップページは<a href = \"MemberTop\">こちら</a></p>");
+								}
+								out.println("</body></html>");
 							}
-							out.println("</body></html>");
-						}else if(newPass.equals("") && newTwitter.equals("") && newFacebook.equals("") && !newMail.equals("")){
-							query = "update users set mail = '"+newMail+"' where id = '"+id+"'";
-							int num = st.executeUpdate(query);
-							if(num > 0) {
-								//登録成功
-								out.println("データが登録されました．");
-								out.println("<p>メンバートップページは<a href = \"MemberTop\">こちら</a></p>");
-							}else {
-								out.println("データの登録に失敗しました。もう一度入力しなおしてください。");
-								out.println("<p>メンバートップページは<a href = \"MemberTop\">こちら</a></p>");
-							}
-							out.println("</body></html>");
 						}else{
 							out.println("申し訳ありません。データを入力しなおしてください。");
 							out.println("<p>メンバートップページは<a href = \"MemberTop\">こちら</a></p>");

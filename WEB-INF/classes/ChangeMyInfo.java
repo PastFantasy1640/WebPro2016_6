@@ -37,7 +37,7 @@ public class ChangeMyInfo extends HttpServlet {
 				if(target.equals("pass")){
 					out.println("<body>"
 					 + "<h2>パスワード変更</h2>"
-					 + "<form action=\"ChangedMyInfo\">"
+					 + "<form method=\"POST\" action=\"ChangedMyInfo\">"
 					 + "<table border=\"0\">"
 					 + "<tr><td align=\"right\">新しいパスワード:</td>"
 					 + "<td><input type=\"password\" name=\"newPass\" size=32 maxlength=32></td></tr>"
@@ -53,7 +53,7 @@ public class ChangeMyInfo extends HttpServlet {
 				}else if(target.equals("twitter")){
 					out.println("<body>"
 					+"<h2>ツイッターアカウント変更<h2>"
-					 + "<form action=\"ChangedMyInfo\">"
+					 + "<form method=\"POST\" action=\"ChangedMyInfo\">"
 					 + "<table border=\"0\">"
 					 + "<tr><td align=\"right\">新しいツイッターアカウント:</td>"
 					 + "<td><input type=\"text\" name=\"newTwitter\" size=16 maxlength=16></td></tr>"
@@ -67,7 +67,7 @@ public class ChangeMyInfo extends HttpServlet {
 				}else if(target.equals("facebook")){
 					out.println("<body>"
 					+"<h2>フェイスブックアカウント変更<h2>"
-					 + "<form action=\"ChangedMyInfo\">"
+					 + "<form method=\"POST\" action=\"ChangedMyInfo\">"
 					 + "<table border=\"0\">"
 					 + "<tr><td align=\"right\">新しいフェイスブックアカウント:</td>"
 					 + "<td><input type=\"text\" name=\"newFacebook\" size=64 maxlength=64></td></tr>"
@@ -81,7 +81,7 @@ public class ChangeMyInfo extends HttpServlet {
 				}else if(target.equals("mail")){
 					out.println("<body>"
 					+"<h2>メール変更<h2>"
-					 + "<form action=\"ChangedMyInfo\">"
+					 + "<form method=\"POST\" action=\"ChangedMyInfo\">"
 					 + "<table border=\"0\">"
 					 + "<tr><td align=\"right\">新しいメールアドレス:</td>"
 					 + "<td><input type=\"text\" name=\"newMail\" size=385 maxlength=385></td></tr>"
