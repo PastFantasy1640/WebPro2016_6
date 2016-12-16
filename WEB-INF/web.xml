@@ -54,4 +54,14 @@
     <url-pattern>/servlet/Logout</url-pattern>
 </servlet-mapping>
 
+<servlet>
+  <servlet-name>ChangeMyInfo</servlet-name>
+  <servlet-class>ChangeMyInfo</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>ChangeMyInfo</servlet-name>
+    <url-pattern>/servlet/ChangeMyInfo</url-pattern>
+</servlet-mapping>
+
 </web-app>
