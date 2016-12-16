@@ -4,6 +4,7 @@
 <link rel="stylesheet" type="text/css" href="login.css" media="all" />
 </head>
 <body>
+< HEAD
 <div id="login">
 	<h2 class="form-title">ログイン</h2>
 	<form action=../../servlet/LoginPage>
@@ -18,5 +19,13 @@
 <div id="regist">
 	<p>新規登録は<a href="RegistUser.html">こちら</a></p>
 </div>
+=======
+<h1>ログイン</h1>
+<form method="POST" action=../../servlet/LoginPage>
+ユーザーID <input type="text" name=IdData size=16>
+パスワード <input type="password" name=PasswordData size=32>
+<input type="submit" value="ログイン">
+<p>新規登録は<a href="RegistUser.html">こちら</a></p>
+</form>
 </body>
 </html>
