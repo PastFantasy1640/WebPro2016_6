@@ -6,7 +6,7 @@ request.setCharacterEncoding("utf-8");
 // JDBC ドライバのロード
 Class.forName("org.gjt.mm.mysql.Driver");
 
-Connection db = DriverManager.getConnection("jdbc:mysql://localhost/webpro_db?user=root&password=Imakiti838&useUnicode=true&characterEncoding=utf-8");
+Connection db = DriverManager.getConnection("jdbc:mysql://localhost/webpro_db?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
 Statement st4 = db.createStatement();
 String query4 = "select id, name,name1 from universities";
 ResultSet rs4 = st4.executeQuery(query4);
