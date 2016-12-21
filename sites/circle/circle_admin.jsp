@@ -8,7 +8,7 @@ Class.forName("org.gjt.mm.mysql.Driver");
 
 Connection db = DriverManager.getConnection("jdbc:mysql://localhost/webpro_db?user=root&password=Imakiti838&useUnicode=true&characterEncoding=utf-8");
 Statement st4 = db.createStatement();
-String query4 = "select name,name1 from universities";
+String query4 = "select id, name,name1 from universities";
 ResultSet rs4 = st4.executeQuery(query4);
 
 
@@ -24,33 +24,53 @@ ResultSet rs4 = st4.executeQuery(query4);
 	<script>
 
 	 function Handler1()
-         {
-             a = [];
-             b = [];
-             var val    = document.Form1.initial.value;
-             var target = document.getElementById("output1");
-             <%
-             while(rs4.next()) {
-             %>
-             a.push('<%= rs4.getString("name1") %>');
-             b.push('<%= rs4.getString("name") %>');
+	 {
+	     var a = [];
+	     var b = [];
+	     var c = [];
+	     var val    = document.Form1.initial.value;
+	     var target = document.getElementById("output1");
+	     var mozi= '';
+	     var bool = false;
+	     
 	     <%
-	     }
+	     rs4.beforeFirst();
+	     while(rs4.next()) {
 	     %>
-             var mozi = '';
-
-             mozi = "<select>";
-
-             for(i = 0; i < a.length; i++){
-                 if(~a[i].indexOf(val)){
-                     mozi += "<option>"+b[i]+"</option>";
-                 }
-             }
-             mozi += "</select>";
-
-             target.innerHTML = mozi;
-         }
-
+	     a.push('<%= rs4.getString("name1") %>');
+	     b.push('<%= rs4.getString("name") %>');
+	     c.push('<%= rs4.getString("id") %>');
+     <%
+     }
+     %>
+	     
+	     if(val == -1){
+     		 
+		 mozi = '<select><option value = -2>指定してください</option></select>';
+		 
+		 target.innerHTML = mozi;
+		 
+		 return true;
+	     }
+	     
+	     
+	     mozi = "<select>";
+	     
+	     for(i = 0; i < a.length; i++){
+		 if(~a[i].indexOf(val)){
+		     bool = true;
+		     mozi += "<option value="+c[i]+">"+b[i]+"</option>";
+		 }
+	     }
+	     if(bool == false){
+		 mozi += "<option value = -3>見つからない</option>";
+	     }
+	     mozi += "</select>";
+	     
+	     target.innerHTML = mozi;
+	     
+	 }
+	 
 	 
 	</script>
 	
@@ -138,7 +158,7 @@ ResultSet rs4 = st4.executeQuery(query4);
 
 			    <div style="text-align: center; padding:10px">
 			    <select name="initial" onChange="Handler1()">
-			    <option value="">頭文字</option>
+			    <option value="-1">頭文字</option>
 			    <option value="あ">あ</option>
 			    <option value="い">い</option>
 			    <option value="う">う</option>
