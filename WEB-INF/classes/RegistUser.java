@@ -29,7 +29,6 @@ public class RegistUser extends HttpServlet {
 		String mail = hreq.getParameter("mail");
 		String twitter = hreq.getParameter("twitter");
 		String facebook = hreq.getParameter("facebook");
-		Part iconUrl = hreq.getPart("icon_url");
 
 		// 性別の文字列化
 		String sex2;
@@ -49,14 +48,11 @@ public class RegistUser extends HttpServlet {
 		out.println("<body>");
 		if(userId.equals("") || universityId.equals("") || pass.equals("") || sex2.equals("")){
 			out.println("未記入項目があります。入力しなおしてください。");
-			out.println("<p>再入力は<a href = \"../webpro/WebPro2016_6/RegistUser.html\">こちら</a></p>");
+			out.println("<p>再入力は<a href = \"Regist\">こちら</a></p>");
 		}else if(!pass.equals(pass2)){
 			out.println("パスワードが一致しません。入力しなおしてください。");
-			out.println("<p>再入力は<a href = \"../webpro/WebPro2016_6/RegistUser.html\">こちら</a></p>");
+			out.println("<p>再入力は<a href = \"Regist\">こちら</a></p>");
 		}else{
-			String fileName = this.getFileName(iconUrl);
-			if(!fileName.equals(""))
-				iconUrl.write(getServletContext().getRealPath("/webpro/WebPro2016_6/uploads/users") + "/" + fileName);
 			out.println("<body>"
 				 + "以下の情報で登録します。"
 				 + "<table border=\"0\">"
@@ -67,7 +63,6 @@ public class RegistUser extends HttpServlet {
 				 + "<tr><td align=\"right\">メール:</td>"+"<td>"+mail+"</td></tr>"
 				 + "<tr><td align=\"right\">twitter:</td>"+"<td>"+twitter+"</td></tr>"
 				 + "<tr><td align=\"right\">facebook:</td>"+"<td>"+facebook+"</td></tr>"
-				 + "<tr><td align=\"right\">ファイル名:</td>"+"<td>"+fileName+"</td></tr>"
 				 + "</table>");
 
 			
@@ -82,7 +77,6 @@ public class RegistUser extends HttpServlet {
 			session.setAttribute("mail",mail);
 			session.setAttribute("twitter",twitter);
 			session.setAttribute("facebook",facebook);
-			session.setAttribute("fileName",fileName);
 
 			out.println("<form method=\"POST\" enctype=\"multipart/form-data\" action = SignupPage>"
 			+ "<input type=\"submit\" value=\"登録\">"

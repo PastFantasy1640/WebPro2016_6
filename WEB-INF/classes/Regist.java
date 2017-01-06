@@ -22,8 +22,9 @@ public class Regist extends HttpServlet {
 		PrintWriter out = hres.getWriter();
 
 		out.println("<html><head><meta http-equiv=\"Pragma\" content=\"no-cache\">");
-		out.println("<meta http-equiv=\"Expires\" content=\"-1\">");
 		out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
+		out.println("<title>Register</title>");
+		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"../webpro/WebPro2016_6/regist.css\" media=\"all\" />");
 		out.println("</head><body>");
 		Connection db = null;
 		String db_name = "circle_triangle";
@@ -36,7 +37,8 @@ public class Regist extends HttpServlet {
 			Statement st = db.createStatement();
 			String query = "select id, name from universities";
 			ResultSet rs = st.executeQuery(query);
-			out.println("<h2>ユーザー登録画面</h2>"
+			out.println("<div id=\"regist\">"
+				+"<h2 class=\"form-title\">ユーザー登録画面</h2>"
 				+"<form method=\"POST\" enctype=\"multipart/form-data\" action=\"RegistUser\">"
 				+"<table border=\"0\">"
 				+"<tr>"
@@ -72,12 +74,12 @@ public class Regist extends HttpServlet {
 				+"</tr><tr>"
 				+"<td align=\"right\"><b>facebook:</b></td>"
 				+"<td><input type=\"text\" name=facebook size=64 maxlength=64></td>"
-				+"</tr><tr>"
-				+"<td align=\"right\"><b>アイコン:</b></td>"
-				+"<td><input type=\"file\" name=icon_url size=64 maxlength=64></td>"
 				+"</tr></table>"
-				+"<input type=\"submit\" value=\"登録\"></form>"
-				+"<p>アカウントをお持ちの方は<a href = \"LoginPage.html\">こちら</a>"
+				+"<p class=\"submit\">"
+				+"<input type=\"submit\" value=\"登録\"></form></div>"
+				+"<div id=\"user\">"
+				+"<p>アカウントをお持ちの方は<a href =../webpro/WebPro2016_6/LoginPage.html>こちら</a>"
+				+"</div>"
 				+"</p></body></html>");
 		} catch(SQLException e) {
 			out.println("接続失敗<br>" + e.toString());
