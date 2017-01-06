@@ -84,4 +84,14 @@
     <url-pattern>/servlet/DeleteUser</url-pattern>
 </servlet-mapping>
 
+<servlet>
+  <servlet-name>Regist</servlet-name>
+  <servlet-class>Regist</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>Regist</servlet-name>
+    <url-pattern>/servlet/Regist</url-pattern>
+</servlet-mapping>
+
 </web-app>

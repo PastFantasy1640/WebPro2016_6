@@ -67,4 +67,10 @@ public class LoginPage extends HttpServlet {
 		}
 		out.println("</body></html>");
 	}
+
+	public void doGet(HttpServletRequest hreq,	// リクエスト
+			  HttpServletResponse hres)	// レスポンス
+		throws ServletException, IOException {
+			hres.sendRedirect("../webpro/WebPro2016_6/LoginPage.html");
+	}
 }
