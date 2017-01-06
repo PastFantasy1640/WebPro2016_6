@@ -64,7 +64,7 @@ public class ImageManager{
 
 		//temporary members
 		int tid = -1;
-		String turl = "";
+		String turl = "default";
 
 		//load the db driver
 		try{
