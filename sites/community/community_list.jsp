@@ -1,6 +1,10 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" import="java.sql.*" %> 
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="community.Community" %>
+<%@ page import="utility.ImageManager" %>
+<%
+     ArrayList<Community> communities = Community.getAllCommunities();
+%>
 
 <html>
 <head>
@@ -15,17 +19,6 @@
 <%
 	// リクエストパラメータの文字エンコーディング指定
 	request.setCharacterEncoding("utf-8");
-	// JDBC ドライバのロード
-	Class.forName("org.gjt.mm.mysql.Driver");
-	// データベースとの結合
-	Connection db = DriverManager.getConnection("jdbc:mysql://localhost/circle_triangle_db?user=root&password=secret&useUnicode=true&characterEncoding=utf-8");
-
-	// Statement オブジェクトの生成
-	Statement st = db.createStatement();
-	// SQL 文を query に格納
-	String query = "select * from communities";
-	// SQL 文を実行し結果を ResultSet に格納
-	ResultSet rs = st.executeQuery(query);
 %>
 <h1>コミュニティ</h1>
 
@@ -34,70 +27,24 @@
 <h3>おすすめのコミュニティ</h3>
 
 <% 
-  for(Community c : communitys){
+  for(Community c : communities){
+    ImageManager image = new ImageManager(c.image_id);
     out.println(" <a href=\"http://www.google.co.jp/\">");
-    out.println("<div class=\"card_community\"");
-    out.println(" <img src=\"../../images/" + c.image_id +\" width=240px height=160px>");      
-    out.println("<div class="name"> ");
-    out.println("c.getName()");
+    out.println("<div class=\"card_community\">");
+    out.println(" <img src=\"/MyApp/uploads/images/" + image.getFileName() +"\" width=240px height=160px>");
+    out.println("<div class=\"name\"> ");
+    out.println(c.name);
     out.println("</div>");
-    out.println("<div class="description">");
-    out.println("c.getDescription()");
+    out.println("<div class=\"description\">");
+    out.println(c.description);
+    out.println("</div>");
     out.println("</div>");
   }
 %>
 
 
-<%
-	// nextメソッドでポインタを順次移動
-	while(rs.next()) {
-%>
-<a href="http://www.google.co.jp/">
-<div class="card_community">
-  <img src="../../images/<%= rs.getString("image_url") %>" width=240px height=160px>
-  <div class="name">
-    <%= rs.getString("name") %>
-  </div>
-  <div class="description">
-    <%= rs.getString("description") %>
-  </div>
-</div>
-
-</a>
-<%
-	}
-%>
 <h3>新着のコミュニティ</h3>
 
-<%
-	// SQL 文を実行し結果を ResultSet に格納
-	ResultSet rs_new = st.executeQuery(query);
-	// nextメソッドでポインタを順次移動
-	while(rs_new.next()) {
-%>
-  
-<a href="http://www.google.co.jp/">
-<div class="card_community">
-  <img src="../../images/<%= rs_new.getString("image_url") %>" width=240px height=160px>
-  <div class="name">
-    <%= rs_new.getString("name") %>
-  </div>
-  <div class="description">
-    <%= rs_new.getString("description") %>
-  </div>
-</div>
 
-</a>
-<%
-	}
-%>
-
-<%
-	// ResultSet, Statement, データベースを順にクローズ
-	rs_new.close();
-	rs.close();
-	st.close();
-	db.close();
-%>
 </body>
 </html>
