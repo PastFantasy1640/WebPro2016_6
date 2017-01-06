@@ -37,7 +37,7 @@ public class Regist extends HttpServlet {
 			String query = "select id, name from universities";
 			ResultSet rs = st.executeQuery(query);
 			out.println("<h2>ユーザー登録画面</h2>"
-				+"<form method=\"POST\" enctype=\"multipart/form-data\" action=\"../../servlet/RegistUser\">"
+				+"<form method=\"POST\" enctype=\"multipart/form-data\" action=\"RegistUser\">"
 				+"<table border=\"0\">"
 				+"<tr>"
 				+"<td align=\"right\"><b>ユーザーID:</b></td>"
