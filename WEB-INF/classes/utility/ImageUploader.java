@@ -25,7 +25,7 @@ public class ImageUploader extends HttpServlet {
     || getServletContext().getMimeType(filename).equals("image/gif"))
     {
       ImageManager imagemanager = new ImageManager((int)session.getAttribute("ID"));
-      if(imagemanager.isFailed()){
+      if(imagemanager.isFailed() == false){
         name = imagemanager.getFileName();
         filename = getServletContext().getRealPath("/uploads/images") + "/" + name;
         part.write(filename);
