@@ -37,7 +37,7 @@ public class ComComment {
     }catch(ClassNotFoundException e){}
 
     // データベースとの結合
-      db = DriverManager.getConnection("jdbc:mysql://localhost/circle_db?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
+      db = DriverManager.getConnection("jdbc:mysql://localhost/circle_triangle_db?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
 
       // SQL 文を query に格納
       String query = "select * from community_comment where community_comment.community_id=?";
@@ -75,7 +75,7 @@ public class ComComment {
     }catch(ClassNotFoundException e){}
 
     // データベースとの結合
-    db = DriverManager.getConnection("jdbc:mysql://localhost/circle_db?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
+    db = DriverManager.getConnection("jdbc:mysql://localhost/circle_triangle_db?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
 
 
     // SQL 文を query に格納
