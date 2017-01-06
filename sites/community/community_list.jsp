@@ -16,7 +16,7 @@
 	// JDBC ドライバのロード
 	Class.forName("org.gjt.mm.mysql.Driver");
 	// データベースとの結合
-	Connection db = DriverManager.getConnection("jdbc:mysql://localhost/circle_triangle?user=root&password=secret&useUnicode=true&characterEncoding=utf-8");
+	Connection db = DriverManager.getConnection("jdbc:mysql://localhost/circle_triangle_db?user=root&password=secret&useUnicode=true&characterEncoding=utf-8");
 
 	// Statement オブジェクトの生成
 	Statement st = db.createStatement();
