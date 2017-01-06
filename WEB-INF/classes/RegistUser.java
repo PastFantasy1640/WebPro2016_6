@@ -7,9 +7,9 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.MultipartConfig;
+import java.sql.*;
 
  
-@MultipartConfig(location="", maxFileSize=1048576)
 public class RegistUser extends HttpServlet {
 	public void doPost(HttpServletRequest hreq,	// リクエスト
 			  HttpServletResponse hres)	// レスポンス
@@ -53,11 +53,23 @@ public class RegistUser extends HttpServlet {
 			out.println("パスワードが一致しません。入力しなおしてください。");
 			out.println("<p>再入力は<a href = \"Regist\">こちら</a></p>");
 		}else{
-			out.println("<body>"
+			Connection db=null;
+			try{
+				Class.forName("org.gjt.mm.mysql.Driver");
+				String db_name="circle_triangle";
+				db=DriverManager.getConnection("jdbc:mysql://localhost/"+db_name+"?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
+				Statement st=db.createStatement();
+				String query="select name from universities where id="+universityId;
+				ResultSet rs=st.executeQuery(query);
+				String uniName="";
+				if(rs.next()){
+					uniName=rs.getString("name");
+				}
+				out.println("<body>"
 				 + "以下の情報で登録します。"
 				 + "<table border=\"0\">"
 				 + "<tr><td align=\"right\">ユーザーID:</td>"+"<td>"+userId+"</td></tr>"
-				 + "<tr><td align=\"right\">大学ID:</td>"+"<td>"+universityId+"</td></tr>"
+				 + "<tr><td align=\"right\">大学名:</td>"+"<td>"+uniName+"</td></tr>"
 				 + "<tr><td align=\"right\">性別:</td>"+"<td>"+sex2+"</td></tr>"
 				 + "<tr><td align=\"right\">パスワード:</td><td>表示なし</td></tr>"
 				 + "<tr><td align=\"right\">メール:</td>"+"<td>"+mail+"</td></tr>"
@@ -67,34 +79,33 @@ public class RegistUser extends HttpServlet {
 
 			
 
-			//登録情報記憶
-			HttpSession session = hreq.getSession(true);
+				//登録情報記憶
+				HttpSession session = hreq.getSession(true);
 
-			session.setAttribute("IdData",userId);
-			session.setAttribute("UniversityId",universityId);
-			session.setAttribute("sex",sex);
-			session.setAttribute("password",pass);
-			session.setAttribute("mail",mail);
-			session.setAttribute("twitter",twitter);
-			session.setAttribute("facebook",facebook);
+				session.setAttribute("IdData",userId);
+				session.setAttribute("UniversityId",universityId);
+				session.setAttribute("sex",sex);
+				session.setAttribute("password",pass);
+				session.setAttribute("mail",mail);
+				session.setAttribute("twitter",twitter);
+				session.setAttribute("facebook",facebook);
 
-			out.println("<form method=\"POST\" enctype=\"multipart/form-data\" action = SignupPage>"
-			+ "<input type=\"submit\" value=\"登録\">"
-			+ "</form>");
+				out.println("<form method=\"POST\" enctype=\"multipart/form-data\" action = SignupPage>"
+				+ "<input type=\"submit\" value=\"登録\">"
+				+ "</form>");
+				rs.close();
+				st.close();
+				db.close();
+			}catch(SQLException e){
+				out.println("接続失敗<br>"+e.toString());
+			}catch(Exception e){
+				e.printStackTrace();
+			}finally{
+				try{
+					db.close();
+				}catch(Exception e){}
+			}
 		}
 		out.println("</body></html>");
 	}
-
-	private String getFileName(Part part) {
-		String name = null;
-		for (String dispotion : part.getHeader("Content-Disposition").split(";")) {
-			if (dispotion.trim().startsWith("filename")) {
-				name = dispotion.substring(dispotion.indexOf("=") + 1).replace("\"", "").trim();
-				name = name.substring(name.lastIndexOf("\\") + 1);
-				break;
-			}
-		}
-		return name;
-	}
-
 }
