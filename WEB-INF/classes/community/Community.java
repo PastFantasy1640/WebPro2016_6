@@ -22,6 +22,8 @@ public class Community {
     this.description = description;
   }
   
+  
+  
   static public Community getCommunityFromID(final int id) throws SQLException{
     // JDBC ドライバのロード
     try{
