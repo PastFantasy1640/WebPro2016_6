@@ -1,12 +1,14 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ page import="utility.ImageManager" %>
 <%
-int ret = 5000;
+Integer ret = new Integer(5000);
 ImageManager img = null;
 if(session.getAttribute("ID") != null) {
-	ret = (int)session.getAttribute("ID");
-	img = new ImageManager(ret);
-	ret = img.getId();
+	ret = (Integer)session.getAttribute("ID");
+	if(ret != null){
+		img = new ImageManager(ret);
+		ret = img.getId();
+	}
 }
 %>
 
