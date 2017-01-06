@@ -29,7 +29,7 @@
 <% 
   for(Community c : communities){
     ImageManager image = new ImageManager(c.image_id);
-    out.println(" <a href=\"sites/community/community_list \">");
+    out.println(" <a href=\"community_top.jsp?id="+c.id+" \">");
     out.println("<div class=\"card_community\">");
     out.println(" <img src=\"/MyApp/uploads/images/" + image.getFileName() +"\" width=240px height=160px>");
     out.println("<div class=\"name\"> ");
