@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" import="java.sql.*" %> 
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="community.Community" %>
 
 <html>
 <head>
@@ -31,14 +33,25 @@
 
 <h3>おすすめのコミュニティ</h3>
 
+<% 
+  for(Community c : communitys){
+    out.println(" <a href=\"http://www.google.co.jp/\">");
+    out.println("<div class=\"card_community\"");
+    out.println(" <img src=\"../../images/" + c.image_id +\" width=240px height=160px>");      
+    out.println("<div class="name"> ");
+    out.println("c.getName()");
+    out.println("</div>");
+    out.println("<div class="description">");
+    out.println("c.getDescription()");
+    out.println("</div>");
+  }
+%>
 
 
 <%
-
 	// nextメソッドでポインタを順次移動
 	while(rs.next()) {
 %>
-  
 <a href="http://www.google.co.jp/">
 <div class="card_community">
   <img src="../../images/<%= rs.getString("image_url") %>" width=240px height=160px>
