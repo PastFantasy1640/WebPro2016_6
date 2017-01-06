@@ -11,7 +11,7 @@ import java.sql.*;
 
 @MultipartConfig(location="", maxFileSize=1048576)
 public class Regist extends HttpServlet {
-	public void doPost(HttpServletRequest hreq,	// リクエスト
+	public void doGet(HttpServletRequest hreq,	// リクエスト
 			  HttpServletResponse hres)	// レスポンス
 		throws ServletException, IOException {
 		// リクエストパラメータの文字エンコーディング指定
