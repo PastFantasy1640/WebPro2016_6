@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <%@ page import="utility.ImageManager" %>
 <%
-session.setAttribute("ID",24);
+session.setAttribute("ID",0);
 session.setAttribute("url","result_test.jsp");
 %>
 
