@@ -36,23 +36,30 @@
 	//セッションをチェック
 	//F5対策
 	String ncomment = request.getParameter("talk_message");
+	String last_comment = (String)session.getAttribute("last_comment");
+	String error_msg = new String("");
+	if(last_comment == null) last_comment = new String("");
 	Integer add_community_id = null;
 	try{
 		add_community_id = (Integer)session.getAttribute("community_id");
 	}catch(ClassCastException e){}
 	session.setAttribute("community_id", community_id);
 	
+	
 	if(ncomment != null && add_community_id != null && add_community_id >= 0){
-			user_id =300;
-		if(ncomment.length() > 0 && ncomment.length() < 511){
-			//submit comment
-			user_id = 100;
-			ComComment.addComment(add_community_id, user_id, ncomment);
+		if(!last_comment.equals(ncomment)){
+			if(ncomment.length() > 0 && ncomment.length() < 512){
+				//submit comment
+				ComComment.addComment(add_community_id, user_id, ncomment);
+			}else error_msg = "文字数が512文字を超過しています。";
+			session.setAttribute("last_comment", ncomment);
+		}else{
+			error_msg = "同じコメントでの発言はできません。";
 		}
 	}
-	
-	
-	
+
+
+
 
 
 	//コミュニティー情報代入
@@ -91,6 +98,12 @@
 	
 <%
     out.print("<title>" + community_name + "のコミュニティーページ</title>");
+
+	//エラーメッセージ
+	if(!error_msg.equals("")){
+		out.print("<script>alert(\"" + error_msg + "\");</script>");
+	}
+
 %>
 
 </head>
