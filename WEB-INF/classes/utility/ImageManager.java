@@ -163,7 +163,9 @@ public class ImageManager{
     		this.url = turl;
 	}
 
-	boolean isFailed(){
+	public boolean isFailed(){
 		return (this.id < 0);
 	}
+	
+	
 }

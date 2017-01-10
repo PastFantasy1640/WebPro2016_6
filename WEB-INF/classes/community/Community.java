@@ -21,6 +21,42 @@ public class Community {
     this.image_id = image_id;
     this.description = description;
   }
+  
+  
+  
+  static public Community getCommunityFromID(final int id) throws SQLException{
+    // JDBC ドライバのロード
+    try{
+      Class.forName("org.gjt.mm.mysql.Driver");
+    }catch(ClassNotFoundException e){
+    	return null;
+    }
+
+    // データベースとの結合
+     Connection db = DriverManager.getConnection("jdbc:mysql://localhost/circle_triangle_db?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
+
+    // SQL 文を query に格納
+    String query = "select * from communities where communities.id=?";
+    PreparedStatement coms_ps = db.prepareStatement(query);
+    coms_ps.setInt(1, id);
+    // SQL 文を実行し結果を ResultSet に格納
+    ResultSet rs = coms_ps.executeQuery();
+    Community ret = null;
+    while(rs.next()){
+      int tid = rs.getInt("id");
+      String name = rs.getString("name");	//######
+      int img_id  = rs.getInt("image_id");
+      String description = rs.getString("description");	//######
+      ret = new Community(tid,name,img_id,description);
+      break;
+    }
+
+    rs.close();
+    coms_ps.close();
+    db.close();
+    
+    return ret;
+  }
 
   static public ArrayList<Community> getAllCommunities() throws SQLException{
     Connection db = null;
