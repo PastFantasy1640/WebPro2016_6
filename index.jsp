@@ -6,11 +6,11 @@
 	<meta name="description" content="全国の大学サークルによるコミュニティーサイト。">
 	<meta name="copyright" content="&copy; WebPro2016 Group6">
 	<title>Circle Triangle</title>
-	<!--<link rel="stylesheet" href="style.css">-->
+	<link rel="stylesheet" href="css/indexstyle.css" />
 	<!--<link href="https://fonts.googleapis.com/css?family=Lato:300,700" rel="stylesheet">-->
 </head>
 <body>
-
-
+aaaas
+<img src="images/logo.png" />
 </body>
 </html>
