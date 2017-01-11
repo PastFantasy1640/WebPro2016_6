@@ -7,12 +7,14 @@
 	<meta name="description" content="全国の大学サークルによるコミュニティーサイト。">
 	<meta name="copyright" content="&copy; WebPro2016 Group6">
 	<title>Circle Triangle</title>
-	<link rel="stylesheet" href="css/indexstyle.css" />
+	<link rel="stylesheet" href="/MyApp/css/indexstyle.css" />
 	<!--<link href="https://fonts.googleapis.com/css?family=Lato:300,700" rel="stylesheet">-->
 	
 	
 </head>
 <body>
+
+<!-- header : using style sheet = indexstyle.css -->
 <header>
 
 	<div id="title_center">
@@ -54,10 +56,20 @@
 		</div>
 		<div id="search_circle">
 			<p>あなたにぴったりなサークルを</p>
-			<div>探す</div>
+			<div id="search_button">探す(unavailable)</div>
+			
 		</div>
 	</div>
 
 </header>
+	
+	<!-- body : using stylesheet =  contents.css -->
+	
+	<main>
+	
+		<p>ここが本文になります。</p>
+	
+	</main>
+	
 </body>
 </html>

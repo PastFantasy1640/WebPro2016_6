@@ -84,3 +84,30 @@ div.image_area{
 	color: black;
 	padding-bottom: 0.5rem;
 }
+
+#search_circle{
+	color: white;
+	margin:0 auto;
+}
+
+#search_button{
+	background-image: url("/MyApp/images/bg_w80.png");
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	margin-bottom: 4px;
+	padding: 0.5rem 0;
+	color: black;
+	font-weight: bold;
+	font-size:x-large;
+	width: 16rem;
+	
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+
+#search_button:hover{
+	border: 4px green solid;
+	margin:0 auto;
+}
