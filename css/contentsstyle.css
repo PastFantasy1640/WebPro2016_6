@@ -25,3 +25,11 @@ section h1{
 section p{
 	padding-left: 2rem;
 }
+
+footer{
+	text-align: center;
+	background-color: black;
+	color: white;
+	font-size:small;
+	margin: 1rem auto;
+}
