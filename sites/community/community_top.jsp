@@ -108,6 +108,7 @@
 
 </head>
 <body>
+	<%@ include file="/WEB-INF/jsp/userinfo.jsp" %>
 	<div id="base_ground">
 		<header>
 			<div id="header_image" class="header_image_url"></div>

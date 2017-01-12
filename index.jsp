@@ -15,6 +15,8 @@
 </head>
 <body>
 
+<%@ include file="/WEB-INF/jsp/userinfo.jsp" %>
+
 <!-- header : using style sheet = indexstyle.css -->
 <header>
 

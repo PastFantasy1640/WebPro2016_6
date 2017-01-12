@@ -16,6 +16,8 @@
 </head>
 <body>
 
+<%@ include file="/WEB-INF/jsp/userinfo.jsp" %>
+
 <%
 	// リクエストパラメータの文字エンコーディング指定
 	request.setCharacterEncoding("utf-8");
