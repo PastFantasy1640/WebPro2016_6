@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.DriverManager;
 import java.lang.ClassNotFoundException;
-
+import java.util.logging.Logger;
 
 public class DatabaseConnector {
 
@@ -14,23 +14,21 @@ public class DatabaseConnector {
 	static private String DATABASE_URL = "mysql://localhost";
 	static private String JDBC_DRIVER = "org.gjt.mm.mysql.Driver";
 	
-	static public Connection connect(final String user, final String pass){
+	static public Connection connect(final String user, final String pass) throws ClassNotFoundException, SQLException{
 		return DatabaseConnector.connect(user,pass,"utf-8");
 	}
 	
 
-	static public Connection connect(final String user, final String pass, final String encode){
-		
+	static public Connection connect(final String user, final String pass, final String encode) throws ClassNotFoundException, SQLException{
+				
 		Connection db = null;
 		
 		// JDBC ドライバのロード
-    	try{
-    		Class.forName(JDBC_DRIVER);
+    	
+    	Class.forName(JDBC_DRIVER);
     		// データベースとの結合
-    		db = DriverManager.getConnection("jdbc:" + DATABASE_URL + "/" + DATABASE_NAME + "?user=" + user + "&password=" + pass + "&useUnicode=true&characterEncoding=" + encode);
-    	}
-    	catch(ClassNotFoundException e){}
-    	catch(SQLException e){}
+    	db = DriverManager.getConnection("jdbc:" + DATABASE_URL + "/" + DATABASE_NAME + "?user=" + user + "&password=" + pass + "&useUnicode=true&characterEncoding=" + encode);    	
+
 
 		return db;
 	}
