@@ -1,16 +1,16 @@
-<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" import="java.sql.*" %>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ page import="circle.University" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="static utility.StringUtil.NonNullString" %>
+
 <%
+	// リクエストパラメータの文字エンコーディング指定
+	request.setCharacterEncoding("utf-8");
 
-// リクエストパラメータの文字エンコーディング指定
-request.setCharacterEncoding("utf-8");
-// JDBC ドライバのロード
-Class.forName("org.gjt.mm.mysql.Driver");
-
-Connection db = DriverManager.getConnection("jdbc:mysql://localhost/webpro_db?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
-Statement st4 = db.createStatement();
-String query4 = "select id, name,name1 from universities";
-ResultSet rs4 = st4.executeQuery(query4);
-
+	ArrayList<University> univs = University.getUniversities();
+	if(univs == null) {}
+	
+	response.sendRedirect("/MyApp/index.jsp");
 
 %>
 
@@ -34,15 +34,12 @@ ResultSet rs4 = st4.executeQuery(query4);
 	     var bool = false;
 	     
 	     <%
-	     rs4.beforeFirst();
-	     while(rs4.next()) {
+	         for(University uv : univs){
+	             out.println("a.push(\'" + uv.name1 + "\');");
+	             out.println("b.push(\'" + uv.name + "\');");
+	             out.println("c.push(\'" + uv.id + "\');");
+	         }
 	     %>
-	     a.push('<%= rs4.getString("name1") %>');
-	     b.push('<%= rs4.getString("name") %>');
-	     c.push('<%= rs4.getString("id") %>');
-     <%
-     }
-     %>
 	     
 	     if(val == -1){
      		 
@@ -76,38 +73,18 @@ ResultSet rs4 = st4.executeQuery(query4);
 	
     </head>
     <body>
+    
 	<%
-	String circlename = request.getParameter("circlename");
-	if(circlename==null)
-	circlename="";
-	String type = request.getParameter("type");
-	if(type==null)
-	type="";
-	String prefecture = request.getParameter("prefecture");
-	if(prefecture==null)
-	prefecture="fukuoka";
-	String university = request.getParameter("university");
-	if(university==null)
-	university="";
-	String comment = request.getParameter("comment");
-	if(comment==null)
-	comment="";
-	String mail = request.getParameter("mail");
-	if(mail==null)
-	mail="";
-	String phone = request.getParameter("phone");
-	if(phone==null)
-	phone="";
-	String twitter = request.getParameter("twitter");
-	if(twitter==null)
-	twitter="";
-	String facebook = request.getParameter("facebook");
-	if(facebook==null)
-	facebook="";
-	String button = request.getParameter("button");
-	if(button==null)
-	button="";
-
+		String circlename = NonNullString(request.getParameter("circlename"));
+		String type = NonNullString(request.getParameter("type"));
+		String prefecture = NonNullString(request.getParameter("prefecture"));
+		String university = NonNullString(request.getParameter("university"));
+		String comment = NonNullString(request.getParameter("comment"));
+		String mail = NonNullString(request.getParameter("mail"));
+		String phone = NonNullString(request.getParameter("phone"));
+		String twitter = NonNullString(request.getParameter("twitter"));
+		String facebook = NonNullString(request.getParameter("facebook"));
+		String button = NonNullString(request.getParameter("button"));
 	%>
 
 	<%
@@ -144,7 +121,7 @@ ResultSet rs4 = st4.executeQuery(query4);
 			    }
 			    out.println("</select>");
 			    %>
-</select>
+
 			</td></tr>
 			<%
 			// Statement オブジェクトの生成
