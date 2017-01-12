@@ -4,48 +4,79 @@
 <%@ page import="java.io.FileReader" %>
 <%@ page import="java.io.BufferedReader" %>
 <%@ page import="community.ComComment" %>
+<%@ page import="community.Community" %>
+<%@ page import="utility.ImageManager" %>
 <%@ page import="java.security.SecureRandom" %>
 
 <%
 
+	//文字セット
 	response.setContentType("text/html;charset=UTF-8");
  	request.setCharacterEncoding("UTF-8");
 
-    int community_id = 0;
+	//コミュニティー取得
+	int community_id = -1;
+	Community community = null;
+	try{
+    	community_id = Integer.parseInt(request.getParameter("id"));
+    	community = Community.getCommunityFromID(community_id);
+    }catch(NumberFormatException e){}
+    if(community == null) community_id = -1;
+    
+    if(community_id < 0){
+    	response.sendRedirect("/MyApp/sites/community/community_list.jsp");
+    	return;
+    //	application.getRequestDispatcher("/MyApp/sites/community/community_list.jsp").forward(request,response);
+    }
+    
+    
     int user_id = 10;
 
 
-	/*** session check ***/
-	String ticket = (String)session.getAttribute("ticket");
+	//セッションをチェック
+	//F5対策
 	String ncomment = request.getParameter("talk_message");
-	if(ncomment != null && ticket != null){
-		if(ncomment.length() > 0 && ncomment.length() < 511 && request.getParameter("ticket").equals(ticket)){
-			//submit comment
-			ComComment.addComment(community_id, user_id, ncomment);
+	String last_comment = (String)session.getAttribute("last_comment");
+	String error_msg = new String("");
+	if(last_comment == null) last_comment = new String("");
+	Integer add_community_id = null;
+	try{
+		add_community_id = (Integer)session.getAttribute("community_id");
+	}catch(ClassCastException e){}
+	session.setAttribute("community_id", community_id);
+	
+	
+	if(ncomment != null && add_community_id != null && add_community_id >= 0){
+		if(!last_comment.equals(ncomment)){
+			if(ncomment.length() > 0 && ncomment.length() < 512){
+				//submit comment
+				ComComment.addComment(add_community_id, user_id, ncomment);
+			}else error_msg = "文字数が512文字を超過しています。";
+			session.setAttribute("last_comment", ncomment);
+		}else{
+			error_msg = "同じコメントでの発言はできません。";
 		}
 	}
-	SecureRandom sr = new SecureRandom();
-	session.setAttribute("ticket", String.valueOf(sr.nextInt()));
-
-    int comment_status = 0;	//0:no comment 1:success 2:failed
 
 
-    String community_name = "サイバー対策コンテストコミュニティー";
-    String community_description = "このコミュニティーは、サイバー対策コンテストの対策として建てられたコミュニティーです。以下ダミーです。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。ほげほげふげふげひげひげはげはげふーばー。";
-    //String document_root = "/webpro";
-    String document_root = "/MyApp/webpro/WebPro2016_6";
-    String document_root_servlet = application.getRealPath("");
-    String community_img_url = document_root + "/uploads/communities/001/top_image.jpg";
 
 
+
+	//コミュニティー情報代入
+    String community_name = community.name;
+    String community_description = community.description;
+    
+    String community_img_url = "";
+    
+    ImageManager community_image = new ImageManager(community.image_id);
+    if(community_image.isFailed() == false) community_img_url = "/MyApp/uploads/images/" + community_image.getFileName();
+
+	//ユーザー制御
     boolean user_allow_talk = true;
-
 
 
     ArrayList<ComComment> comments = ComComment.getCommentsFromCommunity(community_id);
     java.util.Collections.reverse(comments);
-
-
 
 %>
 
@@ -67,11 +98,17 @@
 	
 <%
     out.print("<title>" + community_name + "のコミュニティーページ</title>");
+
+	//エラーメッセージ
+	if(!error_msg.equals("")){
+		out.print("<script>alert(\"" + error_msg + "\");</script>");
+	}
+
 %>
 
 </head>
 <body>
-
+	<%@ include file="/WEB-INF/jsp/userinfo.jsp" %>
 	<div id="base_ground">
 		<header>
 			<div id="header_image" class="header_image_url"></div>
@@ -93,8 +130,7 @@
 			
 			<div id="talkarea">
 				<div id="talkarea_margin">
-					<form action="community_top.jsp" method="post" accept-charset="utf-8">
-						<input type="hidden" name="ticket" value="<%= session.getAttribute("ticket") %>">
+					<form action="community_top.jsp?id=<%= community_id %>" method="post" accept-charset="utf-8">
 						<textarea rows="5" cols="20" name="talk_message" id="tkf1" placeholder="発言メッセージ" maxlength="512" ></textarea>
 						<table id="talkarea_table"><tr><td width="100%">残り文字数は<span id="countdown">512</span>文字です。<br /></td>
 						<td><input type="submit" value="発言" name="talk_on" id="tkf2" disabled></td></tr></table>
@@ -125,7 +161,7 @@
     for(ComComment p : comments){
         out.println("<div class=\"talk\">");
         out.println("<div class=\"image\">");
-        out.println("<img src=\"" + document_root + p.getImageSrc() + "\" />");
+        out.println("<img src=\"" + "###########" + "\" />");
         out.println("</div>");
         out.println("<div class=\"contents\">");
         out.println("<h2>" + p.getName() + "</h2>");
