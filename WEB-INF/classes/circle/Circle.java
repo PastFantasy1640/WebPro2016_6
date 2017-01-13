@@ -54,7 +54,35 @@ public class Circle {
 				rs.close();
 				db.close();
 			}
-		}catch(SQLException e){ ret = null;	}
+		}catch(SQLException e){ ret = null;  }
 		return ret;
 	}
+
+    static public ArrayList<Circle> getCircles(int id) throws SQLException, ClassNotFoundException{
+	
+		ArrayList<Circle> ret = null;
+
+		Connection db = DatabaseConnector.connect("chef","secret");
+    
+    	try{
+			if(db != null){
+				// SQL 文を query に格納
+				Statement st = db.createStatement();
+				String query = "select * from circles where id ="+id;
+				ResultSet rs = st.executeQuery(query);
+	
+				ret = new ArrayList<Circle>();
+				while(rs.next()){
+					ret.add(new Circle(rs.getInt("id"), rs.getString("name"), rs.getInt("circle_leader_id"), rs.getInt("category_id"), rs.getInt("university_id"),rs.getString("comment"), rs.getString("mail"), rs.getString("phone"), rs.getString("twitter"), rs.getString("facebook"), rs.getString("file"), rs.getString("imageid")));
+				}
+	
+				st.close();
+				rs.close();
+				db.close();
+			}
+		}catch(SQLException e){ ret = null;  }
+		return ret;
+
+
+    }
 }

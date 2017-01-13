@@ -42,4 +42,29 @@ public class University {
 		
 		return ret;
 	}
+    
+       	static public ArrayList<University> getUniversities(int id) throws SQLException, ClassNotFoundException{
+		ArrayList<University> ret = null;
+
+		Connection db = DatabaseConnector.connect("chef","secret");
+		
+    	
+		//if(db != null){
+		// SQL 文を query に格納
+			Statement st = db.createStatement();
+			String query = "select * from universities where id="+id;
+			ResultSet rs = st.executeQuery(query);
+			ret = new ArrayList<University>();
+			while(rs.next()){
+				ret.add(new University(rs.getInt("id"), rs.getString("name"), rs.getString("name1"),rs.getInt("prefecture_id")));
+			}
+			rs.close();
+			st.close();
+			db.close();
+		//}
+		
+		return ret;
+	}
+
+       
 }
