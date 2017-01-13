@@ -1,0 +1,249 @@
+-- MySQL dump 10.13  Distrib 5.1.73, for redhat-linux-gnu (i386)
+--
+-- Host: localhost    Database: circle_triangle_db
+-- ------------------------------------------------------
+-- Server version	5.1.73
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `categories`
+--
+
+DROP TABLE IF EXISTS `categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categories`
+--
+
+LOCK TABLES `categories` WRITE;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+INSERT INTO `categories` VALUES (1,'政治/経済'),(2,'フリーペーパー'),(3,'社会起業'),(4,'映画'),(5,'野球'),(6,'スポーツ'),(7,'ビジネス'),(8,'就活'),(9,'ボランティア'),(10,'料理/スイーツ'),(11,'バスケットボール'),(12,'オールラウンド'),(13,'企画'),(14,'医療福祉'),(15,'美術/演劇'),(16,'サブカルチャー'),(17,'バレーボール'),(18,'イベント'),(19,'教育'),(20,'ファッション'),(21,'テニス'),(22,'スキー'),(23,'IT'),(24,'学術研究'),(25,'音楽'),(26,'サッカー'),(27,'スノーボード'),(28,'メディア/広告'),(29,'国際交流'),(30,'旅行'),(31,'フットサル'),(32,'ダンス');
+/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `circles`
+--
+
+DROP TABLE IF EXISTS `circles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `circles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL,
+  `circle_leader_id` int(11) NOT NULL DEFAULT '-9999',
+  `category_id` int(11) NOT NULL DEFAULT '-9999',
+  `university_id` int(11) NOT NULL DEFAULT '-9999',
+  `comment` varchar(512) DEFAULT NULL,
+  `mail` varchar(385) DEFAULT NULL,
+  `phone` varchar(12) DEFAULT NULL,
+  `twitter` varchar(16) DEFAULT NULL,
+  `facebook` varchar(64) DEFAULT NULL,
+  `file` varchar(1024) DEFAULT NULL,
+  `imageid` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `circles`
+--
+
+LOCK TABLES `circles` WRITE;
+/*!40000 ALTER TABLE `circles` DISABLE KEYS */;
+INSERT INTO `circles` VALUES (1,'陸上競技部',1,6,4,'ok let go','hogehoge@yahoo.co.jp','090-444-444','hogehoge','facebook.com/hogehoge','\n<html>\n<body>\n\n<p>これは段落です。</p>\n<p>これは段落です。</p>\n<p>これは段落です。</p>\n\n<p>p（段落）要素は、&lt;p&gt;タグによって定義されます。</p>\n\n</body>\n</html>\n',1),(2,'経済学研究会',-9999,1,55,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(3,'硬式野球部',-9999,5,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL),(4,'軟式野球部',-9999,5,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `circles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `hiragana`
+--
+
+DROP TABLE IF EXISTS `hiragana`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hiragana` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(8) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `hiragana`
+--
+
+LOCK TABLES `hiragana` WRITE;
+/*!40000 ALTER TABLE `hiragana` DISABLE KEYS */;
+INSERT INTO `hiragana` VALUES (1,'あ'),(2,'い'),(3,'う'),(4,'え'),(5,'お'),(6,'か'),(7,'き'),(8,'く'),(9,'け'),(10,'こ'),(11,'さ'),(12,'し'),(13,'す'),(14,'せ'),(15,'そ'),(16,'た'),(17,'ち'),(18,'つ'),(19,'て'),(20,'と'),(21,'な'),(22,'に'),(23,'ぬ'),(24,'ね'),(25,'の'),(26,'は'),(27,'ひ'),(28,'ふ'),(29,'へ'),(30,'ほ'),(31,'ま'),(32,'み'),(33,'む'),(34,'め'),(35,'も'),(36,'や'),(37,'ゆ'),(38,'よ'),(39,'ら'),(40,'り'),(41,'る'),(42,'れ'),(43,'ろ'),(44,'わ'),(45,'を'),(46,'ん');
+/*!40000 ALTER TABLE `hiragana` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `images`
+--
+
+DROP TABLE IF EXISTS `images`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `images` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `url` varchar(64) DEFAULT NULL,
+  KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=159 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `images`
+--
+
+LOCK TABLES `images` WRITE;
+/*!40000 ALTER TABLE `images` DISABLE KEYS */;
+INSERT INTO `images` VALUES (1,'imgaaaahgkgfpmbpflehnfekkiefl'),(2,'imgddffkfdcbkfjnmhfachaofffmh'),(3,'imgkjlpldficgjdoniohdaapbklpi'),(4,'imgnnepdfmmckolpiidcihgcabeee'),(5,'imgfkmoemoaoipkghnmcbkfcglnha'),(6,'imglnbnedhjijnakbodhcjghgemem'),(7,'imgfidkdglkokchjflgidhgbafedl'),(8,'imgmpmbaggcgjeabmkccdgceoljif'),(9,'imgfebhodmjgpgfljhaejkignpodi'),(10,'imgboabjigbkenaihlmhjaljbnafo'),(11,'imgkdepmphdehgkdnmgcldgafhnlj'),(12,'imgdfglpempnijeaiifhdllobiain'),(13,'imghffcjbnblpboilbfadpabklaen'),(14,'imgpelaaalkjlkeegpcdnliklnaaa'),(15,'imgakanoifjmdkjbbaheccbfcdmgj'),(16,'imgbnignpcpbacnaceinnlehfobli'),(17,'imgoihggmmdfebclhinbcmephgbkc'),(18,'imgaennklejiklbjkbnianpcilkmc'),(19,'imgcimfcfcijgbijgmkfgnidmfnpo'),(20,'imgkbkbodbanhgdbfblnbbciojcpd'),(21,'imgdlohmgbmgkkglhlnlmgekchpkm'),(22,'imggiigdnelpalmhgodhjcbeoadfo'),(23,'imggpkgpajfidikoifihcfehbelhc'),(24,'imgpngnmlclfbblbceffekecgjemn'),(25,'imggnobgnncaeblmdcpilpfieeipn'),(26,'imgeafnnlbepkjamegdhpjfahpapd'),(27,'imgbpaeceojkaedbghbajdegjadda'),(28,'imggmnnlejhkecehfgajiibnginpg'),(29,'imgpbophnjoclfeeoombbmagfhejf'),(30,'imghgngeddnacbcochodggcoplnae'),(31,'imghjeondbhhpjbepilppdglbcdkj'),(32,'imgapadkmbapacjnojacjjolhgijk'),(33,'imgapaeikpfngejkjbgepmhahhnco'),(34,'imghcjooobbkehjpbgidieogilgic'),(35,'imgjjebmelgaphkjdjombakgbcocn'),(36,'imgonehepnmgbljoeocjiaaoahoed'),(37,'imgfeklipbiacccghopffenfhkjbe'),(38,'imgddbgnigallbldhpgpdlcmalleh'),(39,'imgadekkgbiabjdndgdefamhkcibh'),(40,'imgacclapjhhideggbdlennpcnecj'),(41,'imgijfejaflfikjajmdfdmbabhgjg'),(42,'imgnbfhfoaepdejdkbbjgbakaccci'),(43,'imggjalmeelnnkajninkembkkiehh'),(44,'imgdhhnnibnodiinogeklhcdkeead'),(45,'imgfpgfboeaheccomlpccppkmneoh'),(46,'imgfgbmcmnnaechebnflcejhhniol'),(47,'imgakajbelfpobjbddddehgkcangf'),(48,'imgmbojbbhbdohepedbnchbdpolmg'),(49,'imgknfhghnjcmefmncdcnoemhdhbp'),(50,'imgemgofmacnnbfkdgnpbpoefjdja'),(51,'imgbmkahjnpfkiiicdjecmppphgio'),(52,'imgfcbilpnpajdglofbllcmcaidag'),(53,'imghpjjpaophndgpaeoeeofkognkc'),(54,'imgemikknjknhjhegdbgjhgpndbpg'),(55,'imghnflaeddhafaknjpeljojpibmg'),(56,'imgkepekcehobfkmoaeehfjhgnapg'),(57,'imghohjjedciejeefflhdfagkaang'),(58,'imgohkckobbehokgnohmepiabbgde'),(59,'imgnojbdgaionokicgegbgahpmafg'),(60,'imgdmmchbhlmhmkeanjbdpmalnmll'),(61,'imggohpgcongbcdhihhcicifliigb'),(62,'imgbicfcmallihifjmjdeejfbjiab'),(63,'imgfpogdjgnjjemagdbciiocoldcb'),(64,'imgbmlolhilmekmakanfapomfpinm'),(65,'imgafookanfmdnmdkoppdhjpejgcd'),(66,'imgapailjejdhmbldihokdbibcibc'),(67,'imgcjamgpmhclhchhfmfbimjbnihl'),(68,'imgddlemiiniheiklcbdgoligfgog'),(69,'imgnpaelkeplaagkgdhedoboafkea'),(70,'imgoeiomlmmkcdnojleniclmigdkj'),(71,'imgpdjgidmbohddaclkeoleiaejmf'),(72,'imgkoggdakhcglfhdcollfmmhgaef'),(73,'imgdobojhohhpkjbjjnojboknaekl'),(74,'imgbgbbheopmmdoaehdkclcjdgpdm'),(75,'imgbjcdpakjpeenmliohlagjoband'),(76,'imgjhnekebjjpefiokelimicidknp'),(77,'imgednbhmfnkneffokagelpmophmj'),(78,'imgdeaoejgmccamiaogokhjnfadbg'),(79,'imghgifnanfnlfmlpeoncggocenkd'),(80,'imgdifdkcpoajdphcpepdobdodhpk'),(81,'imgcbdlcihnoacbfoggppibobpleb'),(82,'imgfkgdmmldfjkmjlobikaappfjjn'),(83,'imglbliakanekdacbhenckhmomoeg'),(84,'imgplmoaijlhmpdcagcgbcklnhfcn'),(85,'imgbfmdhaidjfpfnpcpheiokalcjb'),(86,'imgmpildcpkfjjgkihmajbkbmhkfn'),(87,'imgepconkhfmkiknhibhnkcfanmhj'),(88,'imgbjfgmembbmfmmopcgedoaknhgm'),(89,'imgjndhmdgmignpfeplfckjbmkomh'),(90,'imgegnkneogbfcmmllongmhghcegc'),(91,'imgfhepknjnpholekomhhpjinheej'),(92,'imgkdmcghlklgmagcnffpngfiigfp'),(93,'imgmmbkflldlnedifgdbjkaplnbem'),(94,'imgldmbdggbjomeggldmmlmiojgjd'),(95,'imgigoffodnjmcpinfdiadjpgdibm'),(96,'imgnmedlcmblfjoggdigbceacicpf'),(97,'imgokfaapgionfohepoihclhndpcc'),(98,'imgelljfcoaefkonfbjkfhmmoehfg'),(99,'imgnfekaeibfflmamfagenjbklmbn'),(100,'imgndgehefbmmlkdadfpdbhhhppln'),(101,'imgbjpmcmndlapimfnfljfimfpcic'),(102,'imgkeekdfecbjbanhohmieodihjbe'),(103,'imgdeoejalbcinnjkjgljggligjmi'),(104,'imgcbahjdlmndjdacdghpmeiokpee'),(105,'imgihllgbanpgbedlppamdagbiaec'),(106,'imgmehlpbhkmeoimabcccgpfpldod'),(107,'imgjddmecjabkbefggbgmdlilkjom'),(108,'imgbmiglcmfgmlondhdbgeoanigji'),(109,'imgljbphpfdecgdhlenimonjfaamf'),(110,'imgjemcekpmeplpajcbonfcljpddm'),(111,'imgeahjigackdedfegfhfekahjche'),(112,'imgdcjmilkobaeilodacbibhkcpbd'),(113,'imgolnbicoacmdnhbfaaigkbmdcik'),(114,'imgehnbcnjjlhnahbpaiihoibhmgn'),(115,'imgfkempdhfedcagbjolbnpcdlpbc'),(116,'imglhjadeljlbhhfmfelfhiiinkfd'),(117,'imgncieaoelijpmioojmeofebfnod'),(118,'imgkfmnoadkdcodiflncnfopanfej'),(119,'imgphlnoadfmjhkpddopckpdjmpad'),(120,'imgligjdclcdblbhenffakblbpapm'),(121,'imgoedjdbgconmdcjbfdndcgdhgpd'),(122,'imgpdhjfgbkgapobbibllcnfanhib'),(123,'imgnopcchkakafajnidpmheohppbp'),(124,'imgjgdmpclbkepolfcodgmfkphafh'),(125,'imgjiinkcelabiggdapeiclolbaig'),(126,'imghgdlcekpdjkmpffnigacfpghlf'),(127,'imgikoedbclhnggpjoffingnibgol'),(128,'imgeghpfhddinagnjjgegchcnmjna'),(129,'imglpmbjocbonpinfohlhoookkiae'),(130,'imgkaokjlmgldkbbppiafgokojdjd'),(131,'imgdhaflghcmlcgboaiafblcomghc'),(132,'imgkkmnpikmjfkcmbnlpkkmoplgfj'),(133,'imgcjgicpmjdheceapjhledhoniio'),(134,'imgpijgmfpbdloleommgcgijpinjf'),(135,'imggnebialeabhdifmahpjndkbofk'),(136,'imgnofcgmpkjegpchnjmcimdgineb'),(137,'imgdkcjiablcdcacnnljnadmmhkea'),(138,'imgpjbkbeecahnelkahfpemicbdda'),(139,'imgagoknenbhpdjcfbkkolpncmomc'),(140,'imgeemjiheocdojaephhdfhlimldm'),(141,'imgpeodbkblchchddebodadjffjff'),(142,'imgnelkbhoikkomligdkoillfopmo'),(143,'imgoehhlmceehilenhibbjlbjmhlp'),(144,'imglhhhpmepinbbndggddmfjemegc'),(145,'imgedalhmfaajmccampllohkkmoej'),(146,'imgnkbchjgebjeglklfdmlkmcmgmp'),(147,'imgnonibniemlolmielbmbdlkbdmk'),(148,'imgpfkckkfglnpfbigbmgjfeliknn'),(149,'imgbfoldelboojehdiipkdkmlhlae'),(150,'imgjailallniabdclpndfcmmfodkl'),(151,'imgcjgonjdiicpeephmjdlleimfcp'),(152,'imgjfmhnpidaobhpeflafnnpbihjk'),(153,'imgakjkleamolmijepbkgephkpmfp'),(154,'imglicimnfodhcebidkbmjaollndg'),(155,'imgodkhomnmmlplnnjaifbhaifggl'),(156,'imgkgmpaneajccckkheodiaopgemk'),(157,'imgjekfkdldmjlnlppabaegicnfoe'),(158,'imgejjeojofakbifgianbgfcolglk');
+/*!40000 ALTER TABLE `images` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `prefectures`
+--
+
+DROP TABLE IF EXISTS `prefectures`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `prefectures` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=48 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `prefectures`
+--
+
+LOCK TABLES `prefectures` WRITE;
+/*!40000 ALTER TABLE `prefectures` DISABLE KEYS */;
+INSERT INTO `prefectures` VALUES (1,'北海道'),(2,'青森県'),(3,'岩手県'),(4,'宮城県'),(5,'秋田県'),(6,'山形県'),(7,'福島県'),(8,'茨城県'),(9,'栃木県'),(10,'群馬県'),(11,'埼玉県'),(12,'千葉県'),(13,'東京都'),(14,'神奈川県'),(15,'新潟県'),(16,'富山県'),(17,'石川県'),(18,'福井県'),(19,'山梨県'),(20,'長野県'),(21,'岐阜県'),(22,'静岡県'),(23,'愛知県'),(24,'三重県'),(25,'滋賀県'),(26,'京都府'),(27,'大阪府'),(28,'兵庫県'),(29,'奈良県'),(30,'和歌山県'),(31,'鳥取県'),(32,'島根県'),(33,'岡山県'),(34,'広島県'),(35,'山口県'),(36,'徳島県'),(37,'香川県'),(38,'愛媛県'),(39,'高知県'),(40,'福岡県'),(41,'佐賀県'),(42,'長崎県'),(43,'熊本県'),(44,'大分県'),(45,'宮崎県'),(46,'鹿児島県'),(47,'沖縄県');
+/*!40000 ALTER TABLE `prefectures` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tbl`
+--
+
+DROP TABLE IF EXISTS `tbl`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tbl` (
+  `id` int(11) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tbl`
+--
+
+LOCK TABLES `tbl` WRITE;
+/*!40000 ALTER TABLE `tbl` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `universities`
+--
+
+DROP TABLE IF EXISTS `universities`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `universities` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL,
+  `prefecture_id` int(11) NOT NULL,
+  `name1` varchar(2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `universities`
+--
+
+LOCK TABLES `universities` WRITE;
+/*!40000 ALTER TABLE `universities` DISABLE KEYS */;
+INSERT INTO `universities` VALUES (1,'九州工業大学情報工学部',40,'き'),(2,'九州工業大学工学部',40,'き'),(3,'大分大学経済学部',44,'お'),(4,'宮崎大学教育学部',45,'み'),(5,'鹿児島大学歯学部',46,'か'),(6,'熊本大学理学部',43,'く'),(7,'佐賀大学理工学部',41,'さ'),(8,'長崎大学薬学部',42,'な'),(9,'愛知大学',23,'あ'),(10,'茨城大学',8,'い'),(11,'横浜国立大学',14,'よ'),(12,'東京大学',13,'と'),(13,'一橋大学',13,'ひ'),(14,'東北大学',4,'と'),(15,'埼玉大学',11,'さ'),(16,'東京医科歯科大学',13,'と'),(17,'山梨大学',19,'や'),(18,'東京芸術大学',13,'と'),(19,'群馬大学',10,'く'),(20,'筑波大学',8,'つ'),(21,'電気通信大学',13,'て'),(22,'お茶の水女子大学',13,'お'),(23,'岩手大学',3,'い'),(24,'大阪教育大学',27,'お'),(25,'弘前大学',2,'ひ'),(26,'東京工業大学',13,'と'),(27,'東京農工大学',13,'と'),(28,'長崎大学',42,'な'),(29,'岐阜大学',21,'き'),(30,'滋賀大学',25,'し'),(31,'小樽商科大学',1,'お'),(32,'筑波技術大学',8,'つ'),(33,'佐賀大学',41,'さ'),(34,'宮崎大学',45,'み'),(35,'神戸大学',28,'こ'),(36,'山形大学',6,'や'),(37,'琉球大学',47,'り'),(38,'東京外国語大学',13,'と'),(39,'広島大学',34,'ひ'),(40,'大分大学',44,'お'),(41,'北海道大学',1,'ほ'),(42,'信州大学',20,'し'),(43,'東京海洋大学',13,'と'),(44,'山口大学',35,'や'),(45,'京都工芸繊維大学',26,'き'),(46,'新潟大学',15,'に'),(47,'鳥取大学',31,'と'),(48,'三重大学',24,'み'),(49,'名古屋大学',23,'な'),(50,'千葉大学',12,'ち'),(51,'奈良女子大学',29,'な'),(52,'旭川医科大学',1,'あ'),(53,'岡山大学',33,'お'),(54,'豊橋技術科学大学',23,'と'),(55,'宇都宮大学',9,'う'),(56,'室蘭工業大学',1,'む'),(57,'鹿児島大学',46,'か'),(58,'兵庫教育大学',28,'ひ'),(59,'金沢大学',17,'か'),(60,'熊本大学',43,'く'),(61,'宮城教育大学',4,'み'),(62,'早稲田大学',13,'わ');
+/*!40000 ALTER TABLE `universities` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user_circle`
+--
+
+DROP TABLE IF EXISTS `user_circle`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_circle` (
+  `circle_id` int(11) NOT NULL,
+  `user_uuid` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_circle`
+--
+
+LOCK TABLES `user_circle` WRITE;
+/*!40000 ALTER TABLE `user_circle` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user_circle` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `uuid` int(11) NOT NULL AUTO_INCREMENT,
+  `id` varchar(16) NOT NULL,
+  PRIMARY KEY (`uuid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2017-01-13 16:50:05
