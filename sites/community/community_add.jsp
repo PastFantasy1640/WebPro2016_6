@@ -41,7 +41,9 @@
    Community.addCommunity(name,image_id,description);
    out.println("新規コミュニティが作成されました");
 %>
- 
+<div>
+  <a href="community_list.jsp"> コミュニティリストに戻る</a>
+</div>
 <%
  }
 %>
