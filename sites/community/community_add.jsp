@@ -21,10 +21,6 @@
 <%
 	// リクエストパラメータの文字エンコーディング指定
 	request.setCharacterEncoding("utf-8");
-%>
-<h1>新規作成</h1>
-
- <%
  // リクエストパラメータの文字エンコーディング指定
  request.setCharacterEncoding("utf-8");
  // パラメータの入力とチェック
