@@ -1,0 +1,113 @@
+html, body, header{ height: 100%; }
+
+
+body{
+	margin: 0;  
+	background-image:url("../images/background01.jpg");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	background-color:white;
+	font-family: 游ゴシック体, 'Yu Gothic', YuGothic, 'ヒラギノ角ゴシック Pro', 'Hiragino Kaku Gothic Pro', メイリオ, Meiryo, Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', sans-serif;
+}
+
+/******************/
+/* TITLE (HEADER) */
+/******************/
+header{
+	text-align:			center;
+}
+
+#title_center{
+	position:		absolute;
+	top:			0;
+	right:			0;
+	bottom:			0;
+	left:			0;
+	margin:			auto;
+	width: 80%;
+	height: 100%;
+}
+
+#title_center p#description{
+	color: white;
+	background-image:url("/MyApp/images/bg_b60.png");
+	box-shadow: 0 0 5px black;
+	margin: 0 3.3% 3rem;
+}
+
+#circle_ex{
+	display: table;
+	margin:0 auto;
+}
+
+.circle_tbcell{
+	vertical-align: top;
+	display: table-cell;
+	width: 33%;
+}
+
+.circle_area{
+	margin:0 10%;
+	background-image: url("/MyApp/images/bg_w80.png");
+	box-shadow: 0 0 10px white;
+}
+
+div.image_area{
+	height: 300px;
+}
+
+.image_area img{
+	width: 100%;
+}
+
+.circle_area p{
+	padding:0 1rem;
+	margin:0 ;
+}
+
+.circle_area p.univ small{
+	font-size:small;
+	background-color: #333;
+	color: white;
+}
+
+.circle_area p.title{
+	color: black;
+	font-weight:bold;
+	padding-top: 0.5rem;
+	font-size:large;
+}
+
+.circle_area p.comment{
+	color: black;
+	padding-bottom: 0.5rem;
+}
+
+#search_circle{
+	color: white;
+	margin:0 auto;
+}
+
+#search_button{
+	background-image: url("/MyApp/images/bg_w80.png");
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	margin-bottom: 4px;
+	padding: 0.5rem 0;
+	color: black;
+	font-weight: bold;
+	font-size:x-large;
+	width: 16rem;
+	
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+}
+
+#search_button:hover{
+	border: 4px green solid;
+	margin:0 auto;
+}
