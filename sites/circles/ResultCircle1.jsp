@@ -322,7 +322,7 @@
 		    <div class="image">
 			<%
 			if(ImageId != 0){
-				   out.println("<img src=\"uploads/images/" + image.getFileName() + "\" width=\"100%\" height=\"100%\" />");
+				   out.println("<img src=\"/MyApp/uploads/images/" + image.getFileName() + "\" width=\"100%\" height=\"100%\" />");
 			}
 			else{
 				   out.println("<br><br><br><br><div style=\"text-align:center;color:#fff\">画像は編集されていません</div>");
