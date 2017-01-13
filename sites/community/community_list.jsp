@@ -24,7 +24,7 @@
 %>
 <h1>コミュニティ</h1>
 
-<a href="http://www.google.co.jp/" class="makeCommunity">コミュニティを作る</a>
+<a href="community_add.html" class="makeCommunity">コミュニティを作る</a>
 
 <h3>おすすめのコミュニティ</h3>
 
