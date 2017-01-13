@@ -57,7 +57,18 @@ public class Circle {
 		}
   return ret;
 	}
-  //public registCircle(String circlename, String category, String University){
-    //statement st1 = 
-  //}
+  public registCircle(String circlename, String category, String university){
+		Connection db = DatabaseConnector.connect("chef","secret");
+
+    statement st1 = db.createStatement();
+    String query1 = "select id from categories where name ='"+category+"'";
+    ResultSet rs1 = st2.executeQuery(query);
+    statement st2 = db.createStatement();
+    String query2 = "select id from universities where name ='"+university+"'";
+    ResultSet rs2 = st2.executeQuery(query);
+    statement st3 = db.createStatement();
+    String query3 = "insert into circles("+university+"'";
+    ResultSet rs3 = st3.executeQuery(query);
+
+  }
 }
