@@ -51,6 +51,7 @@ public class LoginPage extends HttpServlet {
 				out.println("<title>ログイン失敗</title></head>");
 				out.println("<body>"
 				 + "IDかパスワードが正しくありません");
+				out.println("<p>再試行は<a href = \"../webpro/WebPro2016_6/LoginPage.html\">こちら</a><p>");
 			}
 			rs.close();
 			st.close();

@@ -25,7 +25,7 @@ public class Regist extends HttpServlet {
 		out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
 		out.println("<title>Register</title>");
 		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"../webpro/WebPro2016_6/regist.css\" media=\"all\" />");
-		out.println("</head><body>");
+		out.println("<title>ユーザー登録画面</title></head><body>");
 		Connection db = null;
 		String db_name = "circle_triangle";
 		try {

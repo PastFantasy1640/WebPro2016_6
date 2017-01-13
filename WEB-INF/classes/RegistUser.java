@@ -43,6 +43,8 @@ public class RegistUser extends HttpServlet {
 		out.println("<html><head><meta http-equiv=\"Pragma\" content=\"no-cache\">");
 		out.println("<meta http-equiv=\"Expires\" content=\"-1\">");
 		out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
+		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"../webpro/WebPro2016_6/registuser.css\" media=\"all\" />");
+
 		// ここまでは以降もそのまま使う
 		out.println("<title>ユーザー登録確認画面</title></head>");
 		out.println("<body>");
@@ -54,6 +56,7 @@ public class RegistUser extends HttpServlet {
 			out.println("<p>再入力は<a href = \"Regist\">こちら</a></p>");
 		}else{
 			out.println("<body>"
+				 + "<div id=\"registuser\">"
 				 + "以下の情報で登録します。"
 				 + "<table border=\"0\">"
 				 + "<tr><td align=\"right\">ユーザーID:</td>"+"<td>"+userId+"</td></tr>"
@@ -79,8 +82,9 @@ public class RegistUser extends HttpServlet {
 			session.setAttribute("facebook",facebook);
 
 			out.println("<form method=\"POST\" enctype=\"multipart/form-data\" action = SignupPage>"
+			+ "<p class=\"submit\">"
 			+ "<input type=\"submit\" value=\"登録\">"
-			+ "</form>");
+			+ "</form></div>");
 		}
 		out.println("</body></html>");
 	}
