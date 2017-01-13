@@ -3,9 +3,9 @@
 
 <%
 
-    int ret = 5000;
+    //int ret = 5000;
 
-    ret = (int)session.getAttribute("UserID");
+    //ret = (int)session.getAttribute("UserID");
 
     // リクエストパラメータの文字エンコーディング指定
     request.setCharacterEncoding("utf-8");
@@ -24,7 +24,7 @@
     String query1 = "select * from circles where id ="+Integer.valueOf(str);
 
     ResultSet rs1 = st1.executeQuery(query1);
-    
+
     //circlesデータ取得のために一歩前に進む
     rs1.next();
 
@@ -87,7 +87,6 @@
 	     position: absolute;
 	     height: 1000px;
 	     width: 100%;
-	     background-color:#C0C0C0;
 	 }
 
 	 .box2 {
@@ -118,16 +117,16 @@
 	 .box2-1{
 	     width:80%;
 	     height: 200px;
-	     background-color: #008080;
+	     background-color: #fff;
 	     margin: 0 auto;
 	 }
 
 	 .box2-1-1{
 	     position: absolute;
 	     width:80%;
-	     background-color: #FFFFff;
+	     background-color: #aff;
 	     background-size: contain;
-	     background-image: url(imagecircle.png);
+	     background-image: url(../../logo.png);
 	     height: 150px;
 	 }
 
@@ -271,7 +270,7 @@
 	     position: absolute;
 	     top: 9%;
 	     margin-left: 10px;
-	     width: 90%;
+	     width: 99%;
 	     height: 90%;
 	     background-color: #fff;
 	 }
@@ -306,7 +305,15 @@
     <body>
 	<div class="box1">
 	    <div class="box2">
+	    	 <div style="text-align:center;">
+			<img border="0" src="../../images/logo.png" width="600px" height="150px">
+		 </div>
+	      <!--			
 		<div class="box2-1">
+		    <div style="text-align:center; top: 50px;">
+			<img border="0" src="../../images/logo.png" width="600px" height="150px">
+		    </div>
+		     
 		    <div class="box2-1-1">
 		    </div>
 		    <div class="box2-1-2">
@@ -316,6 +323,7 @@
 			<div class="box2-1-2-4"><a href="#" style="text-decoration: none; color: #fff">項目4</a></div>
 		    </div>
 		</div>
+		-->
 	    </div>
 	    <div class="box3">
 		<div class="box3-1">

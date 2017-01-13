@@ -567,8 +567,10 @@ ResultSet rs15 = st15.executeQuery(query15);
 	 }
 
 	 .table-ul2 {
+	     top: 50px;
+	     text-align: center;
              position: absolute;
-	     background-color: #ff0;
+	     background-color: #fff;
              width: 1000px;
 	     height: 150px;
              margin: 0 auto;
@@ -583,13 +585,15 @@ ResultSet rs15 = st15.executeQuery(query15);
     <body>
 
 	<div id="top_frame">
-	    <div class="table-ul2"><img border="0" src="imagecircle.png" width="1000px" height="150"></div>
+	    <div class="table-ul2"><img border="0" src="../../images/logo.png" width="600px" height="150px"></div>
+	    <!--
 	    <ul class="table-ul1">
 		<li><a href="#">項目①</a></li>
 		<li><a href="#">項目②</a></li>
 		<li><a href="#">項目③</a></li>
 		<li><a href="#">項目④</a></li>
 	    </ul>
+	    -->
 	    
 	</div>
 	<div id="under_frame">
