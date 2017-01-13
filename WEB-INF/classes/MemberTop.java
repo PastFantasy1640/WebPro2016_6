@@ -53,6 +53,7 @@ public class MemberTop extends HttpServlet {
 					 + "<a href = \"ChangeMyInfo?Target=twitter\">ツイッターアカウント変更</a>"
 					 + "<a href = \"ChangeMyInfo?Target=facebook\">フェイスブックアカウント変更</a>"
 					 + "<a href = \"ChangeMyInfo?Target=mail\">メールアドレス変更</a>"
+					 + "<a href = \"ChangeMyInfo?Target=image\">画像変更</a>"
 					 + "<form action=Logout>"
 					 + "<input type=\"submit\" value=\"logout\">"
 					 + "</form>"

@@ -93,14 +93,16 @@ public class ChangeMyInfo extends HttpServlet {
 					+"</body>"
 					+"</html>");
 				}else if(target.equals("image")){
+					session.setAttribute("ID",0);
+					session.setAttribute("url","ChangedMyImage");
 					out.println("<body>"
-					+ "<h2>画像変更</h2>"
-					+ "<form action=/MyApp/imguploader enctype=multipart/form-data method=post>"
-					+ "<input type=file name=image size=30>"
-					+ "<input type=\"submit\" name=button value=\"変更\">"
-					+ "</form>"
-					+ "</body>"
-					+ "</html>"
+					+"<h2>画像変更</h2>"
+					+"<form action=/MyApp/imguploader enctype=multipart/form-data method=post>"
+					+"<input type=file name=image size=30>"
+					+"<input type=\"submit\" name=button value=\"変更\">"
+					+"</form>"
+					+"</body>"
+					+"</html>");
 				}
 			}else{
 				hres.sendRedirect("../webpro/WebPro2016_6/LoginPage.html");
