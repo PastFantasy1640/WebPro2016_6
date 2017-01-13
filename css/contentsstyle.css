@@ -1,0 +1,35 @@
+
+main{
+	background-image:url("/MyApp/images/bg_w80.png");
+}
+
+article{
+	background-image:url("/MyApp/images/logoicon.png");
+	margin:0 auto;
+	padding:2rem 0;
+	max-width:1200px;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: 30% auto;
+	
+}
+
+section h1{
+	padding: 1rem;
+	border-bottom: 2px solid black;
+	border-left: 10px solid black;
+	font-size: x-large;
+}
+
+section p{
+	padding-left: 2rem;
+}
+
+footer{
+	text-align: center;
+	background-color: black;
+	color: white;
+	font-size:small;
+	margin: 1rem auto;
+}

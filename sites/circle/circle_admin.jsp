@@ -1,11 +1,13 @@
-<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" import="java.sql.*" %>
-<%
-// リクエストパラメータの文字エンコーディング指定
-request.setCharacterEncoding("utf-8");
-// JDBC ドライバのロード
-Class.forName("org.gjt.mm.mysql.Driver");
-Connection db = DriverManager.getConnection("jdbc:mysql://localhost/webpro_db?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
-%>
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ page import="circle.University" %>
+<%@ page import="circle.Category" %>
+<%@ page import="circle.Prefecture" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="utility.StringUtil" %>
+<%@ page import="utility.DatabaseConnector" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.util.logging.Logger" %>
+
 
 <html>
     <head>
@@ -17,31 +19,33 @@ Connection db = DriverManager.getConnection("jdbc:mysql://localhost/webpro_db?us
     <body>
 	<%
 
-    //本来こっちを使う
-    //int id = (int)session.getAttribute("UserId");
-    //テスト用
-    int id = 1; 
-    Statement st3 = db.createStatement();
-    String query3 = "select * from circles where circle_leader_id = " + id + "";
-    ResultSet rs3 = st3.executeQuery(query3);
+    ArrayList<University> univs = University.getUniversities();
+	
+	ArrayList<Category> categories =  Category.getCategories();
+	ArrayList<Prefecture> prefectures = Prefecture.getPrefectures();
+	if(univs == null || categories == null || prefectures == null) {
+		response.sendRedirect("/MyApp/index.jsp");
+		return;
+	}
 
-    if(!rs3.next()){
-      %>サークル情報が登録されていません。<%
-    }else{
-      String circlename = rs3.getString("name");
-      String comment = rs3.getString("comment");
-      String mail = rs3.getString("mail");
-      String phone = rs3.getString("phone");
-      String twitter = rs3.getString("twitter");
-      String facebook = rs3.getString("facebook");
-      String file = rs3.getString("file");
-      String button="";
-      String imageid = rs3.getString("imageid");
+	String circlename = StringUtil.NonNullString(request.getParameter("circlename"));
+	//String type = StringUtil.NonNullString(request.getParameter("type"));
+	//String prefecture = StringUtil.NonNullString(request.getParameter("prefecture"));
+	//String university = StringUtil.NonNullString(request.getParameter("university"));
+	String comment = StringUtil.NonNullString(request.getParameter("comment"));
+	String mail = StringUtil.NonNullString(request.getParameter("mail"));
+	String phone = StringUtil.NonNullString(request.getParameter("phone"));
+	String twitter = StringUtil.NonNullString(request.getParameter("twitter"));
+	String facebook = StringUtil.NonNullString(request.getParameter("facebook"));
+	String button = "";//StringUtil.NonNullString(request.getParameter("button"));
+	String file = StringUtil.NonNullString(request.getParameter("file"));
+	String imageid = StringUtil.NonNullString(request.getParameter("imageid"));
+
 	%>
 
 	<center>
 	    <h1>サークル管理</h1><br>
-	    <form action=Servlet/ImageUploader enctype=multipart/form-data method=post>
+	    <form action="/imguploader" enctype="multipart/form-data" method="post">
 		<h2>・サークル画像変更</h2>
 		<input type=file name=image size=30>
 		<input type="submit" name=button value="送信">
@@ -92,13 +96,6 @@ Connection db = DriverManager.getConnection("jdbc:mysql://localhost/webpro_db?us
       </tbody>
       </table>
 	    <br><input type="submit" name=button value="送信">
-	    <%
-    }
-	    // Statement, データベースを順にクローズ
-      rs3.close();
-      st3.close();
-	    db.close();
-	    %>
   </form>
 	</center>
     </body>
