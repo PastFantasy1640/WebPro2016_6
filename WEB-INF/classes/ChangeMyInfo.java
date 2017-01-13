@@ -52,7 +52,7 @@ public class ChangeMyInfo extends HttpServlet {
 					 + "</html>");
 				}else if(target.equals("twitter")){
 					out.println("<body>"
-					+"<h2>ツイッターアカウント変更<h2>"
+					+"<h2>ツイッターアカウント変更</h2>"
 					 + "<form method=\"POST\" action=\"ChangedMyInfo\">"
 					 + "<table border=\"0\">"
 					 + "<tr><td align=\"right\">新しいツイッターアカウント:</td>"
@@ -66,7 +66,7 @@ public class ChangeMyInfo extends HttpServlet {
 					+"</html>");
 				}else if(target.equals("facebook")){
 					out.println("<body>"
-					+"<h2>フェイスブックアカウント変更<h2>"
+					+"<h2>フェイスブックアカウント変更</h2>"
 					 + "<form method=\"POST\" action=\"ChangedMyInfo\">"
 					 + "<table border=\"0\">"
 					 + "<tr><td align=\"right\">新しいフェイスブックアカウント:</td>"
@@ -80,7 +80,7 @@ public class ChangeMyInfo extends HttpServlet {
 					+"</html>");
 				}else if(target.equals("mail")){
 					out.println("<body>"
-					+"<h2>メール変更<h2>"
+					+"<h2>メール変更</h2>"
 					 + "<form method=\"POST\" action=\"ChangedMyInfo\">"
 					 + "<table border=\"0\">"
 					 + "<tr><td align=\"right\">新しいメールアドレス:</td>"
@@ -92,6 +92,15 @@ public class ChangeMyInfo extends HttpServlet {
 					 + "</form>"
 					+"</body>"
 					+"</html>");
+				}else if(target.equals("image")){
+					out.println("<body>"
+					+ "<h2>画像変更</h2>"
+					+ "<form action=/MyApp/imguploader enctype=multipart/form-data method=post>"
+					+ "<input type=file name=image size=30>"
+					+ "<input type=\"submit\" name=button value=\"変更\">"
+					+ "</form>"
+					+ "</body>"
+					+ "</html>"
 				}
 			}else{
 				hres.sendRedirect("../webpro/WebPro2016_6/LoginPage.html");
