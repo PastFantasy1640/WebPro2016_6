@@ -1,14 +1,31 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" import="java.sql.*" %>
+<%@ page import="circle.University" %>
+<%@ page import="circle.Category" %>
+<%@ page import="circle.Prefecture" %>
+<%@ page import="circle.Circle" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="utility.StringUtil" %>
+<%@ page import="utility.DatabaseConnector" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.util.logging.Logger" %>
+
+
 
 <%
 
 session.setAttribute("UserID",0);
 
 request.setCharacterEncoding("utf-8");
-// JDBC ドライバのロード
+
 Class.forName("org.gjt.mm.mysql.Driver");
 // データベースとの結合
 Connection db = DriverManager.getConnection("jdbc:mysql://localhost/circle_triangle_db?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
+
+ArrayList<Category> categories = Category.getCategories();
+ArrayList<University> universities = University.getUniversities();
+ArrayList<Circle> circles = Circle.getCircles();
+ArrayList<Prefecture> prefectures = Prefecture.getPrefectures();
+//ArrayList<Hiragana> hiraganas = Hiragana.getHiragana();
 
 Statement st11 = db.createStatement();
 
@@ -33,6 +50,7 @@ Statement st14 = db.createStatement();
 String query14 = "select *  from circles";
 
 ResultSet rs14 = st14.executeQuery(query14);
+
 
 Statement st15 = db.createStatement();
 
@@ -62,17 +80,14 @@ ResultSet rs15 = st15.executeQuery(query15);
 	     var mozi= '';
 	     var bool = false;
 
-
 	     <%
-	     rs12.beforeFirst();
-	     while(rs12.next()) {
-	     %>
-	     a.push('<%= rs12.getString("name1") %>');
-	     b.push('<%= rs12.getString("name") %>');
-	     c.push('<%= rs12.getString("id") %>');
-<%
-}
-%>
+		for(University uv : universities){
+		    out.println("a.push(\'" + uv.name1_ + "\');");
+		    out.println("b.push(\'" + uv.name_ + "\');");
+		    out.println("c.push(\'" + uv.id_ + "\');");
+		}
+             %>
+	     
 
 
 	     if(val == -1){
@@ -117,25 +132,22 @@ ResultSet rs15 = st15.executeQuery(query15);
 	     var positionX = rect.left + window.pageXOffset ;	// 要素のX座標
 	     var positionY = rect.top + window.pageYOffset ;	// 要素のY座標
 
-	     <%
-	     rs14.beforeFirst();
-	     while(rs14.next()) {
-	     %>
-	     a.push('<%= rs14.getString("name") %>');
-	     b.push('<%= rs14.getString("university_id")%>');
-	     d.push('<%= rs14.getString("id")%>');
-<%
-}
-%>
+             <%
+		for(Circle ci : circles){
+		    out.println("a.push(\'" + ci.name_ + "\');");
+		    out.println("b.push(\'" + ci.university_id_ + "\');");
+		    out.println("d.push(\'" + ci.id_ + "\');");
+		}
+             %>
 
 	     <%
-	     rs12.beforeFirst();
-	     while(rs12.next()) {
-	     %>
-	     c.push('<%= rs12.getString("name")%>');
-<%
-}
-%>
+		for(University uv : universities){
+		    out.println("c.push(\'" + uv.name_ + "\');");
+		}
+             %>
+
+
+
              var mozi = '';
 
              mozi = '<select name="result">';
@@ -170,24 +182,21 @@ ResultSet rs15 = st15.executeQuery(query15);
              var rect = target.getBoundingClientRect();
              var positionX = rect.left + window.pageXOffset ;   // 要素のX座標
              var positionY = rect.top + window.pageYOffset ;    // 要素のY座標
-             <%
-	     rs12.beforeFirst();
-             while(rs12.next()) {
-             %>
-             a.push('<%= rs12.getString("name") %>');
-	     b.push('<%= rs12.getString("id") %>');
-             <%
-             }
-             %>
 
 	     <%
-	     rs14.beforeFirst();
-             while(rs14.next()) {
+		for(University uv : universities){
+		    out.println("a.push(\'" + uv.name_ + "\');");
+		    out.println("b.push(\'" + uv.id_ + "\');");
+		}
              %>
-             c.push('<%= rs14.getString("name") %>');
-             d.push('<%= rs14.getString("university_id") %>');
-             <%
-             }
+
+	    
+
+	     <%
+		for(Circle ci : circles){
+		    out.println("c.push(\'" + ci.name_ + "\');");
+		    out.println("d.push(\'" + ci.university_id_ + "\');");
+		}
              %>
 	     
 
@@ -274,17 +283,17 @@ ResultSet rs15 = st15.executeQuery(query15);
 	     if(collegeid == -1)
 		 collegeid = null;
 	     
+	    
 	     <%
-	     rs14.beforeFirst();
-             while(rs14.next()) {
+		for(Circle ci : circles){
+		    out.println("CirclesId.push(\'" + ci.id_ + "\');");
+		    out.println("CircleName.push(\'" + ci.name_ + "\');");
+		    out.println("CirclesCategory_id.push(\'" + ci.category_id_ + "\');");
+		    out.println("CircleUniversity_id.push(\'" + ci.university_id_ + "\');");
+		}
              %>
-	     CirclesId.push('<%= rs14.getString("id")%>');
-             CirclesName.push('<%= rs14.getString("name") %>');
-             CirclesCategory_id.push('<%= rs14.getString("category_id") %>');
-	     CirclesUniversity_id.push('<%= rs14.getString("university_id") %>');
-             <%
-             }
-             %>
+
+	     
 
              <%
 	     rs12.beforeFirst();
