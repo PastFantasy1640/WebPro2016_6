@@ -4,6 +4,7 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
          http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
+
 <servlet>
   <servlet-name>RegistUser</servlet-name>
   <servlet-class>RegistUser</servlet-class>
@@ -93,5 +94,16 @@
     <servlet-name>Regist</servlet-name>
     <url-pattern>/servlet/Regist</url-pattern>
 </servlet-mapping>
+
+<servlet>
+  <servlet-name>ImgUpSv</servlet-name>
+  <servlet-class>utility.ImageUploader</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>ImgUpSv</servlet-name>
+    <url-pattern>/imguploader</url-pattern>
+</servlet-mapping>
+
 
 </web-app>

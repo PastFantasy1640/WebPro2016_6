@@ -55,6 +55,14 @@ public class ImageManager{
 		this.url = "";
 	}
 
+
+	final static public int FAILED_TO_LOAD_DBDC = -100;
+	final static public int INVALID_ID = -101;
+	final static public int THERE_IS_NO_DATA = -102;
+	final static public int FAILED_TO_CLOSE_DATABASE = -103;
+	final static public int ACCESS_DENIED_TO_DATABASE = -104;
+
+
 	////////////////////////////////////
 	//  PUBLIC  CONSTRUCTOR         //
 	////////////////////////////////////
@@ -63,8 +71,9 @@ public class ImageManager{
 		Logger logger = Logger.getLogger("ImageManager");
 
 		//temporary members
-		int tid = -1;
-		String turl = "";
+
+		int tid = -99;
+		String turl = "default";
 
 		//load the db driver
 		try{
@@ -72,7 +81,8 @@ public class ImageManager{
     		}catch(ClassNotFoundException e){
     			logger.warning("DB Driver not found exception has occured. EXCEPTION:" + e.toString());
     			
-    			this.id = tid;
+
+    			this.id = this.FAILED_TO_LOAD_DBDC;
     			this.url = turl;
     			return;
     		}
@@ -97,6 +107,8 @@ public class ImageManager{
 			    	}else{
 			    		//nothing data.
 			    		logger.warning("Illegal id has been set.");
+
+			    		tid = this.THERE_IS_NO_DATA;
 			    	}
 		    	
 		    	
@@ -135,17 +147,20 @@ public class ImageManager{
 		    		rs.close();
 
 		    	}else{
-		    		tid = -1;
+		    		tid = this.INVALID_ID;
 		    		turl = "";
 		    	}
 		}catch(SQLException e){
 			logger.warning("access to database has denied.");
 			turl = "";
+			tid = this.ACCESS_DENIED_TO_DATABASE;
+
 		}finally{
 			try{
 				if(db != null) db.close();
 			}catch(SQLException e){
 				logger.warning("failed to close the database.");
+				tid = this.FAILED_TO_CLOSE_DATABASE;
 			}
 		}
     		
@@ -154,5 +169,8 @@ public class ImageManager{
     		this.url = turl;
 	}
 
+	public boolean isFailed(){
+		return (this.id < 0);
+	}
 
 }

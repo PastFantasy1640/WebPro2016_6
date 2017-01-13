@@ -1,0 +1,207 @@
+body{
+	background-color : gray; /* BACKGROUND COLOR*/
+	margin : 0;
+    font-family: 'ÉqÉâÉMÉmäpÉS Pro W3', 'Hiragino Kaku Gothic Pro', 'Hiragino Kaku Gothic ProN', 'ÉÅÉCÉäÉI', Meiryo;
+}
+
+/*** BASE GROUND ***/
+#base_ground{
+	background-color : white;
+	max-width : 1150px;
+	margin : 0 auto;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+#header_contents_margin{
+	height: 1em;
+	background-color : #CCCCCC;
+}
+
+/*****************************************
+ *                HEADER                 *
+ *****************************************/
+
+/*** HEADER ***/
+header{
+	text-align : center;
+	padding-bottom:2em;
+}
+
+/*** HEADER IMAGE ***/
+#header_image{
+	height : 300px;
+	background-size : cover;
+	background-position : center center;
+}
+
+#header_description{
+	width : 80%;
+	margin : 0 auto;	/* centering */
+	font-size : small;
+}
+
+
+
+/*****************************************
+ *             MAIN CONTENTS             *
+ *****************************************/
+
+/*** FRAMING ***/
+#contents_table{
+	display : table;
+	width : 100%;
+}
+
+#contents_base{
+	display : table-cell;
+	max-width : 890px;
+	vertical-align: top;
+}
+
+
+/*** TALK AREA ***/
+#talkarea{
+	background-color: #CCCCCC;
+	padding: 1px 0;
+}
+
+#talkarea_margin{
+	margin: 10px;
+}
+
+#talkarea input,
+#talkarea textarea{
+    font-size:14px;
+    padding: 12px 0.8em;
+    font-family: 'ÉqÉâÉMÉmäpÉS Pro W3', 'Hiragino Kaku Gothic Pro', 'Hiragino Kaku Gothic ProN', 'ÉÅÉCÉäÉI', Meiryo;
+}
+ 
+#talkarea input{
+    width: 120px;
+	border: 1px solid #DDD;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	background-color: #EEE;
+}
+#talkarea textarea{
+    width: 100%;
+    margin: 0 0 8px;
+    border: 1px solid #B9C9CE;
+    border-radius:5px;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
+}
+#talkarea input[type=text]:focus,
+#talkarea textarea:focus {
+  border-color:#83B6C2;
+    outline:none;
+    box-shadow:2px 2px 4px rgba(143,183,222,0.6),-2px -2px 4px rgba(143,183,222,0.6),inset 0 1px 2px rgba(0,0,0,0.2);
+}
+::-webkit-input-placeholder {
+    color:#AFAFAF;
+}
+:-moz-placeholder {
+    color:#AFAFAF;
+}
+
+#talkarea_table {
+	margin: 0;
+}
+
+
+
+/*** A TALK ELEMENT ***/
+div.talk{
+	border : 2px solid black;
+	margin : 10px 5px;
+	width : 98%;
+	display: table;
+    box-shadow: 3px 3px 4px rgba(0,0,0,0.5);
+    border-radius:5px;
+}
+
+div.talk div.image{
+	display: table-cell;
+	width: 64px;
+	height: 64px;
+	vertical-align: middle;
+}
+
+div.talk div.image img{
+	margin: 0;
+	width: auto;
+	height: auto;
+	max-width: 64px;
+	max-height: 64px;
+	vertical-align: top;
+    border-radius:32px;
+}
+
+div.talk div.contents{
+	display: table-cell;
+	vertical-align: top;
+	width: 100%;
+}
+
+/*** MESSAGE ***/
+div.talk p{
+	margin: 0 0 0 2.5em;
+}
+
+/*** DATE ***/
+div.talk small{
+	margin: 0 0 0 0.7em;
+}
+
+/*** NAME ***/
+div.talk h2{
+	margin: 0 0 0 0.5em;
+	font-size: small;
+}
+
+/***********************************
+ *          SIDE CONTENTS          *
+ ***********************************/
+
+#sidebar_base{
+	display : table-cell;
+	width : 260px;
+	vertical-align: top;
+}
+
+div.joincom{
+	margin : 1em;
+	text-align: center;
+}
+
+div.joincom p{
+}
+
+div.joincom small{
+	font-size:xx-small;
+}
+
+p.sidemenu{
+	background-color:#CCCCCC;
+    box-shadow: 0 0 4px rgba(0,0,0,0.2);
+	margin: 3px;
+	padding: 2px;
+}
+
+#join_button{
+	background-color: #CCC;
+	border: 1px solid #DDD;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	color: #111;
+	width: 80%;
+	padding: 10px 0;
+	font-size: large;
+    font-family: 'ÉqÉâÉMÉmäpÉS Pro W3', 'Hiragino Kaku Gothic Pro', 'Hiragino Kaku Gothic ProN', 'ÉÅÉCÉäÉI', Meiryo;
+}
+
+#join_button:hover{
+	background-color: #EEE;
+}
+
