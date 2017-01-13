@@ -39,9 +39,10 @@
   // SQL 文を実行し挿入した数が返る
   ResultSet rs1 = st1.executeQuery(query1);
 
-  out.println("<form method=\"post\" enctype=\" multipart/form-data\" action=circle_regist.jsp>");
   if(button.equals("送信")){
-    application.getRequestDispatcher("/webpro/WebPro2016_6/circle_reg.jsp").forward(request, response);
+  out.println("<form method=\"post\" enctype=\" multipart/form-data\" action=circle_reg.jsp>");
+  }else{  
+  out.println("<form method=\"post\" enctype=\" multipart/form-data\" action=circle_regist.jsp>");
   }
 %>
 <h1>サークル名<br>

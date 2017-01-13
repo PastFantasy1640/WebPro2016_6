@@ -48,7 +48,7 @@
     ResultSet rs2 = st2.executeQuery(query2);
     ResultSet rs3 = st3.executeQuery(query3);
     rs3.next();
-    if(rs3.getString("id") != null){
+    if(rs3.getInt("id") != 0){
 %>
 既に同大学に同名のサークルが登録されています.
 <input type="submit" name=but value="トップページに戻る">
