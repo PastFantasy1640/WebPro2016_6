@@ -93,6 +93,8 @@ public class ChangeMyInfo extends HttpServlet {
 					+"</body>"
 					+"</html>");
 				}else if(target.equals("image")){
+					//ユーザの画像IDをセッション変数に格納する
+					//（ユーザクラスから？
 					session.setAttribute("ID",0);
 					session.setAttribute("url","ChangedMyImage");
 					out.println("<body>"
@@ -106,7 +108,7 @@ public class ChangeMyInfo extends HttpServlet {
 				}
 			}else{
 				hres.sendRedirect("../webpro/WebPro2016_6/LoginPage.html");
-			}	
+			}
 		}
 	}
 }

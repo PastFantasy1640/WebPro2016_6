@@ -8,7 +8,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.MultipartConfig;
 import java.sql.*;
-import utility.ImageManager;
 
 public class ChangedMyImage extends HttpServlet {
 	public void doPost(HttpServletRequest hreq,	// リクエスト
@@ -32,8 +31,6 @@ public class ChangedMyImage extends HttpServlet {
 				out.println("<meta http-equiv=\"Expires\" content=\"-1\">");
 				out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
 				out.println("</head><body>");
-				Integer ret = new Integer(5000);
-				ImageManager img = null;
 				if((int)session.getAttribute("ID") > -1){
 					out.println("<p>登録に成功しました。</p>"
 					+"<p>メンバートップページは<a href= \"MemberTop\">こちら</a></p>"

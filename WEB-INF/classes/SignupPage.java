@@ -9,7 +9,6 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.MultipartConfig;
 import java.sql.*;
 
-@MultipartConfig(location="", maxFileSize=1048576)
 public class SignupPage extends HttpServlet {
 	public void doPost(HttpServletRequest hreq,	// リクエスト
 			  HttpServletResponse hres)	// レスポンス
@@ -30,7 +29,6 @@ public class SignupPage extends HttpServlet {
 		String mail = (String)session.getAttribute("mail");
 		String twitter = (String)session.getAttribute("twitter");
 		String facebook = (String)session.getAttribute("facebook");
-		String fileName = (String)session.getAttribute("fileName");
 
 		// HTMLテキストの出力
 		out.println("<html><head><meta http-equiv=\"Pragma\" content=\"no-cache\">");
@@ -57,7 +55,8 @@ public class SignupPage extends HttpServlet {
 				out.println("</body></html>");
 			} else {
 				// SQL 文を query に格納
-				query = "insert into users set id='" + userId + "', university_id=" + universityId + ", sex=" + sex + ",password='" + pass + "',mail='" + mail + "',twitter='" + twitter + "',facebook='" + facebook + "', icon_url='" + fileName + "'";
+				// icon_urlにはとりあえず0
+				query = "insert into users set id='" + userId + "', university_id=" + universityId + ", sex=" + sex + ",password='" + pass + "',mail='" + mail + "',twitter='" + twitter + "',facebook='" + facebook + "', icon_url=0";
 				// SQL 文を実行し挿入した数が返る
 				int num = st.executeUpdate(query);
 				if(num > 0) {
