@@ -1,0 +1,33 @@
+@charset "utf-8";
+
+body,h2,p,form,input{margin: 0}
+
+div#delete{
+    width: 450px;
+    margin: 30px auto;
+    padding: 20px;
+    border: 1px solid #555;		//これ線
+    }
+
+form p{
+    font-size: 14px;
+    }
+
+.form-title{
+    text-align: center;
+    }
+
+.id,.pass{
+    margin-top: 10px;
+    }
+
+input[type="text"], input[type="password"] {
+    width: 300px;
+    padding: 4px;
+    font-size: 10px;
+    }
+    
+.submit{
+	margin-top: 10px;
+	text-align: center;
+    }
