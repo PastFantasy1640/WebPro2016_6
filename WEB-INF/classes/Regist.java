@@ -40,10 +40,10 @@ public class Regist extends HttpServlet {
 			+"<td align=\"right\"><b>*大学ID</b></td>"
 			+"<td><select name=UniversityId>");
 			for(University uni : universities){
-				out.println("<option value=\""+uni.id_+">"
-				+uni.name_+"</option>");
+				out.println("<option value=\""+uni.id_+ "\">"
+				+ uni.name_ +"</option>");
 			}
-			out.println("</td>"
+			out.println("</select></td>"
 			+"</tr><tr>"
 			+"<td align=\"right\"><b>*性別:</b></td>"
 			+"<td>"
