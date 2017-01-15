@@ -7,7 +7,7 @@
 
 <servlet>
   <servlet-name>RegistUser</servlet-name>
-  <servlet-class>RegistUser</servlet-class>
+  <servlet-class>user.svlt.RegistUser</servlet-class>
 </servlet>
 
 <servlet-mapping>
@@ -17,7 +17,7 @@
 
 <servlet>
   <servlet-name>SignupPage</servlet-name>
-  <servlet-class>SignupPage</servlet-class>
+  <servlet-class>user.svlt.SignupPage</servlet-class>
 </servlet>
 
 <servlet-mapping>
@@ -27,7 +27,7 @@
 
 <servlet>
   <servlet-name>MemberTop</servlet-name>
-  <servlet-class>MemberTop</servlet-class>
+  <servlet-class>user.svlt.MemberTop</servlet-class>
 </servlet>
 
 <servlet-mapping>
@@ -37,7 +37,7 @@
 
 <servlet>
   <servlet-name>LoginPage</servlet-name>
-  <servlet-class>LoginPage</servlet-class>
+  <servlet-class>user.svlt.LoginPage</servlet-class>
 </servlet>
 
 <servlet-mapping>
@@ -47,7 +47,7 @@
 
 <servlet>
   <servlet-name>Logout</servlet-name>
-  <servlet-class>Logout</servlet-class>
+  <servlet-class>user.svlt.Logout</servlet-class>
 </servlet>
 
 <servlet-mapping>
@@ -57,7 +57,7 @@
 
 <servlet>
   <servlet-name>ChangeMyInfo</servlet-name>
-  <servlet-class>ChangeMyInfo</servlet-class>
+  <servlet-class>user.svlt.ChangeMyInfo</servlet-class>
 </servlet>
 
 <servlet-mapping>
@@ -67,7 +67,7 @@
 
 <servlet>
   <servlet-name>ChangedMyInfo</servlet-name>
-  <servlet-class>ChangedMyInfo</servlet-class>
+  <servlet-class>user.svlt.ChangedMyInfo</servlet-class>
 </servlet>
 
 <servlet-mapping>
@@ -77,7 +77,7 @@
 
 <servlet>
   <servlet-name>DeleteUser</servlet-name>
-  <servlet-class>DeleteUser</servlet-class>
+  <servlet-class>user.svlt.DeleteUser</servlet-class>
 </servlet>
 
 <servlet-mapping>
@@ -87,7 +87,7 @@
 
 <servlet>
   <servlet-name>Regist</servlet-name>
-  <servlet-class>Regist</servlet-class>
+  <servlet-class>user.svlt.Regist</servlet-class>
 </servlet>
 
 <servlet-mapping>
