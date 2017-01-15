@@ -2,8 +2,9 @@
 
 body,h2,p,form,input{margin: 0}
 
-div#login{
-    width: 400px;
+div#registuser{
+    text-align: center;
+    width: 300px;
     margin: 30px auto;
     padding: 20px;
     border: 1px solid #555;		//これ線
@@ -32,6 +33,6 @@ input[type="text"], input[type="password"] {
 	text-align: center;
     }
 
-div#regist{
+div#user{
     text-align: center;
     }

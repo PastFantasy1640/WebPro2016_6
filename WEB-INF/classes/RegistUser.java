@@ -43,6 +43,8 @@ public class RegistUser extends HttpServlet {
 		out.println("<html><head><meta http-equiv=\"Pragma\" content=\"no-cache\">");
 		out.println("<meta http-equiv=\"Expires\" content=\"-1\">");
 		out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
+		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"../webpro/WebPro2016_6/registuser.css\" media=\"all\" />");
+
 		// ここまでは以降もそのまま使う
 		out.println("<title>ユーザー登録確認画面</title></head>");
 		out.println("<body>");
@@ -53,6 +55,8 @@ public class RegistUser extends HttpServlet {
 			out.println("パスワードが一致しません。入力しなおしてください。");
 			out.println("<p>再入力は<a href = \"Regist\">こちら</a></p>");
 		}else{
+			out.println("<body>"
+				 + "<div id=\"registuser\">");
 			Connection db=null;
 			try{
 				Class.forName("org.gjt.mm.mysql.Driver");
@@ -89,10 +93,10 @@ public class RegistUser extends HttpServlet {
 				session.setAttribute("mail",mail);
 				session.setAttribute("twitter",twitter);
 				session.setAttribute("facebook",facebook);
-
-				out.println("<form method=\"POST\" enctype=\"multipart/form-data\" action = SignupPage>"
-				+ "<input type=\"submit\" value=\"登録\">"
-				+ "</form>");
+			out.println("<form method=\"POST\" enctype=\"multipart/form-data\" action = SignupPage>"
+			+ "<p class=\"submit\">"
+			+ "<input type=\"submit\" value=\"登録\">"
+			+ "</form></div>");
 				rs.close();
 				st.close();
 				db.close();
