@@ -43,25 +43,21 @@ public class University {
 		return ret;
 	}
     
-       	static public ArrayList<University> getUniversities(int id) throws SQLException, ClassNotFoundException{
-		ArrayList<University> ret = null;
+       	static public University getUniversityFromID(final int id) throws SQLException, ClassNotFoundException{
+		University ret = null;
 
 		Connection db = DatabaseConnector.connect("chef","secret");
 		
-    	
-		//if(db != null){
-		// SQL 文を query に格納
-			Statement st = db.createStatement();
-			String query = "select * from universities where id="+id;
-			ResultSet rs = st.executeQuery(query);
-			ret = new ArrayList<University>();
-			while(rs.next()){
-				ret.add(new University(rs.getInt("id"), rs.getString("name"), rs.getString("name1"),rs.getInt("prefecture_id")));
-			}
-			rs.close();
-			st.close();
-			db.close();
-		//}
+    	PreparedStatement pst = db.prepareStatement("select * from universities where university.id=?");
+		pst.setInt(1, id);
+		ResultSet rs = pst.executeQuery();
+		if(rs.next()){
+			ret = new University(rs.getInt("id"), rs.getString("name"), rs.getString("name1"),rs.getInt("prefecture_id"));
+		}
+
+		rs.close();
+		pst.close();
+		db.close();
 		
 		return ret;
 	}
