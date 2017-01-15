@@ -1,2 +1,0 @@
-circle_regist circle_admin
-処理前にユーザーがサークル長であるかどうかの確認が必要
