@@ -11,18 +11,20 @@ import java.security.NoSuchAlgorithmException;
 
 public class User {
 
-	final public int uuid_;
 	final public static int NEW_USER_UUID = -1;
+	final public static int MALE = 0;
+	final public static int FEMALE = 1;
+	final private static String pepper_ = "I have a pen. I have an apple. Ah^~ ApplePen!";
+	final private static int DEFAULT_STRETCH_COUNT = 1000;
+	
+	
+	final public int uuid_;
 	final public String id_;
 	final public int university_id_;
 	final public int sex_;
-	final public static int MALE = 0;
-	final public static int FEMALE = 1;
 	final private String password_;
 	final private String salt_;
 	final private int stretch_count_;
-	final private static String pepper_ = "I have a pen. I have an apple. Ah^~ ApplePen!";
-	final private static int DEFAULT_STRETCH_COUNT = 1000;
 	final public String mail_;
 	final public String twitter_;
 	final public String facebook_;
@@ -175,6 +177,8 @@ public class User {
 		return ret;
 	}
 	
+	
+	
 	public User updateUser(final User old_user) throws SQLException, ClassNotFoundException{
 		User ret= null;
 		//エラーチェック
@@ -226,8 +230,9 @@ public class User {
 	
 	}
 	
+	
 	//private function
-	static private User getUserFromID(final String id) throws SQLException, ClassNotFoundException{
+	static private User getUserFromIDNonlimit(final String id) throws SQLException, ClassNotFoundException{
 		User ret = null;
 		
 		Connection db = DatabaseConnector.connect("chef","secret");
@@ -271,11 +276,68 @@ public class User {
 		//is equals pass
 		if(hash.equals(rs.getString("password"))){
 			//Success
-			ret = User.getUserFromID(id);
+			ret = User.getUserFromIDNonlimit(id);
 		}
 		
 		return ret;
 	}
+	
+		
+	static public User getUserFromID(final String id)throws SQLException, ClassNotFoundException{
+		User ret = null;
+		
+		Connection db = DatabaseConnector.connect("chef","secret");
+		PreparedStatement ps = db.prepareStatement("select uuid, id, university_id, sex, mail, twitter, facebook, icon_id from user where user.id=?");
+		ps.setString(1,id);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		
+		if(rs.next()){
+			int uuid = rs.getInt("uuid");
+			String id2 = rs.getString("id");
+			int univ_id = rs.getInt("university_id");
+			int sex = rs.getInt("sex");
+			String password = "";
+			String salt = "";
+			int stretch_count = -1;
+			String mail = rs.getString("mail");
+			String twitter = rs.getString("twitter");
+			String facebook = rs.getString("facebook");
+			int icon_id = rs.getInt("icon_id");
+		
+			ret = new User(uuid, id2, univ_id, sex, password, salt, stretch_count, mail, twitter, facebook, icon_id);
+		}
+		return ret;
+	}
+	
+	static public User getUserFromUUID(final int uuid)throws SQLException, ClassNotFoundException{
+		User ret = null;
+		
+		Connection db = DatabaseConnector.connect("chef","secret");
+		PreparedStatement ps = db.prepareStatement("select uuid, id, university_id, sex, mail, twitter, facebook, icon_id from user where user.uuid=?");
+		ps.setInt(1,uuid);
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		
+		if(rs.next()){
+			int uuid2 = rs.getInt("uuid");
+			String id = rs.getString("id");
+			int univ_id = rs.getInt("university_id");
+			int sex = rs.getInt("sex");
+			String password = "";
+			String salt = "";
+			int stretch_count = -1;
+			String mail = rs.getString("mail");
+			String twitter = rs.getString("twitter");
+			String facebook = rs.getString("facebook");
+			int icon_id = rs.getInt("icon_id");
+		
+			ret = new User(uuid2, id, univ_id, sex, password, salt, stretch_count, mail, twitter, facebook, icon_id);
+		}
+		return ret;
+	}
+	
+	
 
 }
 
