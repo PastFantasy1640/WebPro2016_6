@@ -1,6 +1,7 @@
 // 
 // Regist.java
 // 
+package user.svlt;
 
 // 必要なパッケージの指定
 import java.io.*;
@@ -31,7 +32,7 @@ public class Regist extends HttpServlet {
 			ArrayList<University> universities = University.getUniversities();
 			out.println("<div id=\"regist\">"
 			+"<h2 class=\"form-title\">ユーザー登録画面</h2>"
-			+"<form method=\"POST\" enctype=\"multipart/form-data\" action=\"RegistUser\">"
+			+"<form method=\"POST\" enctype=\"multipart/form-data\" action=\"/servlet/RegistUser\">"
 			+"<table border=\"0\">"
 			+"<tr>"
 			+"<td align=\"right\"><b>*ユーザーID:</b></td>"

@@ -2,12 +2,16 @@
 // RegistUser.java
 // 
 
+package user.svlt;
+
 // 必要なパッケージの指定
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.MultipartConfig;
 import java.sql.*;
+import java.util.ArrayList;
+import circle.University;
 
  
 public class RegistUser extends HttpServlet {
@@ -50,25 +54,17 @@ public class RegistUser extends HttpServlet {
 		out.println("<body>");
 		if(userId.equals("") || universityId.equals("") || pass.equals("") || sex2.equals("")){
 			out.println("未記入項目があります。入力しなおしてください。");
-			out.println("<p>再入力は<a href = \"Regist\">こちら</a></p>");
+			out.println("<p>再入力は<a href = \"/servlet/Regist\">こちら</a></p>");
 		}else if(!pass.equals(pass2)){
 			out.println("パスワードが一致しません。入力しなおしてください。");
-			out.println("<p>再入力は<a href = \"Regist\">こちら</a></p>");
+			out.println("<p>再入力は<a href = \"/servlet/Regist\">こちら</a></p>");
 		}else{
 			out.println("<body>"
 				 + "<div id=\"registuser\">");
-			Connection db=null;
-			try{
-				Class.forName("org.gjt.mm.mysql.Driver");
-				String db_name="circle_triangle";
-				db=DriverManager.getConnection("jdbc:mysql://localhost/"+db_name+"?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
-				Statement st=db.createStatement();
-				String query="select name from universities where id="+universityId;
-				ResultSet rs=st.executeQuery(query);
-				String uniName="";
-				if(rs.next()){
-					uniName=rs.getString("name");
-				}
+				 
+			University univ = University.getUniversityFromID(universityId);
+			
+			
 				out.println("<body>"
 				 + "以下の情報で登録します。"
 				 + "<table border=\"0\">"
