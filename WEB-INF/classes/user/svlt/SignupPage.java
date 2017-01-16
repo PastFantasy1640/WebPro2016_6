@@ -44,7 +44,7 @@ public class SignupPage extends HttpServlet {
 						new_user.setImageId(img.id_);
 					}
 					
-				}catch(SQLException | ClassNotFoundException e){
+				}catch(SQLException | ClassNotFoundException | IOException e){
 					new_user = null;
 					throw new ServletException("新たなユーザーの登録に失敗しました。" + e.toString());
 				}

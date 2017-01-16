@@ -103,7 +103,17 @@ public class User {
 	
 	public int getImageId(){ return this.icon_id_; }
 	public int setImageId(final int icon_id){ 
-		if(this.icon_id_ == 0) this.icon_id_ = icon_id;
+		if(this.icon_id_ == 0) {
+			this.icon_id_ = icon_id;
+			try{
+				Connection db = DatabaseConnector.connect("chef","secret");
+				String query = "update users set users.icon_id=? where users.uuid=?";
+				PreparedStatement pst = db.prepareStatement(query);
+				pst.setInt(2, this.uuid_);
+				pst.setInt(1, this.icon_id_);
+				pst.executeUpdate();
+			}catch(SQLException | ClassNotFoundException e){}
+		}
 		return this.icon_id_;
 	}
 	

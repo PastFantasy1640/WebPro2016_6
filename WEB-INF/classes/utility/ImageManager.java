@@ -172,42 +172,38 @@ public class ImageManager{
 		return (this.id_ < 0);
 	}
 
-	private static ImageManager getDefaultImage(final String root_path, final String original_fname){
+	private static ImageManager getDefaultImage(final String root_path, final String original_fname) throws IOException{
 		ImageManager ret = new ImageManager(0);	//新規作成
-		if(!ret.isFailed()){
+		if(ret.isFailed() == false){
 			//成功
 			//画像をコピー
-			try {
-    			String filename_to = root_path + "/uploads/images/" + ret.url_;
-    			String filename_from = root_path + "/uploads/images/" + original_fname;
+   			String filename_to = root_path + "/uploads/images/" + ret.url_;
+   			String filename_from = root_path + "/uploads/images/" + original_fname;
     			
-            	//Fileオブジェクトを生成する
-            	FileInputStream fis = new FileInputStream(filename_from);
-            	FileOutputStream fos = new FileOutputStream(filename_to);
+           	//Fileオブジェクトを生成する
+           	FileInputStream fis = new FileInputStream(filename_from);
+           	FileOutputStream fos = new FileOutputStream(filename_to);
 
-            	//入力ファイルをそのまま出力ファイルに書き出す
-            	byte buf[] = new byte[512];
-            	int len;
-            	while ((len = fis.read(buf)) != -1) {
-            	    fos.write(buf, 0, len);
-            	}
+           	//入力ファイルをそのまま出力ファイルに書き出す
+           	byte buf[] = new byte[512];
+          	int len;
+           	while ((len = fis.read(buf)) != -1) {
+           	    fos.write(buf, 0, len);
+           	}
 
-            	//終了処理
-            	fos.flush();
-            	fos.close();
-            	fis.close();
-	        } catch (IOException ex) {
-	        	ret = new ImageManager(ImageManager.IOEXCEPTION_HAS_OCCURED);
-			}
+           	//終了処理
+           	fos.flush();
+           	fos.close();
+           	fis.close();
 		}
 		return ret;
 	}
 
-	public static ImageManager getDefaultIcon(final String root_path){
-		return ImageManager.getDefaultImage(root_path, "defaut_icon");
+	public static ImageManager getDefaultIcon(final String root_path) throws IOException{
+		return ImageManager.getDefaultImage(root_path, "default_icon");
 	}
 	
-	public static ImageManager getDefaultImage(final String root_path){
-		return ImageManager.getDefaultImage(root_path, "defaut_image");
+	public static ImageManager getDefaultImage(final String root_path) throws IOException{
+		return ImageManager.getDefaultImage(root_path, "default_image");
 	}
 }
