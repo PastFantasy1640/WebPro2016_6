@@ -17,6 +17,7 @@ public class User {
 	final public static int NOINFO = -1;
 	final private static String pepper_ = "I have a pen. I have an apple. Ah^~ ApplePen!";
 	final private static int DEFAULT_STRETCH_COUNT = 1000;
+	final private static String LOGIN_USER_SESSION_NAME = "login_user";
 	
 	
 	final public int uuid_;
@@ -140,14 +141,14 @@ public class User {
 	 * @see isValidPassword
 	 * @see isValidParameter
 	 */
-	public User insertNewUser() throws SQLException, ClassNotFoundException{
+	public User insertNewUser(javax.servlet.http.HttpSession session) throws SQLException, ClassNotFoundException{
 		User ret = null;
 		
 		//エラーチェック
 		if(this.isUniqueID() && this.isValidPassword() && this.isValidParameter()){
 			//クエリ発行
 			Connection db = DatabaseConnector.connect("chef","secret");
-			String query = "insert into users (id, university_id, sex, password, salt, mail, twitter, facebook, icon_id) values (?,?,?,?,?,?,?,?,?);";
+			String query = "insert into users (id, university_id, sex, password, salt, stretch_count, mail, twitter, facebook, icon_id) values (?,?,?,?,?,?,?,?,?,?);";
 			PreparedStatement pst = db.prepareStatement(query);
 			
 			pst.setString(1, this.id_);
@@ -155,10 +156,11 @@ public class User {
 			pst.setInt(3, this.sex_);
 			pst.setString(4, this.password_);
 			pst.setString(5, this.salt_);
-			pst.setString(6, this.mail_);
-			pst.setString(7, this.twitter_);
-			pst.setString(8, this.facebook_);
-			pst.setInt(9, this.icon_id_);
+			pst.setInt(6, this.stretch_count_);
+			pst.setString(7, this.mail_);
+			pst.setString(8, this.twitter_);
+			pst.setString(9, this.facebook_);
+			pst.setInt(10, this.icon_id_);
 			
 			pst.executeUpdate();
 			
@@ -171,6 +173,9 @@ public class User {
 			rs.next();
 			int new_uuid = rs.getInt("LAST");
 			ret = new User(new_uuid, this.id_, this.university_id_, this.sex_, this.password_, this.salt_, this.stretch_count_, this.mail_, this.twitter_, this.facebook_, this.icon_id_);
+			
+			session.setAttribute(LOGIN_USER_SESSION_NAME, ret);
+			
 			
 			rs.close();
 			st.close();
@@ -239,10 +244,9 @@ public class User {
 		User ret = null;
 		
 		Connection db = DatabaseConnector.connect("chef","secret");
-		PreparedStatement ps = db.prepareStatement("select * from user where user.id=?");
+		PreparedStatement ps = db.prepareStatement("select * from users where users.id=?");
 		ps.setString(1,id);
 		ResultSet rs = ps.executeQuery();
-		rs.next();
 		
 		if(rs.next()){
 			int uuid = rs.getInt("uuid");
@@ -262,7 +266,7 @@ public class User {
 		return ret;
 	}
 	
-	static public User autholizeUser(final String id, final String password_str) throws SQLException, ClassNotFoundException{
+	static public User authorizeUser(final String id, final String password_str, javax.servlet.http.HttpSession session) throws SQLException, ClassNotFoundException{
 		User ret = null;
 		
 		//get salt from id
@@ -276,10 +280,14 @@ public class User {
 		//hash with the salt
 		String hash = User.getHashedPassword(password_str, rs.getString("salt"), rs.getInt("stretch_count"));
 		
+		String password = rs.getString("password");
+		
 		//is equals pass
-		if(hash.equals(rs.getString("password"))){
+		if(hash.equals(password)){
 			//Success
 			ret = User.getUserFromIDNonlimit(id);
+			session.setAttribute(LOGIN_USER_SESSION_NAME, ret);
+		}else{
 		}
 		
 		return ret;
@@ -338,6 +346,15 @@ public class User {
 			ret = new User(uuid2, id, univ_id, sex, password, salt, stretch_count, mail, twitter, facebook, icon_id);
 		}
 		return ret;
+	}
+	
+	static public User getLoginUser(javax.servlet.http.HttpSession session){
+		if(session == null) return null;
+		return (User)session.getAttribute(LOGIN_USER_SESSION_NAME);
+	}
+	
+	static public void logoutCurrentUser(javax.servlet.http.HttpSession session){
+		if(session != null) session.setAttribute(LOGIN_USER_SESSION_NAME, null);
 	}
 	
 	

@@ -103,7 +103,7 @@ public class RegistUser extends HttpServlet {
 			session.setAttribute("login_user", new_user);
 			out.println("<form method=\"POST\" action=\"/MyApp/servlet/SignupPage\">"
 			+ "<p class=\"submit\">"
-			+ "<input type=\"hidden\" value=\"" + new_user.salt_ + "\" />"
+			+ "<input type=\"hidden\" value=\"" + new_user.salt_ + "\" name=\"key\"/>"
 			+ "<input type=\"submit\" value=\"登録\">"
 			+ "</p></form></div>");
 		}
