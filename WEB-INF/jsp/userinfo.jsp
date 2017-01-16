@@ -1,4 +1,10 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ page import="user.User" %>
+
+<%
+	User login_user = User.getLoginUser(session);
+%>
+
 <style type="text/css">
 
 #userinfo{
@@ -15,7 +21,12 @@
 </style>
 
 <div id="userinfo">
-ログイン | 新規登録
+<%
+	if(login_user == null) out.println("ログイン | <a href=\"/MyApp/servlet/Regist\">新規登録</a>");
+	else out.println("ID:" + login_user.id_ + "さんでログイン中 | <a href=\"/MyApp/servlet/MemberTop\">メンバーページ</a>");
+%>
+
+
 </div>
 
 
