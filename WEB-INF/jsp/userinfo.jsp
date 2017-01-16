@@ -22,7 +22,7 @@
 
 <div id="userinfo">
 <%
-	if(login_user == null) out.println("ログイン | <a href=\"/MyApp/servlet/Regist\">新規登録</a>");
+	if(login_user == null) out.println("<a href=\"/MyApp/sites/user/LoginPage.html\">ログイン</a> | <a href=\"/MyApp/servlet/Regist\">新規登録</a>");
 	else out.println("ID:" + login_user.id_ + "さんでログイン中 | <a href=\"/MyApp/servlet/MemberTop\">メンバーページ</a>");
 %>
 

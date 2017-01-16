@@ -244,10 +244,9 @@ public class User {
 		User ret = null;
 		
 		Connection db = DatabaseConnector.connect("chef","secret");
-		PreparedStatement ps = db.prepareStatement("select * from user where user.id=?");
+		PreparedStatement ps = db.prepareStatement("select * from users where users.id=?");
 		ps.setString(1,id);
 		ResultSet rs = ps.executeQuery();
-		rs.next();
 		
 		if(rs.next()){
 			int uuid = rs.getInt("uuid");
@@ -267,7 +266,7 @@ public class User {
 		return ret;
 	}
 	
-	static public User autholizeUser(final String id, final String password_str) throws SQLException, ClassNotFoundException{
+	static public User authorizeUser(final String id, final String password_str, javax.servlet.http.HttpSession session) throws SQLException, ClassNotFoundException{
 		User ret = null;
 		
 		//get salt from id
@@ -281,10 +280,14 @@ public class User {
 		//hash with the salt
 		String hash = User.getHashedPassword(password_str, rs.getString("salt"), rs.getInt("stretch_count"));
 		
+		String password = rs.getString("password");
+		
 		//is equals pass
-		if(hash.equals(rs.getString("password"))){
+		if(hash.equals(password)){
 			//Success
 			ret = User.getUserFromIDNonlimit(id);
+			session.setAttribute(LOGIN_USER_SESSION_NAME, ret);
+		}else{
 		}
 		
 		return ret;
@@ -351,7 +354,7 @@ public class User {
 	}
 	
 	static public void logoutCurrentUser(javax.servlet.http.HttpSession session){
-		session.setAttribute(LOGIN_USER_SESSION_NAME, null);
+		if(session != null) session.setAttribute(LOGIN_USER_SESSION_NAME, null);
 	}
 	
 	

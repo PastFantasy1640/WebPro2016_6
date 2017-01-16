@@ -26,7 +26,7 @@ public class MemberTop extends HttpServlet {
 		HttpSession session = hreq.getSession(false);
 		User login_user = User.getLoginUser(session);
 		
-		if(session == null){
+		if(login_user == null){
 			hres.sendRedirect("/MyApp");
 			return;
 		}

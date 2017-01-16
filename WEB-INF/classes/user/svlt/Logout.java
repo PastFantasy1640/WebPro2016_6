@@ -1,15 +1,15 @@
 // 
 // Logout.java
 // 
-
+package user.svlt;
 // 必要なパッケージの指定
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
+import user.User;
 
 // 
 public class Logout extends HttpServlet {
-// SvlSmpl1::doGet()
 	public void doGet(HttpServletRequest hreq,	// リクエスト
 			  HttpServletResponse hres)	// レスポンス
 		throws ServletException, IOException {
@@ -21,15 +21,10 @@ public class Logout extends HttpServlet {
 		PrintWriter out = hres.getWriter();
 		// パラメータ情報の収集
 		HttpSession session = hreq.getSession(false);
-		if(session == null){
-			session = hreq.getSession(true);
-			session.setAttribute("Login",0);
-			session.invalidate();
-			hres.sendRedirect("../webpro/WebPro2016_6/LoginPage.html");
-		}else{
-			session.setAttribute("Login",0);
-			session.invalidate();
-			hres.sendRedirect("../webpro/WebPro2016_6/LoginPage.html");
-		}
+		User.logoutCurrentUser(session);
+		
+		
+		hres.sendRedirect("/MyApp");
+		return;
 	}
 }
