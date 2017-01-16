@@ -10,6 +10,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.MultipartConfig;
 import user.User;
+import utility.ImageManager;
 import java.sql.*;
 
 public class SignupPage extends HttpServlet {
@@ -37,6 +38,12 @@ public class SignupPage extends HttpServlet {
 				//リロードなどに対しては、新たに取得できるUserがnullになることによって検知可能のはず
 				try{
 					new_user = new_user.insertNewUser(session);
+					if(new_user != null){
+						//画像の登録
+						ImageManager img = ImageManager.getDefaultIcon(getServletContext().getRealPath(""));
+						new_user.setImageId(img.id_);
+					}
+					
 				}catch(SQLException | ClassNotFoundException e){
 					new_user = null;
 					throw new ServletException("新たなユーザーの登録に失敗しました。" + e.toString());
