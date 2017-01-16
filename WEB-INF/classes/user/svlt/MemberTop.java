@@ -10,6 +10,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.sql.*;
 import user.User;
+import utility.ImageManager;
 
 // 
 public class MemberTop extends HttpServlet {
@@ -30,6 +31,7 @@ public class MemberTop extends HttpServlet {
 			hres.sendRedirect("/MyApp");
 			return;
 		}
+		ImageManager icon = new ImageManager(login_user.getImageId());
 		
 		// HTMLテキストの出力
 		out.println("<html><head><meta http-equiv=\"Pragma\" content=\"no-cache\">");
@@ -38,8 +40,9 @@ public class MemberTop extends HttpServlet {
 		// ここまでは以降もそのまま使う
 		out.println("<title>MemberTop</title></head>");
 		out.println("<body>"
-			 + " id " + login_user.id_ + " さんようこそ。"
-			 + "<p><a href = \"ChangeMyInfo?Target=pass\">パスワード変更</a></p>"
+			 + "<p> id " + login_user.id_ + " さんようこそ。</p>");
+		out.println("<img src=\"/MyApp/uploads/images/" + icon.url_ + "\" alt=\"" + Integer.toString(icon.id_) + "\"/>");
+		out.println("<p><a href = \"ChangeMyInfo?Target=pass\">パスワード変更</a></p>"
 			 + "<p><a href = \"ChangeMyInfo?Target=twitter\">ツイッターアカウント変更</a></p>"
 			 + "<p><a href = \"ChangeMyInfo?Target=facebook\">フェイスブックアカウント変更</a></p>"
 			 + "<p><a href = \"ChangeMyInfo?Target=mail\">メールアドレス変更</a></p>"

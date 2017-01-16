@@ -30,7 +30,7 @@ public class User {
 	final public String mail_;
 	final public String twitter_;
 	final public String facebook_;
-	final public int icon_id_;
+	private int icon_id_;
 
 	private static String getSHA256(String target) {
 		MessageDigest md = null;
@@ -99,6 +99,22 @@ public class User {
 		
 		this.password_ = hash;
 		this.icon_id_ = icon_id;
+	}
+	
+	public int getImageId(){ return this.icon_id_; }
+	public int setImageId(final int icon_id){ 
+		if(this.icon_id_ == 0) {
+			this.icon_id_ = icon_id;
+			try{
+				Connection db = DatabaseConnector.connect("chef","secret");
+				String query = "update users set users.icon_id=? where users.uuid=?";
+				PreparedStatement pst = db.prepareStatement(query);
+				pst.setInt(2, this.uuid_);
+				pst.setInt(1, this.icon_id_);
+				pst.executeUpdate();
+			}catch(SQLException | ClassNotFoundException e){}
+		}
+		return this.icon_id_;
 	}
 	
 	public boolean isUniqueID(){
