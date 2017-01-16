@@ -11,6 +11,7 @@ import javax.servlet.annotation.MultipartConfig;
 import java.sql.*;
 import circle.University;
 import java.util.ArrayList;
+import user.User;
 
 public class Regist extends HttpServlet {
 	public void doGet(HttpServletRequest hreq,	// リクエスト
@@ -26,13 +27,13 @@ public class Regist extends HttpServlet {
 		out.println("<html><head><meta http-equiv=\"Pragma\" content=\"no-cache\">");
 		out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
 		out.println("<title>Register</title>");
-		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"../webpro/WebPro2016_6/regist.css\" media=\"all\" />");
+		out.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"/MyApp/sites/user/regist.css\" media=\"all\" />");
 		out.println("</head><body>");
 		try{
 			ArrayList<University> universities = University.getUniversities();
 			out.println("<div id=\"regist\">"
 			+"<h2 class=\"form-title\">ユーザー登録画面</h2>"
-			+"<form method=\"POST\" enctype=\"multipart/form-data\" action=\"/servlet/RegistUser\">"
+			+"<form method=\"POST\" action=\"/MyApp/servlet/RegistUser\">"
 			+"<table border=\"0\">"
 			+"<tr>"
 			+"<td align=\"right\"><b>*ユーザーID:</b></td>"
@@ -48,8 +49,9 @@ public class Regist extends HttpServlet {
 			+"</tr><tr>"
 			+"<td align=\"right\"><b>*性別:</b></td>"
 			+"<td>"
-			+"<input type=\"radio\" name=\"sex\" value=\"1\">男"
-			+"<input type=\"radio\" name=\"sex\" value=\"2\">女"
+			+"<input type=\"radio\" name=\"sex\" value=\"" + User.NOINFO + "\" checked>非公開"
+			+"<input type=\"radio\" name=\"sex\" value=\"" + User.MALE + "\">男"
+			+"<input type=\"radio\" name=\"sex\" value=\"" + User.FEMALE + "\">女"
 			+"</td></tr><tr>"
 			+"<td align=\"right\"><b>*パスワード:</b></td>"
 			+"<td><input type=\"password\" name=password size=32 maxlength=32></td>"
@@ -70,7 +72,7 @@ public class Regist extends HttpServlet {
 			+"<p class=\"submit\">"
 			+"<input type=\"submit\" value=\"登録\"></form></div>"
 			+"<div id=\"user\">"
-			+"<p>アカウントをお持ちの方は<a href =../webpro/WebPro2016_6/LoginPage.html>こちら</a>"
+			+"<p>アカウントをお持ちの方は<a href =/MyApp/sites/user/LoginPage.html>こちら</a>"
 			+"</div>"
 			+"</p></body></html>");
 		}catch(SQLException e){
