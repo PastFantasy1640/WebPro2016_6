@@ -48,7 +48,7 @@ public class University {
 
 		Connection db = DatabaseConnector.connect("chef","secret");
 		
-    	PreparedStatement pst = db.prepareStatement("select * from universities where university.id=?");
+    	PreparedStatement pst = db.prepareStatement("select * from universities where universities.id=?");
 		pst.setInt(1, id);
 		ResultSet rs = pst.executeQuery();
 		if(rs.next()){
