@@ -23,7 +23,17 @@ public class Regist extends HttpServlet {
 		hres.setContentType("text/html;charset=utf-8");
 		// 出力用PrintWriterの参照を取得
 		PrintWriter out = hres.getWriter();
-
+		
+		
+		HttpSession session = hreq.getSession(false);
+		User login_user = User.getLoginUser(session);
+		if(login_user != null){
+			//すでにログインされていた
+			hres.sendRedirect("/MyApp/servlet/MemberTop");
+			out.close();
+			return;
+		}
+		
 		out.println("<html><head><meta http-equiv=\"Pragma\" content=\"no-cache\">");
 		out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
 		out.println("<title>Register</title>");
