@@ -14,6 +14,7 @@ public class User {
 	final public static int NEW_USER_UUID = -1;
 	final public static int MALE = 0;
 	final public static int FEMALE = 1;
+	final public static int NOINFO = -1;
 	final private static String pepper_ = "I have a pen. I have an apple. Ah^~ ApplePen!";
 	final private static int DEFAULT_STRETCH_COUNT = 1000;
 	
@@ -23,7 +24,7 @@ public class User {
 	final public int university_id_;
 	final public int sex_;
 	final private String password_;
-	final private String salt_;
+	final public String salt_;
 	final private int stretch_count_;
 	final public String mail_;
 	final public String twitter_;
@@ -99,20 +100,22 @@ public class User {
 		this.icon_id_ = icon_id;
 	}
 	
-	public boolean isUniqueID() throws SQLException, ClassNotFoundException{
+	public boolean isUniqueID(){
 		//クエリ発行
 		if(this.id_.length() < 4 || this.id_.length() >= 16) return false;
+		try{
+			Connection db = DatabaseConnector.connect("chef","secret");
+			String query = "select count(*) cnt from users where users.id=?";
+			PreparedStatement pst = db.prepareStatement(query);
+			pst.setString(1, this.id_);
+			ResultSet rs = pst.executeQuery();
 		
-		Connection db = DatabaseConnector.connect("chef","secret");
-		String query = "select count(*) cnt from users where users.id=?";
-		PreparedStatement pst = db.prepareStatement(query);
-		pst.setString(1, this.id_);
-		ResultSet rs = pst.executeQuery();
+			rs.next();
 		
-		rs.next();
+			if(rs.getInt("cnt") == 0) return true;	//未登録
 		
-		if(rs.getInt("cnt") == 0) return true;	//未登録
-		
+		}catch(SQLException | ClassNotFoundException e){
+		}
 		return false;
 	}
 	
@@ -122,7 +125,7 @@ public class User {
 	}
 	
 	public boolean isValidParameter(){
-		if(this.sex_ != MALE && this.sex_ != FEMALE) return false;
+		if(this.sex_ != MALE && this.sex_ != FEMALE && this.sex_ != NOINFO) return false;
 		if(this.salt_ == null) return false;
 		if(this.uuid_ != NEW_USER_UUID) return false;
 		
