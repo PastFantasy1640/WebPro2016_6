@@ -172,15 +172,14 @@ public class ImageManager{
 		return (this.id_ < 0);
 	}
 
-	public static ImageManager getDefaultIcon(final String root_path){
+	private static ImageManager getDefaultImage(final String root_path, final String original_fname){
 		ImageManager ret = new ImageManager(0);	//新規作成
-		
 		if(!ret.isFailed()){
 			//成功
 			//画像をコピー
 			try {
     			String filename_to = root_path + "/uploads/images/" + ret.url_;
-    			String filename_from = root_path + "/uploads/images/" + "/default_icon";
+    			String filename_from = root_path + "/uploads/images/" + original_fname;
     			
             	//Fileオブジェクトを生成する
             	FileInputStream fis = new FileInputStream(filename_from);
@@ -202,5 +201,13 @@ public class ImageManager{
 			}
 		}
 		return ret;
+	}
+
+	public static ImageManager getDefaultIcon(final String root_path){
+		return ImageManager.getDefaultImage(root_path, "defaut_icon");
+	}
+	
+	public static ImageManager getDefaultImage(final String root_path){
+		return ImageManager.getDefaultImage(root_path, "defaut_image");
 	}
 }
