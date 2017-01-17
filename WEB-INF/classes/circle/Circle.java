@@ -134,4 +134,56 @@ public class Circle {
 		}
   		return ret;
 	}
+	
+	public Circle insertNewCircle() throws SQLException, ClassNotFoundException{
+		Circle ret = null;
+		
+		Connection db = DatabaseConnector.connect("chef","secret");
+  		PreparedStatement pst = db.prepareStatement("select count(*) from circles where circles.name=? and circles.university_id=? and circles.category_id=?");
+  		pst.setString(1, this.name_);
+  		pst.setInt(2, this.university_id_);
+  		pst.setInt(3, this.category_id_);
+  		ResultSet rs = pst.executeQuery();
+  		rs.next();
+  		int count = rs.getInt(1);
+  		
+  		rs.close();
+  		pst.close();
+		//エラーチェック
+		if(count == 0){
+			//クエリ発行
+			String query = "insert into circles (name, circle_leader_id, category_id, university_id,comment, mail, phone, twitter, facebook,file, imageid) values (?,?,?,?,?,?,?,?,?,?,?);";
+			pst = db.prepareStatement(query);
+			
+			pst.setString(1, this.name_);
+			pst.setInt(2, this.circle_leader_id_);
+			pst.setInt(3, this.category_id_);
+			pst.setInt(4, this.university_id_);
+			pst.setString(5, this.comment_);
+			pst.setString(6, this.mail_);
+			pst.setString(7, this.phone_);
+			pst.setString(8, this.twitter_);
+			pst.setString(9, this.facebook_);
+			pst.setString(10, this.file_);
+			pst.setInt(11, this.imageid_);
+			
+			pst.executeUpdate();
+			
+			pst.close();
+			
+			query = "select last_insert_id() as last";
+			Statement st = db.createStatement();
+			rs = st.executeQuery(query);
+			
+			rs.next();
+			int new_id = rs.getInt("LAST");
+			ret = new Circle(new_id, this.name_, this.circle_leader_id_, this.category_id_, this.university_id_, this.comment_, this.mail_,  this.phone_, this.twitter_, this.facebook_, this.file_, this.imageid_);
+			
+			rs.close();
+			st.close();
+			db.close();
+		}else {
+		}
+		return ret;
+	}
 }
