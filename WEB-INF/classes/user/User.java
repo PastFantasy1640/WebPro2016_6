@@ -291,19 +291,20 @@ public class User {
 		PreparedStatement ps = db.prepareStatement("select salt, stretch_count, password from users where users.id=?");
 		ps.setString(1, id);
 		ResultSet rs = ps.executeQuery();
-		rs.next();
+		if(rs.next()){
 		
-		//hash with the salt
-		String hash = User.getHashedPassword(password_str, rs.getString("salt"), rs.getInt("stretch_count"));
-		
-		String password = rs.getString("password");
-		
-		//is equals pass
-		if(hash.equals(password)){
-			//Success
-			ret = User.getUserFromIDNonlimit(id);
-			session.setAttribute(LOGIN_USER_SESSION_NAME, ret);
-		}else{
+			//hash with the salt
+			String hash = User.getHashedPassword(password_str, rs.getString("salt"), rs.getInt("stretch_count"));
+			
+			String password = rs.getString("password");
+			
+			//is equals pass
+			if(hash.equals(password)){
+				//Success
+				ret = User.getUserFromIDNonlimit(id);
+				session.setAttribute(LOGIN_USER_SESSION_NAME, ret);
+			}else{
+			}
 		}
 		
 		return ret;

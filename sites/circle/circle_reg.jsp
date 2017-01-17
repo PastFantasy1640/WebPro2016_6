@@ -1,4 +1,49 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" import="java.sql.*" %> 
+<%@ page import="static utility.StringUtil.NonNullString" %>
+<%@ page import="circle.*" %>
+<%@ page import="user.User" %>
+<%@ page import="utility.ImageManager" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="utility.DatabaseConnector" %>
+
+<%
+	// リクエストパラメータの文字エンコーディング指定
+	request.setCharacterEncoding("utf-8");
+	// パラメータの入力とチェック
+  String circlename = NonNullString(request.getParameter("circlename"));
+  String type = NonNullString(request.getParameter("type"));
+  String prefecture = NonNullString(request.getParameter("prefecture"));
+  String university = NonNullString(request.getParameter("university"));
+  
+  
+  int prefecture_id = -1;
+  int type_id = -1;
+  int univ_id = -1;
+  try{
+  	prefecture_id = Integer.parseInt(prefecture);
+  	type_id = Integer.parseInt(type);
+  	univ_id = Integer.parseInt(university);
+  }catch(NumberFormatException e){
+  	prefecture_id = -1;
+  }
+  
+  
+  out.println("<!--\r\ncirclename:" + circlename + "\r\ntype_id:" + Integer.toString(type_id) 
+  + "\r\npref_id:" + Integer.toString(prefecture_id) + "\r\nuniv_id:" + Integer.toString(univ_id) + "-->");
+  
+  Circle new_circle = null;
+  
+  if(circlename != ""){
+  User login_user = User.getLoginUser(session);
+  	
+  	if(login_user != null){ 
+  		ImageManager img = ImageManager.getDefaultImage(getServletContext().getRealPath(""));
+  		if(img == null) img = new ImageManager(0);
+  		new_circle = new Circle(circlename, login_user.uuid_, type_id, univ_id, "新設サークルです。よろしくお願いします。（管理画面から変更することができます。）","","","","","新設サークルです。よろしくお願いします。ここは自分のサークルを思う存分紹介するためのスペースです。",img.id_);
+  		new_circle = new_circle.insertNewCircle();
+  	}
+  }
+%>
 
 <html>
 <head>
@@ -10,80 +55,22 @@
 <body>
 
 <%
-	// リクエストパラメータの文字エンコーディング指定
-	request.setCharacterEncoding("utf-8");
-	// パラメータの入力とチェック
-  String circlename = request.getParameter("circlename");
-  String type = request.getParameter("type");
-  String prefecture = request.getParameter("prefecture");
-  String university = request.getParameter("university");
-  String button = request.getParameter("button");
+	if (new_circle == null){
+%>
+		<p>サークルの登録に失敗しました。ログインをしていないか、未入力の場所があるか、同じ大学、カテゴリで、同じサークル名がすでに存在しています。</p>
 
-%>
-<form method=post action=top_test.html>
-<%
-	if(circlename.equals("")) {
-%>
-未入力の項目がありますので，登録できません．
-<input type="submit" name=but value="トップページに戻る">
+		<a href="circle_regist.jsp">戻る</a>
+
 <%
 	}
 	else {
-		// JDBC ドライバのロード
-		Class.forName("org.gjt.mm.mysql.Driver");
-		// データベースとの結合
-		Connection db = DriverManager.getConnection("jdbc:mysql://localhost/webpro_db?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
+%>
+		<p>サークルの登録に成功しました。</p>
 
-		// Statement オブジェクトの生成
-		Statement st = db.createStatement();
-    Statement st1 = db.createStatement();
-    Statement st2 = db.createStatement();
-    Statement st3 = db.createStatement();
-
-    String query1 = "select id from categories where name='" + type + "'";
-    String query2 = "select id from universities where name='" + university + "'";
-    String query3 = "select id from circles where name='" + circlename + "' and university_id = (select id from universities where name='" + university + "')";
-    
-    ResultSet rs1 = st1.executeQuery(query1);
-    ResultSet rs2 = st2.executeQuery(query2);
-    ResultSet rs3 = st3.executeQuery(query3);
-    if(rs3.next() == false){
-%>
-既に同大学に同名のサークルが登録されています.
-<input type="submit" name=but value="トップページに戻る">
+		<a href="ResultCircle1.jsp?id=<%= new_circle.id_ %>">サークルのトップページへ行く</a>
 <%
-    }
-    else{
-    rs1.next();
-    rs2.next();
-		// SQL 文を query に格納
-		String query = "insert into circles set name='" + circlename + "', category_id=" + rs1.getInt("id") + ", university_id=" + rs2.getInt("id");
-		// SQL 文を実行し挿入した数が返る
-		int num = st.executeUpdate(query);
-		if(num > 0) { 
-%>
-データが登録されました.
-<input type="submit" name=but value="トップページに戻る">
-<%
-		}
-		else {
-%>
-データが登録されませんでした．
-<input type="submit" name=but value="トップページに戻る">
-</form>
-<%
-		}
-		// Statement, データベースを順にクローズ
-    rs1.close();
-    rs2.close();
-		st.close();
-    st1.close();
-    st2.close();
-    st3.close();
-		db.close();
-    }
 	}
 %>
-</table>
+	
 </body>
 </html>

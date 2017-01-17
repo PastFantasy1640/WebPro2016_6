@@ -1,4 +1,38 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" import="java.sql.*" %> 
+<%@ page import="static utility.StringUtil.NonNullString" %>
+<%@ page import="circle.*" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="utility.DatabaseConnector" %>
+
+
+<%
+  // リクエストパラメータの文字エンコーディング指定
+  request.setCharacterEncoding("utf-8");
+    
+  if(request.getParameter("create_bt") != null) {
+  	application.getRequestDispatcher("/sites/circle/circle_reg.jsp").forward(request,response);
+  	return;
+  }
+  
+  String circlename = NonNullString(request.getParameter("circlename"));
+  String type = NonNullString(request.getParameter("type"));
+  String prefecture = NonNullString(request.getParameter("prefecture"));
+  int prefecture_id = -1;
+  int type_id = -1;
+  try{
+  	prefecture_id = Integer.parseInt(prefecture);
+  	type_id = Integer.parseInt(type);
+  }catch(NumberFormatException e){
+  	prefecture_id = -1;
+  }
+  
+  
+  ArrayList<Category> categs = Category.getCategories();
+  ArrayList<University> univs = University.getUniversities();
+  ArrayList<Prefecture> prefs = Prefecture.getPrefectures();
+
+%>
+
 <html>
 <head>
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
@@ -7,44 +41,11 @@
 <title>サークル登録</title>
 </head>
 <body>
-<%
-  // リクエストパラメータの文字エンコーディング指定
-  request.setCharacterEncoding("utf-8");
-  // JDBC ドライバのロード
-  Class.forName("org.gjt.mm.mysql.Driver");
 
-  String circlename = request.getParameter("circlename");
-  if(circlename==null)
-    circlename="";
-  String type = request.getParameter("type");
-  if(type==null)
-    type="";
-  String prefecture = request.getParameter("prefecture");
-  if(prefecture==null)
-    prefecture="fukuoka";
-  String university = request.getParameter("university");
-  if(university==null)
-    university="";
-  String button = request.getParameter("button");
-  if(button==null)
-    button="";
+	<%@ include file="/WEB-INF/jsp/userinfo.jsp" %>
 
-  // データベースとの結合
-  Connection db = DriverManager.getConnection("jdbc:mysql://localhost/webpro_db?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
 
-  // Statement オブジェクトの生成;
-  Statement st1 = db.createStatement();
-  // SQL 文を query に納入
-  String query1 = "select name from categories";
-  // SQL 文を実行し挿入した数が返る
-  ResultSet rs1 = st1.executeQuery(query1);
-
-  if(button.equals("送信")){
-  out.println("<form method=\"post\" enctype=\" multipart/form-data\" action=circle_reg.jsp>");
-  }else{  
-  out.println("<form method=\"post\" enctype=\" multipart/form-data\" action=circle_regist.jsp>");
-  }
-%>
+<form method="post" action=circle_regist.jsp>
 <center>
 <br><br><br><br><br>
 <h1>サークル登録</h1>
@@ -59,11 +60,11 @@ out.println("<input type=\"text\" value=\"" + circlename + "\"name=circlename si
 <tr><th>カテゴリ</th><td>
 <%
   out.println("<select name=type>");
-  while(rs1.next()){
-    if(type.equals(rs1.getString("name"))){
-      out.println("<option value=\"" + rs1.getString("name") + "\"selected>" + rs1.getString("name") + "</option>");
+  for(Category cg : categs){
+    if(type_id == cg.id_){
+      out.println("<option value=\"" + cg.id_ + "\"selected>" + cg.name_ + "</option>");
   }else{
-    out.println("<option value=\"" + rs1.getString("name") + "\">" + rs1.getString("name") + "</option>");
+    out.println("<option value=\"" + cg.id_ + "\">" + cg.name_ + "</option>");
     }
   }
   out.println("</select>");
@@ -71,56 +72,50 @@ out.println("<input type=\"text\" value=\"" + circlename + "\"name=circlename si
 %>
 </select>
 </td></tr>
-<%
-  // Statement オブジェクトの生成
-  Statement st2 = db.createStatement();
-  // SQL 文を query に納入
-  String query2 = "select name from prefectures order by id asc";
-  // SQL 文を実行し挿入した数が返る
-  ResultSet rs2 = st2.executeQuery(query2);
-%>
+
 <tr><th>所在大学</th><td>
 <%
 out.println("<select name=prefecture>");
-  while(rs2.next()){
-    if(prefecture.equals(rs2.getString("name"))){
-      out.println("<option value=\"" + rs2.getString("name") + "\"selected>" + rs2.getString("name") + "</option>");
+  for(Prefecture pr : prefs){
+    if(prefecture_id == pr.id_){
+      out.println("<option value=\"" + pr.id_ + "\"selected>" + pr.name_ + "</option>");
     }else{
-      out.println("<option value=\"" + rs2.getString("name") + "\">" + rs2.getString("name") + "</option>");
+      out.println("<option value=\"" + pr.id_ + "\">" + pr.name_ + "</option>");
     }
   }
   out.println("</select>");
 %>
-<input type="submit" name=button value=検索>
+<input type="submit" name="search_bt" value="検索">
 <%
+if(prefecture_id >= 0){
+	Connection db = DatabaseConnector.connect("chef","secret");
   // Statement オブジェクトの生成
   Statement st3 = db.createStatement();
   // SQL 文を query に納入
-  String query3 = "select universities.name from universities,prefectures where prefectures.name='" + prefecture + "' and universities.prefecture_id=prefectures.id";
+  String query3 = "select universities.name,universities.id from universities,prefectures where prefectures.id='" + prefecture_id + "' and universities.prefecture_id=prefectures.id";
   // SQL 文を実行し挿入した数が返る
   ResultSet rs3 = st3.executeQuery(query3);
 
-  out.println("<select name=university>");
+  out.println("<select name=\"university\">");
   while(rs3.next()){
-      out.println("<option value=\"" + rs3.getString("name") + "\">" + rs3.getString("name") + "</option>");
+      out.println("<option value=\"" + rs3.getString("id") + "\">" + rs3.getString("name") + "</option>");
   }
   out.println("</select>");
+  rs3.close();
+  st3.close();
+  db.close();
+}
 %>
 </select>
 </td></tr>
 </table>
-<input type="submit" name=button value="送信">
 <%
-  // Statement, データベースを順にクローズ
-  rs1.close();
-  rs2.close();
-  rs3.close();
-  st1.close();
-  st2.close();
-  st3.close();
-  db.close();
+	if(prefecture_id >= 0){
+		out.println("<input type=\"submit\" name=\"create_bt\" value=\"作成\">");
+	}
 %>
 </form>
+<p><a href="/MyApp/">トップページへ戻る</a></p>
 </center>
 </body>
 </html>
