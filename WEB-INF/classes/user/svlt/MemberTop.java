@@ -42,7 +42,8 @@ public class MemberTop extends HttpServlet {
 		out.println("<body>"
 			 + "<p> id " + login_user.id_ + " さんようこそ。</p>");
 		out.println("<img src=\"/MyApp/uploads/images/" + icon.url_ + "\" alt=\"" + Integer.toString(icon.id_) + "\"/>");
-		out.println("<p><a href = \"ChangeMyInfo?Target=pass\">パスワード変更</a></p>"
+		out.println("<p><a href = \"/MyApp/\">Topへ</a></p>"
+			+ "<p><a href = \"ChangeMyInfo?Target=pass\">パスワード変更</a></p>"
 			 + "<p><a href = \"ChangeMyInfo?Target=twitter\">ツイッターアカウント変更</a></p>"
 			 + "<p><a href = \"ChangeMyInfo?Target=facebook\">フェイスブックアカウント変更</a></p>"
 			 + "<p><a href = \"ChangeMyInfo?Target=mail\">メールアドレス変更</a></p>"
