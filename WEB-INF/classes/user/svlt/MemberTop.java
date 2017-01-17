@@ -11,6 +11,8 @@ import javax.servlet.http.*;
 import java.sql.*;
 import user.User;
 import utility.ImageManager;
+import circle.Circle;
+import java.util.ArrayList;
 
 // 
 public class MemberTop extends HttpServlet {
@@ -33,6 +35,13 @@ public class MemberTop extends HttpServlet {
 		}
 		ImageManager icon = new ImageManager(login_user.getImageId());
 		
+		ArrayList<Circle> hosting_circles = null;
+		try{
+			hosting_circles = Circle.getCirclesFromLeaderId(login_user.uuid_);
+		}catch(SQLException | ClassNotFoundException e){
+			throw new ServletException(e.toString());
+		}
+		
 		// HTMLテキストの出力
 		out.println("<html><head><meta http-equiv=\"Pragma\" content=\"no-cache\">");
 		out.println("<meta http-equiv=\"Expires\" content=\"-1\">");
@@ -48,7 +57,21 @@ public class MemberTop extends HttpServlet {
 			 + "<p><a href = \"ChangeMyInfo?Target=facebook\">フェイスブックアカウント変更</a></p>"
 			 + "<p><a href = \"ChangeMyInfo?Target=mail\">メールアドレス変更</a></p>"
 			 + "<p><a href = \"ChangeMyInfo?Target=image\">画像変更</a></p>"
-			 + "<form action=Logout>"
+			 + "<p><a href = \"/MyApp/sites/circle/circle_regist.jsp\">サークル作成</a></p>");
+		out.println("<p><h2>現在あなたが部長であるサークル一覧</h2>");
+		if(hosting_circles.size() > 0){
+			out.println("<ul>");
+			for(Circle cs : hosting_circles){
+				out.println("<li><a href=\"/MyApp/sites/circle/ResultCircle1.jsp?id=" + cs.id_ + "\">" + cs.name_ + "</a></li>");
+			}
+			out.println("</ul>");
+		}else{
+			out.println("あなたが部長のサークルはありません");
+		}
+		
+		out.println("</p>");
+		
+		out.println("<form action=\"Logout\">"
 			 + "<input type=\"submit\" value=\"logout\">"
 			 + "</form>"
 			 + "<p>退会は<a href = \"../webpro/WebPro2016_6/DeleteUser.html\">こちら</a></p>"

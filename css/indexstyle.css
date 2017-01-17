@@ -46,16 +46,17 @@ header{
 	vertical-align: top;
 	display: table-cell;
 	width: 33%;
+	text-align:center;
 }
 
 .circle_area{
-	margin:0 10%;
+	max-width:300px;
+	margin:0% auto;
 	background-image: url("/MyApp/images/bg_w80.png");
 	box-shadow: 0 0 10px white;
 }
 
 div.image_area{
-	height: 300px;
 }
 
 .image_area img{

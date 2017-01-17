@@ -42,5 +42,24 @@ public class Prefecture {
 		
 		return ret;
 	}
+	
+	static public Prefecture getPrefectureFromID(final int id) throws SQLException, ClassNotFoundException{
+		Prefecture ret = null;
+
+		Connection db = DatabaseConnector.connect("chef","secret");
+		
+    	PreparedStatement pst = db.prepareStatement("select * from prefectures where prefectures.id=?");
+		pst.setInt(1, id);
+		ResultSet rs = pst.executeQuery();
+		if(rs.next()){
+			ret = new Prefecture(rs.getInt("id"), rs.getString("name"));
+		}
+
+		rs.close();
+		pst.close();
+		db.close();
+		
+		return ret;
+	}
 }
 
