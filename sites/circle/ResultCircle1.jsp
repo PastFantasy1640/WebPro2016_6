@@ -3,6 +3,7 @@
 <%@ page import="utility.ImageManager" %>
 <%@ page import="circle.Circle" %>
 <%@ page import="circle.University" %>
+<%@ page import="user.User" %>
 
 <%
 
@@ -14,6 +15,8 @@
 	Circle circle = null;
 	ImageManager image = null;
 	University univ = null;
+	User login_user = User.getLoginUser(session);
+
 	try{
 		id = Integer.parseInt(request.getParameter("id"));
 		//サークルを取得
@@ -119,7 +122,7 @@
 	   			<div id="circle_name">
 				<h1><%= univ.name_ + " " + circle.name_ %></h1>
 <%
-	if(login_user.uuid_ == circle.circle_leader_id_) out.println("<p><a href=\"#\">サークル情報を変更する</a>　｜　<a href=\"#\">サークルメンバーを招待する</a>　｜　<a href=\"#\">Twitterで広報する</a></p>");
+	if(login_user != null && login_user.uuid_ == circle.circle_leader_id_) out.println("<p><a href=\"#\">サークル情報を変更する</a>　｜　<a href=\"#\">サークルメンバーを招待する</a>　｜　<a href=\"#\">Twitterで広報する</a></p>");
 %>
 				</div>
 				<div class="box4-1-1">
