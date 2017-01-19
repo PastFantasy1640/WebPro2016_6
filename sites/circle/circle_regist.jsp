@@ -74,9 +74,7 @@ out.println("<input type=\"text\" value=\"" + circlename + "\"name=circlename si
 </td></tr>
 </table>
 <%
-	if(prefecture_id >= 0){
-		out.println("<input type=\"submit\" name=\"create_bt\" value=\"作成\">");
-	}
+	out.println("<input type=\"submit\" name=\"create_bt\" value=\"作成\">");
 %>
 </form>
 <p><a href="/MyApp/">トップページへ戻る</a></p>
