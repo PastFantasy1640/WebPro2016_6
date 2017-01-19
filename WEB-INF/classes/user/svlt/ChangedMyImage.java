@@ -2,12 +2,15 @@
 // ChangedMyImage.java
 // 
 
+package user.svlt;
+
 // 必要なパッケージの指定
 import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.MultipartConfig;
 import java.sql.*;
+import user.User;
 
 public class ChangedMyImage extends HttpServlet {
 	public void doPost(HttpServletRequest hreq,	// リクエスト
@@ -21,27 +24,24 @@ public class ChangedMyImage extends HttpServlet {
 		PrintWriter out = hres.getWriter();
 
 		HttpSession session = hreq.getSession(false);
-		if(session == null){
-			session = hreq.getSession(true);
-			hres.sendRedirect("../webpro/WebPro2016_6/LoginPage.html");
-			session.setAttribute("Login",0);
+		User login_user = User.getLoginUser(session);
+
+		if(login_user == null){
+			hres.sendRedirect("/MyApp");
+			return;
 		}else{
-			if((int)session.getAttribute("Login")==1){
-				out.println("<html><head><meta http-equiv=\"Pragma\" content=\"no-cache\">");
-				out.println("<meta http-equiv=\"Expires\" content=\"-1\">");
-				out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
-				out.println("</head><body>");
-				if((int)session.getAttribute("ID") > -1){
-					out.println("<p>登録に成功しました。</p>"
-					+"<p>メンバートップページは<a href= \"MemberTop\">こちら</a></p>"
-					+"</body></html>");
-				}else{
-					out.println("<p>登録に失敗しました。</p>"
-					+"<p>メンバートップページは<a href=\"MemberTop\">こちら</a></p>"
-					+"</body></html>");
-				}
+			out.println("<html><head><meta http-equiv=\"Pragma\" content=\"no-cache\">");
+			out.println("<meta http-equiv=\"Expires\" content=\"-1\">");
+			out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
+			out.println("</head><body>");
+			if((int)session.getAttribute("ID") > -1){
+				out.println("<p>登録に成功しました。</p>"
+				+"<p>メンバートップページは<a href= \"/MyApp/servlet/MemberTop\">こちら</a></p>"
+				+"</body></html>");
 			}else{
-				hres.sendRedirect("../webpro/WebPro2016_6/LoginPage.html");
+				out.println("<p>登録に失敗しました。</p>"
+				+"<p>メンバートップページは<a href=\"/MyApp/servlet/MemberTop\">こちら</a></p>"
+				+"</body></html>");
 			}
 		}
 	}
