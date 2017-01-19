@@ -50,7 +50,7 @@ public class Regist extends HttpServlet {
 			+"<td><input type=\"text\" name=UserId size=16 maxlength=16></td>"
 			+"</tr><tr>"
 			+"<td align=\"right\"><b>*大学ID</b></td>"
-			+"<td><select name=UniversityId>");
+			+"<td><select name=UniversityId><option value=\"-1\" selected>NO DAIGAKU</option>");
 			for(University uni : universities){
 				out.println("<option value=\""+uni.id_+ "\">"
 				+ uni.name_ +"</option>");
