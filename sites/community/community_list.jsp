@@ -23,8 +23,15 @@
 	request.setCharacterEncoding("utf-8");
 %>
 <h1>コミュニティ</h1>
-
-<a href="community_add.html" class="makeCommunity">コミュニティを作る</a>
+<%
+  User login_user = USer.getLoginUser(session);
+  if(login_user == null){}
+  else {  
+%>
+  <a href="community_add.html" class="makeCommunity">コミュニティを作る</a>
+<%
+  }
+%>
 
 <h3>おすすめのコミュニティ</h3>
 
