@@ -72,42 +72,6 @@ out.println("<input type=\"text\" value=\"" + circlename + "\"name=circlename si
 %>
 </select>
 </td></tr>
-
-<tr><th>所在大学</th><td>
-<%
-out.println("<select name=prefecture>");
-  for(Prefecture pr : prefs){
-    if(prefecture_id == pr.id_){
-      out.println("<option value=\"" + pr.id_ + "\"selected>" + pr.name_ + "</option>");
-    }else{
-      out.println("<option value=\"" + pr.id_ + "\">" + pr.name_ + "</option>");
-    }
-  }
-  out.println("</select>");
-%>
-<input type="submit" name="search_bt" value="検索">
-<%
-if(prefecture_id >= 0){
-	Connection db = DatabaseConnector.connect("chef","secret");
-  // Statement オブジェクトの生成
-  Statement st3 = db.createStatement();
-  // SQL 文を query に納入
-  String query3 = "select universities.name,universities.id from universities,prefectures where prefectures.id='" + prefecture_id + "' and universities.prefecture_id=prefectures.id";
-  // SQL 文を実行し挿入した数が返る
-  ResultSet rs3 = st3.executeQuery(query3);
-
-  out.println("<select name=\"university\">");
-  while(rs3.next()){
-      out.println("<option value=\"" + rs3.getString("id") + "\">" + rs3.getString("name") + "</option>");
-  }
-  out.println("</select>");
-  rs3.close();
-  st3.close();
-  db.close();
-}
-%>
-</select>
-</td></tr>
 </table>
 <%
 	if(prefecture_id >= 0){

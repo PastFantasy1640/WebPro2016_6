@@ -36,7 +36,7 @@
   if(circlename != ""){
   User login_user = User.getLoginUser(session);
   	
-  	if(login_user != null){ 
+  	if(login_user != null && login_user.university_id_ != -1){
   		ImageManager img = ImageManager.getDefaultImage(getServletContext().getRealPath(""));
   		if(img == null) img = new ImageManager(0);
   		new_circle = new Circle(circlename, login_user.uuid_, type_id, univ_id, "新設サークルです。よろしくお願いします。（管理画面から変更することができます。）","","","","","新設サークルです。よろしくお願いします。ここは自分のサークルを思う存分紹介するためのスペースです。",img.id_);
