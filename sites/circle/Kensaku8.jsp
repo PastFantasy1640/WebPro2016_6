@@ -29,19 +29,19 @@ request.setCharacterEncoding("utf-8");
 
 	 function Handler1()
 	 {
-         var a = [];
-         var b = [];
-         var c = [];
-         var val    = document.Form1.initial.value;
+             var a = [];
+             var b = [];
+             var c = [];
+             var val    = document.Form1.initial.value;
 	     var target = document.getElementById("output1");
 	     var mozi= '';
 	     var bool = false;
 
 	     <%
 	     for(University uv : univs){
-	     	out.println("a.push(\'" + uv.name_ + "\'");
-	     	out.println("b.push(\'" + uv.name1_ + "\'");
-	     	out.println("c.push(\'" + uv.id_ + "\'");
+	     	out.println("a.push(\'" + uv.name1_ + "\');");
+	     	out.println("b.push(\'" + uv.name_ + "\');");
+	     	out.println("c.push(\'" + uv.id_ + "\');");
 	     }
 	     %>
 
@@ -89,13 +89,13 @@ request.setCharacterEncoding("utf-8");
 
 		<%
 		for(Circle cs : circles){
-			out.println("a.push(\'" + cs.name_ + "\'");
-			out.println("b.push(\'" + cs.university_id_ + "\'");
-			out.println("d.push(\'" + cs.id_ + "\'");
+			out.println("a.push(\'" + cs.name_ + "\');");
+			out.println("b.push(\'" + cs.university_id_ + "\');");
+			out.println("d.push(\'" + cs.id_ + "\');");
 		}
 
 		for(University uv : univs){
-			out.println("c.push(\'" + uv.name_ + "\'");
+			out.println("c.push(\'" + uv.name_ + "\');");
 		}
 		
 		%>
@@ -135,13 +135,13 @@ request.setCharacterEncoding("utf-8");
         var positionY = rect.top + window.pageYOffset ;    // 要素のY座標
         <%
 		for(University uv : univs){
-			out.println("a.push(\'" + uv.name_ + "\'");
-			out.println("b.push(\'" + uv.id_ + "\'");
+			out.println("a.push(\'" + uv.name_ + "\');");
+			out.println("b.push(\'" + uv.id_ + "\');");
 		}
 
 		for(Circle cs : circles){
-			out.println("c.push(\'" + cs.name_ + "\'");
-			out.println("d.push(\'" + cs.university_id_ + "\'");
+			out.println("c.push(\'" + cs.name_ + "\');");
+			out.println("d.push(\'" + cs.university_id_ + "\');");
 		}
 		
 		%>
@@ -219,6 +219,8 @@ request.setCharacterEncoding("utf-8");
                  }
              }
 
+	    
+
 	     activearea = document.sform.prefec.value;
 	     
 	     collegeid = document.Form1.result.value;
@@ -232,18 +234,19 @@ request.setCharacterEncoding("utf-8");
 	    
 	    <%
 	    for(University uv : univs){
-			out.println("UniversitiesName.push(\'" + uv.name_ + "\'");
-			out.println("UniversitiesId.push(\'" + uv.id_ + "\'");
-			out.println("UniversitiesPrefecture_id.push(\'" + uv.prefecture_id_ + "\'");
+			out.println("UniversityName.push(\'" + uv.name_ + "\');");
+			out.println("UniversitiesId.push(\'" + uv.id_ + "\');");
+			out.println("UniversitiesPrefecture_id.push(\'" + uv.prefecture_id_ + "\');");
 		}
 
 		for(Circle cs : circles){
-			out.println("CirclesId.push(\'" + cs.id_ + "\'");
-			out.println("CirclesName.push(\'" + cs.name_ + "\'");
-			out.println("CirclesCategory_id.push(\'" + cs.category_id_ + "\'");
-			out.println("CirclesUniversity_id.push(\'" + cs.university_id_ + "\'");
+			out.println("CirclesId.push(\'" + cs.id_ + "\');");
+			out.println("CirclesName.push(\'" + cs.name_ + "\');");
+			out.println("CirclesCategory_id.push(\'" + cs.category_id_ + "\');");
+			out.println("CirclesUniversity_id.push(\'" + cs.university_id_ + "\');");
 		}
 	    %>
+
 
 	     var mozi = '';
 
@@ -275,13 +278,11 @@ request.setCharacterEncoding("utf-8");
 			 }
                      }
 
-		     alert(stack1);
 
 		     if(stack1 != ''){
 			 for(i = 0; i < CirclesName.length; i++){
 			     if(~id_result1.indexOf(CirclesUniversity_id[i])){
 				 if(~stack1.indexOf(CirclesCategory_id[i])){
-				     alert("hoge");
 				     mozi += '<option value="'+CirclesId[i]+'">'+UniversityName[CirclesUniversity_id[i]-1]+CirclesName[i]+'</option>';
 				 }
 			     }
@@ -291,7 +292,6 @@ request.setCharacterEncoding("utf-8");
 
 			 for(i = 0; i < CirclesName.length; i++){
                              if(~id_result1.indexOf(CirclesUniversity_id[i])){
-                                 alert("hoge");
                                  mozi += '<option value="'+CirclesId[i]+'">'+UniversityName[CirclesUniversity_id[i]-1]+CirclesName[i]+'</option>';
                              }
                          }
@@ -320,6 +320,7 @@ request.setCharacterEncoding("utf-8");
 	     mozi += '</select>';
 
 	     target.innerHTML = mozi;
+
 
 	 }
 
@@ -439,6 +440,7 @@ if(i == 5){
 				%>
 	    </ul>
 
+	    <!--
 	    <ul class="table-ul">
 		<%
 		for(Category cg : categs){
@@ -450,6 +452,7 @@ if(i == 5){
 		    %>
 		    <li></li><li></li><li></li><li></li>
 	    </ul>
+	    -->
 	    
 			    </form>
 			</div>
@@ -545,7 +548,7 @@ if(i == 5){
 			<h1 style="text-align: center; color: #0099cc;">検索結果はこちら</h1>
 			<div style="text-align:center">
 			    <form action="ResultCircle1.jsp" method="get">
-				<select name="result" style="width:400px;height:40px; margin-top:40px" id="output2">
+				<select name="id" style="width:400px;height:40px; margin-top:40px" id="output2">
 				    <option value="-1" >検索ボタンをおしてね!</option>
 				</select>
 				<input type="submit" value="このサークル紹介に行く" >
