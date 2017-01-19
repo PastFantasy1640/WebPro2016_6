@@ -28,6 +28,7 @@
 		return;
 	}
 
+  String circleid = request.getParameter("id");
 	String circlename = StringUtil.NonNullString(request.getParameter("circlename"));
 	//String type = StringUtil.NonNullString(request.getParameter("type"));
 	//String prefecture = StringUtil.NonNullString(request.getParameter("prefecture"));

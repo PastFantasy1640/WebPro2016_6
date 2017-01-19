@@ -1,10 +1,24 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" import="java.sql.*" %>
+<%@ page import="static utility.StringUtil.NonNullString" %>
+<%@ page import="circle.*" %>
+<%@ page import="user.User" %>
+<%@ page import="utility.ImageManager" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="utility.DatabaseConnector" %>
 <%
 // リクエストパラメータの文字エンコーディング指定
 request.setCharacterEncoding("utf-8");
-// JDBC ドライバのロード
-Class.forName("org.gjt.mm.mysql.Driver");
-Connection db = DriverManager.getConnection("jdbc:mysql://localhost/webpro_db?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
+
+  String circleid = NonNullString(request.getParameter("circleid");
+  String comment = NonNullString(request.getParameter("comment"));
+  String mail = NonNullString(request.getParameter("mail"));
+  String phone = NonNullString(request.getParameter("phone"));
+  String twitter = NonNullString(request.getParameter("twitter"));
+  String facebook = NonNullString(request.getParameter("facebook"));
+  String file = NonNullString(request.getParameter("file"));
+  User login_user = User.getLoginUser(session);
+
+  Circle new_circle = Circle()
 %>
 
 <html>
@@ -16,29 +30,6 @@ Connection db = DriverManager.getConnection("jdbc:mysql://localhost/webpro_db?us
     </head>
     <body>
 	<%
-
-    //本来こっちを使う
-    //int id = (int)session.getAttribute("UserId");
-    //テスト用
-    int id = 1;
-    String comment = request.getParameter("comment");
-    if(comment==null)
-      comment="";
-    String mail = request.getParameter("mail");
-    if(mail==null)
-      mail="";
-    String phone = request.getParameter("phone");
-    if(phone==null)
-      phone="";
-    String twitter = request.getParameter("twitter");
-    if(twitter==null)
-      twitter="";
-    String facebook = request.getParameter("facebook");
-    if(facebook==null)
-      facebook="";
-    String file = request.getParameter("file");
-    if(file==null)
-      file="";
 
     Statement st3 = db.createStatement();
     String query3 = "update circles set comment='" + comment +"', mail='" + mail +"', phone='" + phone +"', twitter='" + twitter +"', facebook='" + facebook +"', file='" + file + "' where circle_leader_id="+id+"";
