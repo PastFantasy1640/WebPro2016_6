@@ -29,10 +29,11 @@ request.setCharacterEncoding("utf-8");
 
 	 function Handler1()
 	 {
-         var a = [];
-         var b = [];
-         var c = [];
-         var val    = document.Form1.initial.value;
+	     alert("aaa");
+             var a = [];
+             var b = [];
+             var c = [];
+             var val    = document.Form1.initial.value;
 	     var target = document.getElementById("output1");
 	     var mozi= '';
 	     var bool = false;
@@ -417,7 +418,7 @@ request.setCharacterEncoding("utf-8");
 <%
 }
 %>
-<li><input type="checkbox"  name="category"   value=<%= cg.id_ %>><%= cg.name_ %></li>
+<li><input type="checkbox"  name="category"   value="<%= cg.id_ %>"><%= cg.name_ %></li>
 <%
 if(i == 5){
     if(k == 5){
@@ -439,17 +440,19 @@ if(i == 5){
 				%>
 	    </ul>
 
+	    <!--
 	    <ul class="table-ul">
 		<%
 		for(Category cg : categs){
 		%>
-		<li><input type="checkbox" name="category"   value=<%= cg.id_ %>><%= cg.name_ %></li>
+		<li><input type="checkbox" name="category"   value="<%= cg.id_ %>"><%= cg.name_ %></li>
 		
 		    <%
 		    }
 		    %>
 		    <li></li><li></li><li></li><li></li>
 	    </ul>
+	    -->
 	    
 			    </form>
 			</div>
