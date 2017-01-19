@@ -24,7 +24,7 @@
 %>
 <h1>コミュニティ</h1>
 <%
-  User login_user = USer.getLoginUser(session);
+  User login_user = User.getLoginUser(session);
   if(login_user == null){}
   else {  
 %>

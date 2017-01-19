@@ -186,5 +186,33 @@ public class Circle {
 		}
 		return ret;
 	}
+
+	public Circle updateCircle(Circle old_circle) throws SQLException, ClassNotFoundException{
+		Circle ret = null;
+		
+		Connection db = DatabaseConnector.connect("chef","secret");
+  		
+		//クエリ発行
+		String query = "update circles set comment=?, mail=?, phone=?, twitter=?, facebook=?, file=? where id=?;";
+		PreparedStatement pst = db.prepareStatement(query);
+			
+		pst.setString(1, this.comment_);
+		pst.setString(2, this.mail_);
+		pst.setString(3, this.phone_);
+		pst.setString(4, this.twitter_);
+		pst.setString(5, this.facebook_);
+		pst.setString(6, this.file_);
+		pst.setInt(7, old_circle.id_);
+		
+		pst.executeUpdate();
+			
+		pst.close();
+			
+		ret = getCircleFromId(old_circle.id_);
+			
+		pst.close();
+		db.close();
+		return ret;
+	}
 	
 }
