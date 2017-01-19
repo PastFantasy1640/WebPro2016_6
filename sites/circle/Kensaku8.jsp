@@ -27,6 +27,14 @@ request.setCharacterEncoding("utf-8");
 	
 	<script>
 
+         function IdSearch(val1, val2){
+                  var i;
+                  for(i = 0; i < val2.length; i++){
+                        if(val2[i] == val1)
+                               return i;
+                  }
+         }
+
 	 function Handler1()
 	 {
              var a = [];
@@ -81,6 +89,7 @@ request.setCharacterEncoding("utf-8");
 	     var b = [];
 	     var c = [];
 	     var d = [];
+	     var e = [];
              var val    = document.searchCircle.CircleName.value;
              var target = document.getElementById("output2");
 	     var rect = target.getBoundingClientRect();
@@ -96,6 +105,7 @@ request.setCharacterEncoding("utf-8");
 
 		for(University uv : univs){
 			out.println("c.push(\'" + uv.name_ + "\');");
+			out.println("e.push(\'" + uv.id_ + "\');");
 		}
 		
 		%>
@@ -106,7 +116,7 @@ request.setCharacterEncoding("utf-8");
 	     if(val != ''){
 		 for(i = 0; i < a.length; i++){
                      if(~a[i].indexOf(val)){
-			 mozi += '<option value="'+d[i]+'">'+c[b[i]-1]+a[i]+'</option>';
+			 mozi += '<option value="'+d[i]+'">'+c[IdSearch(b[i],e)]+a[i]+'</option>';
                      }
 		 }
 	     }
@@ -127,8 +137,9 @@ request.setCharacterEncoding("utf-8");
 	    var b = [];
 	    var c = [];
 	    var d = [];
-	     
-        var val    = document.searchUniversity.UniversityName.value;
+	    var e = [];
+
+        var val    = document.searchUniversity.UniversityName.value;	
         var target = document.getElementById("output2");
         var rect = target.getBoundingClientRect();
         var positionX = rect.left + window.pageXOffset ;   // 要素のX座標
@@ -142,6 +153,7 @@ request.setCharacterEncoding("utf-8");
 		for(Circle cs : circles){
 			out.println("c.push(\'" + cs.name_ + "\');");
 			out.println("d.push(\'" + cs.university_id_ + "\');");
+			out.println("e.push(\'" + cs.id_ + "\');");
 		}
 		
 		%>
@@ -170,7 +182,7 @@ request.setCharacterEncoding("utf-8");
 	     for(i = 0; i < c.length; i++){
 		 for(j = 0; j < id_result.length; j++){
 		     if(d[i] == id_result[j]){
-			 mozi += '<option value="'+b[i]+'">'+a[d[i]-1]+c[i]+"</option>";
+			 mozi += '<option value="'+e[i]+'">'+a[IdSearch(d[i],b)]+c[i]+"</option>";
 			 break;
 		     }
 		 }
@@ -189,6 +201,7 @@ request.setCharacterEncoding("utf-8");
 
 
 	 }
+
 
 	 function Handler4(){
 
@@ -258,11 +271,11 @@ request.setCharacterEncoding("utf-8");
 		     if(CirclesUniversity_id[i] == collegeid){
 			 if(stack1 != ''){
 			     if(~stack1.indexOf(CirclesCategory_id[i])){
-				 mozi += '<option value="'+CirclesId[i]+'">'+UniversityName[collegeid-1]+CirclesName[i]+'</option>';
+				 mozi += '<option value="'+CirclesId[i]+'">'+UniversityName[IdSearch(collegeid,UniversitiesId)]+CirclesName[i]+'</option>';
 			     }
 			 }
 			 else{
-                             mozi += '<option value="'+CirclesId[i]+'">'+UniversityName[collegeid-1]+CirclesName[i]+'</option>';
+                             mozi += '<option value="'+CirclesId[i]+'">'+UniversityName[IdSearch(collegeid,UniversitiesId)]+CirclesName[i]+'</option>';
 			 }
 		     }
 		 }
@@ -283,7 +296,7 @@ request.setCharacterEncoding("utf-8");
 			 for(i = 0; i < CirclesName.length; i++){
 			     if(~id_result1.indexOf(CirclesUniversity_id[i])){
 				 if(~stack1.indexOf(CirclesCategory_id[i])){
-				     mozi += '<option value="'+CirclesId[i]+'">'+UniversityName[CirclesUniversity_id[i]-1]+CirclesName[i]+'</option>';
+				     mozi += '<option value="'+CirclesId[i]+'">'+UniversityName[IdSearch(CirclesUniversity_id[i],UniversitiesId)]+CirclesName[i]+'</option>';
 				 }
 			     }
 			 }
@@ -292,7 +305,7 @@ request.setCharacterEncoding("utf-8");
 
 			 for(i = 0; i < CirclesName.length; i++){
                              if(~id_result1.indexOf(CirclesUniversity_id[i])){
-                                 mozi += '<option value="'+CirclesId[i]+'">'+UniversityName[CirclesUniversity_id[i]-1]+CirclesName[i]+'</option>';
+                                 mozi += '<option value="'+CirclesId[i]+'">'+UniversityName[IdSearch(CirclesUniversity_id[i],UniversitiesId)]+CirclesName[i]+'</option>';
                              }
                          }
 			 
@@ -304,7 +317,7 @@ request.setCharacterEncoding("utf-8");
 		     if(stack1 != ''){
 			 for(i = 0; i < CirclesName.length; i++){
                              if(~stack1.indexOf(CirclesCategory_id[i])){
-				 mozi += '<option value="'+CirclesId[i]+'">'+UniversityName[CirclesUniversity_id[i]-1]+CirclesName[i]+'</option>';
+				 mozi += '<option value="'+CirclesId[i]+'">'+UniversityName[IdSearch(CirclesUniversity_id[i],UniversitiesId)]+CirclesName[i]+'</option>';
                              }
 			 }
 		     }
