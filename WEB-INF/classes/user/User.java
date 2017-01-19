@@ -315,10 +315,9 @@ public class User {
 		User ret = null;
 		
 		Connection db = DatabaseConnector.connect("chef","secret");
-		PreparedStatement ps = db.prepareStatement("select uuid, id, university_id, sex, mail, twitter, facebook, icon_id from user where user.id=?");
+		PreparedStatement ps = db.prepareStatement("select uuid, id, university_id, sex, mail, twitter, facebook, icon_id from users where users.id=?");
 		ps.setString(1,id);
 		ResultSet rs = ps.executeQuery();
-		rs.next();
 		
 		if(rs.next()){
 			int uuid = rs.getInt("uuid");
@@ -342,10 +341,9 @@ public class User {
 		User ret = null;
 		
 		Connection db = DatabaseConnector.connect("chef","secret");
-		PreparedStatement ps = db.prepareStatement("select uuid, id, university_id, sex, mail, twitter, facebook, icon_id from user where user.uuid=?");
+		PreparedStatement ps = db.prepareStatement("select uuid, id, university_id, sex, mail, twitter, facebook, icon_id from users where users.uuid=?");
 		ps.setInt(1,uuid);
 		ResultSet rs = ps.executeQuery();
-		rs.next();
 		
 		if(rs.next()){
 			int uuid2 = rs.getInt("uuid");

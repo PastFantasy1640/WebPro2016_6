@@ -32,14 +32,13 @@ h3{
 
 .card_community:hover{;
     color:#4169e1;
-    text-decoration:underline;
+    text-decoration:none;
     box-shadow:3px 3px 6px rgba(0,0,0,0.5);
 }
 
 .card_community{
     background-color:#FAFAFA;
     width:250;
-    height:240;
     float:left;
     margin-top:-10px;
     margin-left:20px;

@@ -34,11 +34,23 @@
 	 	border: solid 1px #3ae;
 	 }
 
-	h1{
+	#circle_name{
 		background-color: #3ae;
-		color: white;
-		padding: 2rem;
+		padding: 2rem 1rem 1rem;
+		margin: 0;
+
 	}
+	#circle_name h1{
+		color: white;
+		margin: 0;
+	}
+
+	#circle_name p,
+	#circle_name a{
+		color:white;
+	}
+
+
 
 	 #circle_image img{
 	     border-radius: 50px;

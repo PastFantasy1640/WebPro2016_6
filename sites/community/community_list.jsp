@@ -40,7 +40,7 @@
     out.println("<div class=\"description\">");
     out.println(c.description);
     out.println("</div>");
-    out.println("</div>");
+    out.println("</div></a>");
   }
 %>
 

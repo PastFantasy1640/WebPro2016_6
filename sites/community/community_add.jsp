@@ -2,8 +2,22 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="community.Community" %>
 <%@ page import="utility.ImageManager" %>
+<%@ page import="user.User" %>
 <%
-     ArrayList<Community> communities = Community.getAllCommunities();
+	User login_user = User.getLoginUser(session);
+	if(login_user == null){
+		response.sendRedirect("/MyApp/");
+		return;
+	}
+    
+    	ArrayList<Community> communities = Community.getAllCommunities();
+
+	// リクエストパラメータの文字エンコーディング指定
+	request.setCharacterEncoding("utf-8");
+ 	// パラメータの入力とチェック
+ 	String name = request.getParameter("name");
+ 	ImageManager img = ImageManager.getDefaultImage(getServletContext().getRealPath(""));
+ 	String description = request.getParameter("description");
 %>
 
 <html>
@@ -16,17 +30,8 @@
 </head>
 <body>
 
-<%@ include file="/WEB-INF/jsp/userinfo.jsp" %>
 
 <%
-	// リクエストパラメータの文字エンコーディング指定
-	request.setCharacterEncoding("utf-8");
- // リクエストパラメータの文字エンコーディング指定
- request.setCharacterEncoding("utf-8");
- // パラメータの入力とチェック
- String name = request.getParameter("name");
- int image_id = Integer.parseInt(request.getParameter("image_id"));
- String description = request.getParameter("description");
 
  if(name.equals("") || description.equals("")) {
  %>
@@ -34,8 +39,9 @@
  <%
  }
  else {
-   Community.addCommunity(name,image_id,description);
-   out.println("新規コミュニティが作成されました");
+   boolean res = Community.addCommunity(name,img.id_,description);
+   if(res) out.println("新規コミュニティが作成されました");
+   else out.println("Failed to add the community.");
 %>
 <div>
   <a href="community_list.jsp"> コミュニティリストに戻る</a>

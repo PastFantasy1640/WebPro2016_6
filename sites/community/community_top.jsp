@@ -7,6 +7,7 @@
 <%@ page import="community.Community" %>
 <%@ page import="utility.ImageManager" %>
 <%@ page import="java.security.SecureRandom" %>
+<%@ page import="user.User" %>
 
 <%
 
@@ -29,9 +30,12 @@
     //	application.getRequestDispatcher("/MyApp/sites/community/community_list.jsp").forward(request,response);
     }
     
-    
-    int user_id = 10;
-
+    User login_user = User.getLoginUser(session);
+    if(login_user == null){
+    		response.sendRedirect("/MyApp/");
+    		return;
+	}
+    int user_id = login_user.uuid_;
 
 	//セッションをチェック
 	//F5対策
@@ -65,11 +69,11 @@
 	//コミュニティー情報代入
     String community_name = community.name;
     String community_description = community.description;
-    
-    String community_img_url = "";
+    ImageManager img = new ImageManager(community.image_id);
+    String community_img_url = "/MyApp/uploads/images/" + img.url_;
     
     ImageManager community_image = new ImageManager(community.image_id);
-    if(community_image.isFailed() == false) community_img_url = "/MyApp/uploads/images/" + community_image.getFileName();
+    community_img_url = "/MyApp/uploads/images/" + community_image.getFileName();
 
 	//ユーザー制御
     boolean user_allow_talk = true;
@@ -114,11 +118,13 @@
 			<div id="header_image" class="header_image_url"></div>
 			<h1><%= community_name %></h1>
 			<p id="header_description"><%= community_description %></p>
+			<p><a href="community_list.jsp">Return to community list page.</a></p>
 		</header>
 		
 		<div id="header_contents_margin"></div>
 		<div id="contents_table">
 			<div id="contents_base">
+
 			
 			<%-- ########################## Talk Area Jsp ############################ --%>
 
@@ -161,7 +167,7 @@
     for(ComComment p : comments){
         out.println("<div class=\"talk\">");
         out.println("<div class=\"image\">");
-        out.println("<img src=\"" + "###########" + "\" />");
+        out.println("<img src=\"/MyApp/uploads/images/" + p.getImageSrc() + "\" />");
         out.println("</div>");
         out.println("<div class=\"contents\">");
         out.println("<h2>" + p.getName() + "</h2>");
@@ -172,17 +178,6 @@
     }
 %>
 
-				<!-- 参加者のコメント -->
-				<div class="talk">
-					<div class="image">
-						<img src="../../assets/communities/001/top_image.jpg" />
-					</div>
-					<div class="contents">
-						<h2>東大　サイバー研</h2>
-						<small>2016/10/24  11:28:03</small>
-						<p>これが発言の表示サンプルです</p>
-					</div>
-				</div>
 			</div>
 			
 			<div id="sidebar_base">

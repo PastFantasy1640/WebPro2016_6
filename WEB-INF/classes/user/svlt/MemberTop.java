@@ -57,6 +57,7 @@ public class MemberTop extends HttpServlet {
 			 + "<p><a href = \"ChangeMyInfo?Target=facebook\">フェイスブックアカウント変更</a></p>"
 			 + "<p><a href = \"ChangeMyInfo?Target=mail\">メールアドレス変更</a></p>"
 			 + "<p><a href = \"ChangeMyInfo?Target=image\">画像変更</a></p>"
+			 + "<p><a href = \"/MyApp/sites/community/community_list.jsp\">CommunityPage</a></p>"
 			 + "<p><a href = \"/MyApp/sites/circle/circle_regist.jsp\">サークル作成</a></p>");
 		out.println("<p><h2>現在あなたが部長であるサークル一覧</h2>");
 		if(hosting_circles.size() > 0){

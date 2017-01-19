@@ -122,9 +122,10 @@ div.talk{
 
 div.talk div.image{
 	display: table-cell;
+
 	width: 64px;
 	height: 64px;
-	vertical-align: middle;
+	vertical-align: top;
 }
 
 div.talk div.image img{

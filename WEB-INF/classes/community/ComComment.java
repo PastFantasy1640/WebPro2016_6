@@ -3,6 +3,8 @@ package community;
 
 import java.util.ArrayList;
 import java.sql.*;
+import user.User;
+import utility.ImageManager;
 
 public class ComComment {
 
@@ -27,7 +29,7 @@ public class ComComment {
     this.img_src = img_src;
   }
 
-  static public ArrayList<ComComment> getCommentsFromCommunity(final int community_id) throws SQLException{
+  static public ArrayList<ComComment> getCommentsFromCommunity(final int community_id) throws SQLException, ClassNotFoundException{
     Connection db = null;
     ArrayList<ComComment> ret = null;
 
@@ -51,9 +53,10 @@ public class ComComment {
       ret = new ArrayList<ComComment>();
       while(rs.next()){
         String comment = rs.getString("comment");
-        String name = "temporary";	//######
+        User us = User.getUserFromUUID(rs.getInt("user_uuid"));
+        String name = us.id_;
         String date_str = rs.getString("posted_at");
-        String img_src = "";	//######
+        String img_src = new ImageManager(us.getImageId()).url_;
         ret.add(new ComComment(comment,name,date_str,img_src));
       }
 
