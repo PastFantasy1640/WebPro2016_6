@@ -13,7 +13,7 @@ import java.sql.*;
 import user.User;
 
 public class ChangedMyImage extends HttpServlet {
-	public void doPost(HttpServletRequest hreq,	// リクエスト
+	public void doGet(HttpServletRequest hreq,	// リクエスト
 			  HttpServletResponse hres)	// レスポンス
 		throws ServletException, IOException {
 		// リクエストパラメータの文字エンコーディング指定
@@ -35,6 +35,7 @@ public class ChangedMyImage extends HttpServlet {
 			out.println("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">");
 			out.println("</head><body>");
 			if((int)session.getAttribute("ID") > -1){
+				out.println((int)session.getAttribute("ID"));
 				out.println("<p>登録に成功しました。</p>"
 				+"<p>メンバートップページは<a href= \"/MyApp/servlet/MemberTop\">こちら</a></p>"
 				+"</body></html>");

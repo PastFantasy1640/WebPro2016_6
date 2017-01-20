@@ -44,4 +44,9 @@ public class ImageUploader extends HttpServlet {
     }
     return name;
   }
+
+
+  public void doGet(HttpServletRequest hreq,  // リクエスト
+        HttpServletResponse hres) // レスポンス
+    throws ServletException, IOException {}
 }

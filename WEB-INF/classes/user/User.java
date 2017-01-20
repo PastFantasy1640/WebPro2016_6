@@ -206,7 +206,7 @@ public class User {
 	public User updateUser(final User old_user) throws SQLException, ClassNotFoundException{
 		User ret= null;
 		//エラーチェック
-		if(this.isUniqueID() && this.isValidParameter() && this.id_.equals(old_user.id_) && this.uuid_ >= 0){
+		if( this.isValidParameter() && this.id_.equals(old_user.id_)){
 			//クエリ発行
 			Connection db = DatabaseConnector.connect("chef","secret");
 			String query;
