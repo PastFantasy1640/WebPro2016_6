@@ -61,7 +61,7 @@
 		</div>
 		<div id="search_circle">
 			<p>あなたにぴったりなサークルを</p>
-			<div id="search_button">探す(unavailable)</div>
+			<a href="/MyApp/sites/circle/Kensaku8.jsp" style="text-decoration: none;"><div id="search_button">探す</div></a>
 			
 		</div>
 	</div>

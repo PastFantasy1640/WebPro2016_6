@@ -9,12 +9,10 @@
 
 <%
 request.setCharacterEncoding("utf-8");
-
 	ArrayList<Prefecture> prefs = Prefecture.getPrefectures();
 	ArrayList<University> univs = University.getUniversities();
 	ArrayList<Category> categs = Category.getCategories();
 	ArrayList<Circle> circles = Circle.getCircles();
-
 %>
 
 <html>
@@ -26,7 +24,13 @@ request.setCharacterEncoding("utf-8");
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	
 	<script>
-
+         function IdSearch(val1, val2){
+                  var i;
+                  for(i = 0; i < val2.length; i++){
+                        if(val2[i] == val1)
+                               return i;
+                  }
+         }
 	 function Handler1()
 	 {
              var a = [];
@@ -36,7 +40,6 @@ request.setCharacterEncoding("utf-8");
 	     var target = document.getElementById("output1");
 	     var mozi= '';
 	     var bool = false;
-
 	     <%
 	     for(University uv : univs){
 	     	out.println("a.push(\'" + uv.name1_ + "\');");
@@ -44,9 +47,7 @@ request.setCharacterEncoding("utf-8");
 	     	out.println("c.push(\'" + uv.id_ + "\');");
 	     }
 	     %>
-
 	     if(val == -1){
-
 		 mozi = '<select><option value = -1>指定してください</option></select>';
 		 
 		 target.innerHTML = mozi;
@@ -63,72 +64,61 @@ request.setCharacterEncoding("utf-8");
 		     mozi += "<option value="+c[i]+">"+b[i]+"</option>";
 		 }
 	     }
-
 	     if(bool == false){
 		 mozi += "<option value = -1>見つからない</option>";
 	     }
-
 	     mozi += "</select>";
 	     
 	     target.innerHTML = mozi;
-
 	     
 	 }
-
 	 function Handler2()
          {
 	     var a = [];
 	     var b = [];
 	     var c = [];
 	     var d = [];
+	     var e = [];
              var val    = document.searchCircle.CircleName.value;
              var target = document.getElementById("output2");
 	     var rect = target.getBoundingClientRect();
 	     var positionX = rect.left + window.pageXOffset ;	// 要素のX座標
 	     var positionY = rect.top + window.pageYOffset ;	// 要素のY座標
-
 		<%
 		for(Circle cs : circles){
 			out.println("a.push(\'" + cs.name_ + "\');");
 			out.println("b.push(\'" + cs.university_id_ + "\');");
 			out.println("d.push(\'" + cs.id_ + "\');");
 		}
-
 		for(University uv : univs){
 			out.println("c.push(\'" + uv.name_ + "\');");
+			out.println("e.push(\'" + uv.id_ + "\');");
 		}
 		
 		%>
              var mozi = '';
-
              mozi = '<select name="result">';
-
 	     if(val != ''){
 		 for(i = 0; i < a.length; i++){
                      if(~a[i].indexOf(val)){
-			 mozi += '<option value="'+d[i]+'">'+c[b[i]-1]+a[i]+'</option>';
+			 mozi += '<option value="'+d[i]+'">'+c[IdSearch(b[i],e)]+a[i]+'</option>';
                      }
 		 }
 	     }
-
              mozi += "</select>";
 	     
-
              target.innerHTML = mozi;
 	     
 	     document.searchCircle.CircleName.value = '';
-
 	     window.scrollTo(0,positionY) ;
-
          }
-
 	 function Handler3(){
 	    var a = [];
 	    var b = [];
 	    var c = [];
 	    var d = [];
-	     
-        var val    = document.searchUniversity.UniversityName.value;
+	    var e = [];
+        var val    = document.searchUniversity.UniversityName.value;	
         var target = document.getElementById("output2");
         var rect = target.getBoundingClientRect();
         var positionX = rect.left + window.pageXOffset ;   // 要素のX座標
@@ -138,15 +128,14 @@ request.setCharacterEncoding("utf-8");
 			out.println("a.push(\'" + uv.name_ + "\');");
 			out.println("b.push(\'" + uv.id_ + "\');");
 		}
-
 		for(Circle cs : circles){
 			out.println("c.push(\'" + cs.name_ + "\');");
 			out.println("d.push(\'" + cs.university_id_ + "\');");
+			out.println("e.push(\'" + cs.id_ + "\');");
 		}
 		
 		%>
 	     
-
 	     var id_result = [];
 	     
 	     //id_resultには大学名が部分一致したidが入っている
@@ -158,46 +147,29 @@ request.setCharacterEncoding("utf-8");
                      }
 		 }
              }
-
-
 	     var mozi = '';
-
-
 	     mozi = '<select name="result">';
-
 	     //dにはカテゴリーサークルの中のuniversity_idが入っている
 	     
 	     for(i = 0; i < c.length; i++){
 		 for(j = 0; j < id_result.length; j++){
 		     if(d[i] == id_result[j]){
-			 mozi += '<option value="'+b[i]+'">'+a[d[i]-1]+c[i]+"</option>";
+			 mozi += '<option value="'+e[i]+'">'+a[IdSearch(d[i],b)]+c[i]+"</option>";
 			 break;
 		     }
 		 }
 	     }
-
 	     
 	     mozi += "</select>";
-
-
-
              target.innerHTML = mozi;
-
              document.searchUniversity.UniversityName.value = '';
-
              window.scrollTo(0,positionY) ;
-
-
 	 }
-
 	 function Handler4(){
-
-
 	     
 	     var stack1 = [];
 	     var activearea = null;
 	     var collegeid = null;
-
 	     var CirclesId = [];
 	     var CirclesName = [];
 	     var CirclesCategory_id = [];
@@ -205,30 +177,22 @@ request.setCharacterEncoding("utf-8");
 	     var UniversityName = [];
 	     var UniversitiesId = [];
 	     var UniversitiesPrefecture_id = [];
-
 	     var id_result = [];
 	     var id_result1 = [];
-
 	     var target = document.getElementById("output2");
 	     
 	     
 	     for(i=0; i < document.nform.category.length; i++){
-
                  if(document.nform.category[i].checked){
 		     stack1.push(document.nform.category[i].value);
                  }
              }
-
 	    
-
 	     activearea = document.sform.prefec.value;
 	     
 	     collegeid = document.Form1.result.value;
-
-
 	     if(activearea == -1)
 		 activearea = null;
-
 	     if(collegeid == -1)
 		 collegeid = null;
 	    
@@ -238,7 +202,6 @@ request.setCharacterEncoding("utf-8");
 			out.println("UniversitiesId.push(\'" + uv.id_ + "\');");
 			out.println("UniversitiesPrefecture_id.push(\'" + uv.prefecture_id_ + "\');");
 		}
-
 		for(Circle cs : circles){
 			out.println("CirclesId.push(\'" + cs.id_ + "\');");
 			out.println("CirclesName.push(\'" + cs.name_ + "\');");
@@ -246,97 +209,72 @@ request.setCharacterEncoding("utf-8");
 			out.println("CirclesUniversity_id.push(\'" + cs.university_id_ + "\');");
 		}
 	    %>
-
-
 	     var mozi = '';
-
 	     mozi = '<select name="result">';
-
 	     
 	     if(collegeid != null){
 		 for(i = 0; i < CirclesName.length; i++){
 		     if(CirclesUniversity_id[i] == collegeid){
 			 if(stack1 != ''){
 			     if(~stack1.indexOf(CirclesCategory_id[i])){
-				 mozi += '<option value="'+CirclesId[i]+'">'+UniversityName[collegeid-1]+CirclesName[i]+'</option>';
+				 mozi += '<option value="'+CirclesId[i]+'">'+UniversityName[IdSearch(collegeid,UniversitiesId)]+CirclesName[i]+'</option>';
 			     }
 			 }
 			 else{
-                             mozi += '<option value="'+CirclesId[i]+'">'+UniversityName[collegeid-1]+CirclesName[i]+'</option>';
+                             mozi += '<option value="'+CirclesId[i]+'">'+UniversityName[IdSearch(collegeid,UniversitiesId)]+CirclesName[i]+'</option>';
 			 }
 		     }
 		 }
 	     }
 	     else{
-
 		 
 		 if(activearea != null){
-
 		     for(i = 0; i < UniversitiesPrefecture_id.length; i++){
 			 if(UniversitiesPrefecture_id[i] == activearea){
 			     id_result1.push(UniversitiesId[i]);
 			 }
                      }
-
-
 		     if(stack1 != ''){
 			 for(i = 0; i < CirclesName.length; i++){
 			     if(~id_result1.indexOf(CirclesUniversity_id[i])){
 				 if(~stack1.indexOf(CirclesCategory_id[i])){
-				     mozi += '<option value="'+CirclesId[i]+'">'+UniversityName[CirclesUniversity_id[i]-1]+CirclesName[i]+'</option>';
+				     mozi += '<option value="'+CirclesId[i]+'">'+UniversityName[IdSearch(CirclesUniversity_id[i],UniversitiesId)]+CirclesName[i]+'</option>';
 				 }
 			     }
 			 }
 		     }
 		     else{
-
 			 for(i = 0; i < CirclesName.length; i++){
                              if(~id_result1.indexOf(CirclesUniversity_id[i])){
-                                 mozi += '<option value="'+CirclesId[i]+'">'+UniversityName[CirclesUniversity_id[i]-1]+CirclesName[i]+'</option>';
+                                 mozi += '<option value="'+CirclesId[i]+'">'+UniversityName[IdSearch(CirclesUniversity_id[i],UniversitiesId)]+CirclesName[i]+'</option>';
                              }
                          }
 			 
 		     }
-
                  }else{
-
-
 		     if(stack1 != ''){
 			 for(i = 0; i < CirclesName.length; i++){
                              if(~stack1.indexOf(CirclesCategory_id[i])){
-				 mozi += '<option value="'+CirclesId[i]+'">'+UniversityName[CirclesUniversity_id[i]-1]+CirclesName[i]+'</option>';
+				 mozi += '<option value="'+CirclesId[i]+'">'+UniversityName[IdSearch(CirclesUniversity_id[i],UniversitiesId)]+CirclesName[i]+'</option>';
                              }
 			 }
 		     }
 		     else{
 			 mozi += '<option value="-1">検索条件を指定してください</option>';
 		     }
-
 		     
                  }
-
 	     }
-
 	     mozi += '</select>';
-
 	     target.innerHTML = mozi;
-
-
 	 }
-
 	 
-
-
-
 	 function submitStop(e){
 	     if(!e) var e = window.event;
-
 	     if(e.keyCode == 13)
 		 return false;
 	 }
-
 	 function chBxOff(){
-
 	     var target = document.getElementById("output1");
 	     
 	     for(var i=0; i<document.nform.category.length;i++){
@@ -344,18 +282,11 @@ request.setCharacterEncoding("utf-8");
 		     document.nform.category[i].checked = false;
 		 }
 	     }
-
 	     document.sform.prefec.value=-1;
-
 	     document.Form1.initial.value=-1;
-
 	     var mozi = '';
-
-
 	     mozi = '<select><option value=-1>指定しろ</option></select>';
-
 	     target.innerHTML = mozi;
-
 	 }
 	 
 	 
@@ -430,7 +361,6 @@ if(i == 5){
 				i = 0;
 				
 				continue;
-
 				}
 				
 				i++;
@@ -561,5 +491,3 @@ if(i == 5){
 
     </body>
 </html>
-
-

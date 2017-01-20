@@ -12,17 +12,9 @@
 	// パラメータの入力とチェック
   String circlename = NonNullString(request.getParameter("circlename"));
   String type = NonNullString(request.getParameter("type"));
-  String prefecture = NonNullString(request.getParameter("prefecture"));
-  
-  
-  int prefecture_id = -1;
   int type_id = -1;
-  try{
-  	prefecture_id = Integer.parseInt(prefecture);
+  
   	type_id = Integer.parseInt(type);
-  }catch(NumberFormatException e){
-  	prefecture_id = -1;
-  }
   
   
   

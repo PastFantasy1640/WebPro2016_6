@@ -2,6 +2,7 @@
 <%@ page import="circle.University" %>
 <%@ page import="circle.Category" %>
 <%@ page import="circle.Prefecture" %>
+<%@ page import="circle.Circle" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="utility.StringUtil" %>
 <%@ page import="utility.DatabaseConnector" %>
@@ -28,6 +29,9 @@
 		return;
 	}
 
+	int circle_id = Integer.parseInt(request.getParameter("id"));
+	Circle cs = Circle.getCircleFromId(circle_id);
+
 	String circlename = StringUtil.NonNullString(request.getParameter("circlename"));
 	//String type = StringUtil.NonNullString(request.getParameter("type"));
 	//String prefecture = StringUtil.NonNullString(request.getParameter("prefecture"));
@@ -41,11 +45,14 @@
 	String file = StringUtil.NonNullString(request.getParameter("file"));
 	String imageid = StringUtil.NonNullString(request.getParameter("imageid"));
 
+	session.setAttribute("ID", cs.imageid_);
+	session.setAttribute("url","/MyApp/sites/circle/ResultCircle1.jsp?id=" + Integer.toString(circle_id));
+
 	%>
 
 	<center>
 	    <h1>サークル管理</h1><br>
-	    <form action="/imguploader" enctype="multipart/form-data" method="post">
+	    <form action="/MyApp/imguploader" enctype="multipart/form-data" method="post">
 		<h2>・サークル画像変更</h2>
 		<input type=file name=image size=30>
 		<input type="submit" name=button value="送信">

@@ -66,9 +66,22 @@
 </servlet-mapping>
 
 <servlet>
+  <servlet-name>ChangedMyImage</servlet-name>
+  <servlet-class>user.svlt.ChangedMyImage</servlet-class>
+</servlet>
+
+
+<servlet-mapping>
+    <servlet-name>ChangedMyImage</servlet-name>
+    <url-pattern>/servlet/ChangedMyImage</url-pattern>
+</servlet-mapping>
+
+
+<servlet>
   <servlet-name>ChangedMyInfo</servlet-name>
   <servlet-class>user.svlt.ChangedMyInfo</servlet-class>
 </servlet>
+
 
 <servlet-mapping>
     <servlet-name>ChangedMyInfo</servlet-name>
