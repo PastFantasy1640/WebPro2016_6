@@ -1,1 +1,122 @@
-<!-- ここにxmlを表記 -->
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee
+         http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
+
+<servlet>
+  <servlet-name>RegistUser</servlet-name>
+  <servlet-class>user.svlt.RegistUser</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>RegistUser</servlet-name>
+    <url-pattern>/servlet/RegistUser</url-pattern>
+</servlet-mapping>
+
+<servlet>
+  <servlet-name>SignupPage</servlet-name>
+  <servlet-class>user.svlt.SignupPage</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>SignupPage</servlet-name>
+    <url-pattern>/servlet/SignupPage</url-pattern>
+</servlet-mapping>
+
+<servlet>
+  <servlet-name>MemberTop</servlet-name>
+  <servlet-class>user.svlt.MemberTop</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>MemberTop</servlet-name>
+    <url-pattern>/servlet/MemberTop</url-pattern>
+</servlet-mapping>
+
+<servlet>
+  <servlet-name>LoginPage</servlet-name>
+  <servlet-class>user.svlt.LoginPage</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>LoginPage</servlet-name>
+    <url-pattern>/servlet/LoginPage</url-pattern>
+</servlet-mapping>
+
+<servlet>
+  <servlet-name>Logout</servlet-name>
+  <servlet-class>user.svlt.Logout</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/servlet/Logout</url-pattern>
+</servlet-mapping>
+
+<servlet>
+  <servlet-name>ChangeMyInfo</servlet-name>
+  <servlet-class>user.svlt.ChangeMyInfo</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>ChangeMyInfo</servlet-name>
+    <url-pattern>/servlet/ChangeMyInfo</url-pattern>
+</servlet-mapping>
+
+<servlet>
+  <servlet-name>ChangedMyImage</servlet-name>
+  <servlet-class>user.svlt.ChangedMyImage</servlet-class>
+</servlet>
+
+
+<servlet-mapping>
+    <servlet-name>ChangedMyImage</servlet-name>
+    <url-pattern>/servlet/ChangedMyImage</url-pattern>
+</servlet-mapping>
+
+
+<servlet>
+  <servlet-name>ChangedMyInfo</servlet-name>
+  <servlet-class>user.svlt.ChangedMyInfo</servlet-class>
+</servlet>
+
+
+<servlet-mapping>
+    <servlet-name>ChangedMyInfo</servlet-name>
+    <url-pattern>/servlet/ChangedMyInfo</url-pattern>
+</servlet-mapping>
+
+<servlet>
+  <servlet-name>DeleteUser</servlet-name>
+  <servlet-class>user.svlt.DeleteUser</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>DeleteUser</servlet-name>
+    <url-pattern>/servlet/DeleteUser</url-pattern>
+</servlet-mapping>
+
+<servlet>
+  <servlet-name>Regist</servlet-name>
+  <servlet-class>user.svlt.Regist</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>Regist</servlet-name>
+    <url-pattern>/servlet/Regist</url-pattern>
+</servlet-mapping>
+
+<servlet>
+  <servlet-name>ImgUpSv</servlet-name>
+  <servlet-class>utility.ImageUploader</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>ImgUpSv</servlet-name>
+    <url-pattern>/imguploader</url-pattern>
+</servlet-mapping>
+
+
+</web-app>

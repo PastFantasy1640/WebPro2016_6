@@ -1,0 +1,22 @@
+<html>
+<head>
+<title>LoginUser</title>
+<link rel="stylesheet" type="text/css" href="loginuser.css" media="all" />
+</head>
+<body>
+<div id="login">
+	<h2 class="form-title">ログイン</h2>
+	<form method="POST" action="/MyApp/servlet/LoginPage">
+	<p class="id">
+	ユーザーID <input type="text" name="IdData" size="16">
+	<p class="pass">
+	パスワード <input type="password" name="PasswordData" size="32">
+	<p class="submit">
+	<input type="submit" value="ログイン">
+	</form>
+</div>
+<div id="regist">
+	<p>新規登録は<a href="/MyApp/servlet/Regist">こちら</a></p>
+</div>
+</body>
+</html>
