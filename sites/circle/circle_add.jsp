@@ -18,7 +18,15 @@ request.setCharacterEncoding("utf-8");
   String file = NonNullString(request.getParameter("file"));
   User login_user = User.getLoginUser(session);
 
-  Circle new_circle = Circle()
+  Circle new_circle = getCircleFromId(circleid);
+  new_circle.comment_ = comment;
+  new_circle.mail_ = mail;
+  new_circle.phone_ = phone;
+  new_circle.twitter_ = twitter;
+  new_circle.facebook_ = facebook;
+  new_circle.file_ = file;
+  new_circle.updateCircle(new_cirlce);
+
 %>
 
 <html>
@@ -29,18 +37,7 @@ request.setCharacterEncoding("utf-8");
 	<title>サークル管理</title>
     </head>
     <body>
-	<%
-
-    Statement st3 = db.createStatement();
-    String query3 = "update circles set comment='" + comment +"', mail='" + mail +"', phone='" + phone +"', twitter='" + twitter +"', facebook='" + facebook +"', file='" + file + "' where circle_leader_id="+id+"";
-    int num = st3.executeUpdate(query3);
-    if(num <= 0){
-      %>更新に失敗しました。<%
-    }else{
-      %>更新しました。<%
-    }
-      st3.close();
-	    db.close();
-      %>
+	<p>更新しました。</p>
+	<a href="ResultCircle1.jsp?id=<%= new_circle.id_ %>">サークルのトップページへ行く</a>
     </body>
 </html>
