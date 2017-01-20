@@ -52,11 +52,11 @@ public class MemberTop extends HttpServlet {
 			 + "<p> id " + login_user.id_ + " さんようこそ。</p>");
 		out.println("<img src=\"/MyApp/uploads/images/" + icon.url_ + "\" alt=\"" + Integer.toString(icon.id_) + "\"/>");
 		out.println("<p><a href = \"/MyApp/\">Topへ</a></p>"
-			+ "<p><a href = \"ChangeMyInfo?Target=pass\">パスワード変更</a></p>"
-			 + "<p><a href = \"ChangeMyInfo?Target=twitter\">ツイッターアカウント変更</a></p>"
-			 + "<p><a href = \"ChangeMyInfo?Target=facebook\">フェイスブックアカウント変更</a></p>"
-			 + "<p><a href = \"ChangeMyInfo?Target=mail\">メールアドレス変更</a></p>"
-			 + "<p><a href = \"ChangeMyInfo?Target=image\">画像変更</a></p>"
+			+ "<p><a href = \"/MyApp/servlet/ChangeMyInfo?Target=pass\">パスワード変更</a></p>"
+			 + "<p><a href = \"/MyApp/servlet/ChangeMyInfo?Target=twitter\">ツイッターアカウント変更</a></p>"
+			 + "<p><a href = \"/MyApp/servlet/ChangeMyInfo?Target=facebook\">フェイスブックアカウント変更</a></p>"
+			 + "<p><a href = \"/MyApp/servlet/ChangeMyInfo?Target=mail\">メールアドレス変更</a></p>"
+			 + "<p><a href = \"/MyApp/servlet/ChangeMyInfo?Target=image\">画像変更</a></p>"
 			 + "<p><a href = \"/MyApp/sites/community/community_list.jsp\">CommunityPage</a></p>"
 			 + "<p><a href = \"/MyApp/sites/circle/circle_regist.jsp\">サークル作成</a></p>");
 		out.println("<p><h2>現在あなたが部長であるサークル一覧</h2>");
@@ -75,7 +75,7 @@ public class MemberTop extends HttpServlet {
 		out.println("<form action=\"Logout\">"
 			 + "<input type=\"submit\" value=\"logout\">"
 			 + "</form>"
-			 + "<p>退会は<a href = \"../webpro/WebPro2016_6/DeleteUser.html\">こちら</a></p>"
+			 + "<p>退会は<a href = \"/MyApp/sites/user/DeleteUser.html\">こちら</a></p>"
 			 + "</body>"
 			 + "</html>");
 	}
