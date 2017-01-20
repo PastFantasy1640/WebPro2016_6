@@ -60,6 +60,7 @@
 
 	    <h2>・サークル情報変更</h2>
 	    <form action=circle_add.jsp method=post>
+	    <input type="hidden" name="circleid" value="<%= circle_id %>">
 		<table>
 		    <tbody>
 			<tr><th>サークル名</th><td>

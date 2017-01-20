@@ -1,10 +1,28 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8" import="java.sql.*" %>
+<%@ page import="static utility.StringUtil.NonNullString" %>
+<%@ page import="circle.*" %>
+<%@ page import="user.User" %>
+<%@ page import="utility.ImageManager" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="utility.DatabaseConnector" %>
 <%
 // リクエストパラメータの文字エンコーディング指定
 request.setCharacterEncoding("utf-8");
-// JDBC ドライバのロード
-Class.forName("org.gjt.mm.mysql.Driver");
-Connection db = DriverManager.getConnection("jdbc:mysql://localhost/webpro_db?user=chef&password=secret&useUnicode=true&characterEncoding=utf-8");
+
+  String circleid = NonNullString(request.getParameter("circleid"));
+  String comment = NonNullString(request.getParameter("comment"));
+  String mail = NonNullString(request.getParameter("mail"));
+  String phone = NonNullString(request.getParameter("phone"));
+  String twitter = NonNullString(request.getParameter("twitter"));
+  String facebook = NonNullString(request.getParameter("facebook"));
+  String file = NonNullString(request.getParameter("file"));
+  User login_user = User.getLoginUser(session);
+
+  Circle now_circle = Circle.getCircleFromId(Integer.parseInt(circleid));
+  Circle new_circle = new Circle(now_circle.name_, now_circle.circle_leader_id_, now_circle.category_id_, now_circle.university_id_, comment, mail, phone, twitter, facebook, file, now_circle.imageid_);
+  
+  new_circle = new_circle.updateCircle(now_circle);
+
 %>
 
 <html>
@@ -15,41 +33,17 @@ Connection db = DriverManager.getConnection("jdbc:mysql://localhost/webpro_db?us
 	<title>サークル管理</title>
     </head>
     <body>
-	<%
-
-    //本来こっちを使う
-    //int id = (int)session.getAttribute("UserId");
-    //テスト用
-    int id = 1;
-    String comment = request.getParameter("comment");
-    if(comment==null)
-      comment="";
-    String mail = request.getParameter("mail");
-    if(mail==null)
-      mail="";
-    String phone = request.getParameter("phone");
-    if(phone==null)
-      phone="";
-    String twitter = request.getParameter("twitter");
-    if(twitter==null)
-      twitter="";
-    String facebook = request.getParameter("facebook");
-    if(facebook==null)
-      facebook="";
-    String file = request.getParameter("file");
-    if(file==null)
-      file="";
-
-    Statement st3 = db.createStatement();
-    String query3 = "update circles set comment='" + comment +"', mail='" + mail +"', phone='" + phone +"', twitter='" + twitter +"', facebook='" + facebook +"', file='" + file + "' where circle_leader_id="+id+"";
-    int num = st3.executeUpdate(query3);
-    if(num <= 0){
-      %>更新に失敗しました。<%
-    }else{
-      %>更新しました。<%
-    }
-      st3.close();
-	    db.close();
-      %>
+    <%
+    if(new_circle == null){
+    %>
+    <p>Failed to update your circle information.</p>
+    <%
+  }else{
+  %>
+	<p>更新しました。</p>
+  <%
+}
+%>
+	<a href="ResultCircle1.jsp?id=<%= new_circle.id_ %>">サークルのトップページへ行く</a>
     </body>
 </html>

@@ -47,11 +47,12 @@ header{
 	display: table-cell;
 	width: 33%;
 	text-align:center;
+
 }
 
 .circle_area{
 	max-width:300px;
-	margin:0% auto;
+	margin:0% 30px;
 	background-image: url("/MyApp/images/bg_w80.png");
 	box-shadow: 0 0 10px white;
 }
